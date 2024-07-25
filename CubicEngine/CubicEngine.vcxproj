@@ -155,35 +155,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Application.cpp" />
-    <ClCompile Include="Sources\EngineCore.cpp" />
-    <ClCompile Include="Sources\GameInstance.cpp" />
-    <ClCompile Include="Sources\GameObject.cpp" />
-    <ClCompile Include="Sources\Input.cpp" />
-    <ClCompile Include="Sources\Object.cpp" />
-    <ClCompile Include="Sources\Scene.cpp" />
+    <ClCompile Include="Sources\Component\Camera.cpp" />
+    <ClCompile Include="Sources\Core\Application.cpp" />
+    <ClCompile Include="Sources\Core\EngineCore.cpp" />
+    <ClCompile Include="Sources\Object\GameInstance.cpp" />
+    <ClCompile Include="Sources\Object\GameObject.cpp" />
+    <ClCompile Include="Sources\Manager\InputManager.cpp" />
+    <ClCompile Include="Sources\Object\Object.cpp" />
+    <ClCompile Include="Sources\Object\Scene.cpp" />
     <ClCompile Include="Sources\shader.cpp" />
     <ClCompile Include="Sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Sources\fragmentShader.glsl" />
     <None Include="Sources\vertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Application.h" />
-    <ClInclude Include="Sources\Component.h" />
+    <ClInclude Include="Sources\Component\Camera.h" />
+    <ClInclude Include="Sources\Core\Application.h" />
+    <ClInclude Include="Sources\Component\Component.h" />
     <ClInclude Include="Sources\CubicEngine.h" />
-    <ClInclude Include="Sources\EngineCore.h" />
-    <ClInclude Include="Sources\GameInstance.h" />
-    <ClInclude Include="Sources\GameObject.h" />
-    <ClInclude Include="Sources\Input.h" />
+    <ClInclude Include="Sources\Core\EngineCore.h" />
+    <ClInclude Include="Sources\Object\GameInstance.h" />
+    <ClInclude Include="Sources\Object\GameObject.h" />
+    <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\MacroDef.h" />
-    <ClInclude Include="Sources\Object.h" />
-    <ClInclude Include="Sources\Scene.h" />
+    <ClInclude Include="Sources\Object\Object.h" />
+    <ClInclude Include="Sources\Object\Scene.h" />
     <ClInclude Include="Sources\shader.h" />
-    <ClInclude Include="Sources\Vector.h" />
+    <ClInclude Include="Sources\Util\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,8 +8,8 @@
 //                                         |___/                  
 // created by Airhood
 
-#include "EngineCore.h"
-#include "Application.h"
+#include "Core/EngineCore.h"
+#include "Core/Application.h"
 
 #define CUBIC_ENGINE CORE
 

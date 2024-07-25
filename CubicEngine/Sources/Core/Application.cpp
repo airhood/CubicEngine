@@ -23,7 +23,7 @@ void Application::Initialize() {
 
 	GLFWwindow* window;
 	window = glfwCreateWindow(1920, 1080, "CubicEngine", NULL, NULL);
-	input = new Input(window);
+	input = new InputManager(window);
 
 	if (window == NULL) {
 		std::cout << "Failed to open GLFW window" << std::endl;

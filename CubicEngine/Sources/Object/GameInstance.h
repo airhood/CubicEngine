@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Component.h"
+#include "../Component/Component.h"
 #include "Scene.h"
 
 namespace CubicEngine {

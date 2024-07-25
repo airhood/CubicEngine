@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Object.h"
-#include "Component.h"
+#include "../Component/Component.h"
 #include "GameInstance.h"
 #include <unordered_set>
 
