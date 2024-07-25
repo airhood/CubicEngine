@@ -1,12 +1,9 @@
 #pragma once
 
 #include <iostream>
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include "shader.h"
-
 #include "Input.h"
 
 namespace CubicEngine {
@@ -23,6 +20,8 @@ namespace CubicEngine {
 
 		void setTitle(std::string title);
 		std::string getTitle();
+
+	private:
 
 	private:
 		bool initialized;

@@ -41,3 +41,28 @@ GameObject* Scene::GetGameObjectByID(std::string id) {
 	}
 	return nullptr;
 }
+
+GameObject* CubicEngine::Scene::GetGameObjectByTag(std::string tag)
+{
+	return nullptr;
+}
+
+GameObject* CubicEngine::Scene::GetGameObjectByTags(std::initializer_list<std::string> tags)
+{
+	return nullptr;
+}
+
+GameObject* CubicEngine::Scene::GetGameObjectsByName(std::string name)
+{
+	return nullptr;
+}
+
+GameObject* CubicEngine::Scene::GetGameObjectsByTag(std::string tag)
+{
+	return nullptr;
+}
+
+GameObject* CubicEngine::Scene::GetGameObjectsByTags(std::initializer_list<std::string> tags)
+{
+	return nullptr;
+}
