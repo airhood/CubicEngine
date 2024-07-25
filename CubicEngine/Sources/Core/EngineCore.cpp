@@ -5,6 +5,7 @@ using namespace CubicEngine;
 IMPLEMENT_SINGLETON(EngineCore);
 
 EngineCore::EngineCore() {
+
 }
 
 EngineCore::~EngineCore() {

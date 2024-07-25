@@ -128,13 +128,13 @@ namespace CubicEngine {
 		Menu
 	};
 
-	class Input {
+	class InputManager {
 	private:
 		GLFWwindow* window;
 		static const int glfw_keyCode[];
 
 	public:
-		Input(GLFWwindow* window);
+		InputManager(GLFWwindow* window);
 		bool GetKey(KeyCode key);
 	};
 }

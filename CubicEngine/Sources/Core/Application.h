@@ -3,14 +3,17 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "shader.h"
-#include "Input.h"
+#include "../shader.h"
+#include "../Manager/InputManager.h"
 
 namespace CubicEngine {
+
+	class InputManager;
+
 	class Application {
 	protected:
 		GLFWwindow* window;
-		Input* input;
+		InputManager* input;
 
 	public:
 		Application();
