@@ -1,10 +1,7 @@
 #version 330 core
 
-out vec3 color;
+out vec3 FragColor;
 
 void main() {
-	int r = 255;
-	int g = 255;
-	int b = 255;
-	color = vec3(r/255,g/255,b/255);
+	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
 }

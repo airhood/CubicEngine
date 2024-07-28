@@ -158,12 +158,13 @@
     <ClCompile Include="Sources\Component\Camera.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
+    <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Object\GameInstance.cpp" />
     <ClCompile Include="Sources\Object\GameObject.cpp" />
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
     <ClCompile Include="Sources\Object\Object.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
-    <ClCompile Include="Sources\shader.cpp" />
+    <ClCompile Include="Sources\Util\Shader.cpp" />
     <ClCompile Include="Sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,13 +177,16 @@
     <ClInclude Include="Sources\Component\Component.h" />
     <ClInclude Include="Sources\CubicEngine.h" />
     <ClInclude Include="Sources\Core\EngineCore.h" />
+    <ClInclude Include="Sources\Manager\CoreBase.h" />
+    <ClInclude Include="Sources\Manager\RenderBase.h" />
+    <ClInclude Include="Sources\Manager\RenderManager.h" />
     <ClInclude Include="Sources\Object\GameInstance.h" />
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
-    <ClInclude Include="Sources\MacroDef.h" />
+    <ClInclude Include="Sources\Util\MacroDef.h" />
     <ClInclude Include="Sources\Object\Object.h" />
     <ClInclude Include="Sources\Object\Scene.h" />
-    <ClInclude Include="Sources\shader.h" />
+    <ClInclude Include="Sources\Util\Shader.h" />
     <ClInclude Include="Sources\Util\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

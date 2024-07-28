@@ -39,6 +39,18 @@ namespace CubicEngine {
 		bool CheckTagExists(std::string tag);
 		bool CheckTagsExists(std::initializer_list<std::string> tags);
 
+		void SetParent(GameObject* parent);
+		GameObject* GetParent();
+		void AddChild(GameObject* child);
+		GameObject* GetChildByName(std::string name);
+		GameObject* GetChildByID(std::string id);
+		GameObject* GetChildByTag(std::string tag);
+		GameObject* GetChildByTags(std::initializer_list<std::string> tags);
+		std::vector<GameObject*> GetChildren();
+		std::vector<GameObject*> GetChildrenByName(std::string name);
+		std::vector<GameObject*> GetChildrenByTag(std::string tag);
+		std::vector<GameObject*> GetChildrenByTags(std::initializer_list<std::string> tags);
+
 		template <typename T>
 		T* AddComponent();
 		void AddComponent(Component* component);

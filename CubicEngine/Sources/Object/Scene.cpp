@@ -15,54 +15,74 @@ void Scene::Init() {
 }
 
 void Scene::InitGameObjects() {
-	for (auto gameObject : game_objects) {
-		gameObject->Init();
+	for (auto game_object : game_objects) {
+		game_object->Init();
 	}
 }
 
 void Scene::Tick(float elapsedTime) {
-	for (auto gameObject : game_objects) {
-		gameObject->Tick(elapsedTime);
+	for (auto game_object : game_objects) {
+		game_object->Tick(elapsedTime);
 	}
 }
 
+void Scene::AddGameObject(GameObject* game_object) {
+	game_objects.push_back(game_object);
+}
+
 GameObject* Scene::GetGameObjectByName(std::string name) {
-	auto it = std::find_if(game_objects.begin(), game_objects.end(), [name](const GameObject* element) { return element->GetName() == name; });
-	if (it != game_objects.end()) {
-		return *it;
+	for (auto& game_object : game_objects) {
+		if (game_object->GetName() == name) return game_object;
 	}
 	return nullptr;
 }
 
 GameObject* Scene::GetGameObjectByID(std::string id) {
-	auto it = std::find_if(game_objects.begin(), game_objects.end(), [id](const GameObject* element) { return element->GetObjectID() == id; });
-	if (it != game_objects.end()) {
-		return *it;
+	for (auto& game_object : game_objects) {
+		if (game_object->GetObjectID() == id) return game_object;
 	}
 	return nullptr;
 }
 
 GameObject* CubicEngine::Scene::GetGameObjectByTag(std::string tag)
 {
+	for (auto& game_object : game_objects) {
+		if (game_object->CheckTagExists(tag)) return game_object;
+	}
 	return nullptr;
 }
 
 GameObject* CubicEngine::Scene::GetGameObjectByTags(std::initializer_list<std::string> tags)
 {
+	for (auto& game_object : game_objects) {
+		if (game_object->CheckTagsExists(tags)) return game_object;
+	}
 	return nullptr;
 }
 
-GameObject* CubicEngine::Scene::GetGameObjectsByName(std::string name)
+std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByName(std::string name)
 {
-	return nullptr;
+	std::vector<GameObject*> results;
+	for (auto& game_object : game_objects) {
+		if (game_object->GetName() == name) results.push_back(game_object);
+	}
+	return results;
 }
 
-GameObject* CubicEngine::Scene::GetGameObjectsByTag(std::string tag)
+std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByTag(std::string tag)
 {
-	return nullptr;
+	std::vector<GameObject*> results;
+	for (auto& game_object : game_objects) {
+		if (game_object->CheckTagExists(tag)) results.push_back(game_object);
+	}
+	return results;
 }
 
-GameObject* CubicEngine::Scene::GetGameObjectsByTags(std::initializer_list<std::string> tags)
+std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByTags(std::initializer_list<std::string> tags)
 {
-	return nullptr;
+	std::vector<GameObject*> results;
+	for (auto& game_object : game_objects) {
+		if (game_object->CheckTagsExists(tags)) results.push_back(game_object);
+	}
+	return results;
 }

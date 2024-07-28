@@ -14,7 +14,7 @@ using namespace std;
 
 #include "shader.h"
 
-GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
+void LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 
 	// Create the shaders
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -32,7 +32,7 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 	else {
 		printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
 		getchar();
-		return 0;
+		return;
 	}
 
 	// Read the Fragment Shader code from the file
@@ -85,27 +85,27 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 
 	// Link the program
 	printf("Linking program\n");
-	GLuint ProgramID = glCreateProgram();
-	glAttachShader(ProgramID, VertexShaderID);
-	glAttachShader(ProgramID, FragmentShaderID);
-	glLinkProgram(ProgramID);
+	GLuint shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, VertexShaderID);
+	glAttachShader(shaderProgram, FragmentShaderID);
+	glLinkProgram(shaderProgram);
 
 	// Check the program
-	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &Result);
+	glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if (InfoLogLength > 0) {
 		std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
-		glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+		glGetProgramInfoLog(shaderProgram, InfoLogLength, NULL, &ProgramErrorMessage[0]);
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}
 
+	glUseProgram(shaderProgram);
 
-	glDetachShader(ProgramID, VertexShaderID);
-	glDetachShader(ProgramID, FragmentShaderID);
+
+	glDetachShader(shaderProgram, VertexShaderID);
+	glDetachShader(shaderProgram, FragmentShaderID);
 
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);
-
-	return ProgramID;
 }
 

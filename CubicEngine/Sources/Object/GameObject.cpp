@@ -114,6 +114,70 @@ bool GameObject::CheckTagsExists(std::initializer_list<std::string> tag) {
 	return true;
 }
 
+void GameObject::SetParent(GameObject* parent) {
+	this->parent = parent;
+}
+
+GameObject* GameObject::GetParent() {
+	return parent;
+}
+
+void GameObject::AddChild(GameObject* child) {
+	children.push_back(child);
+}
+
+GameObject* GameObject::GetChildByName(std::string name) {
+	for (auto child : children) {
+		if (child->GetName() == name) return child;
+	}
+}
+
+GameObject* GameObject::GetChildByID(std::string id) {
+	for (auto child : children) {
+		if (child->GetObjectID() == id) return child;
+	}
+}
+
+GameObject* GameObject::GetChildByTag(std::string tag) {
+	for (auto child : children) {
+		if (child->CheckTagExists(tag)) return child;
+	}
+}
+
+GameObject* GameObject::GetChildByTags(std::initializer_list<std::string> tags) {
+	for (auto child : children) {
+		if (child->CheckTagsExists(tags)) return child;
+	}
+}
+
+std::vector<GameObject*> GameObject::GetChildren() {
+	return children;
+}
+
+std::vector<GameObject*> GameObject::GetChildrenByName(std::string name) {
+	std::vector<GameObject*> results;
+	for (auto& child : children) {
+		if (child->GetName() == name) results.push_back(child);
+	}
+	return results;
+}
+
+std::vector<GameObject*> GameObject::GetChildrenByTag(std::string tag) {
+	std::vector<GameObject*> results;
+	for (auto& child : children) {
+		if (child->CheckTagExists(tag)) results.push_back(child);
+	}
+	return results;
+}
+
+std::vector<GameObject*> GameObject::GetChildrenByTags(std::initializer_list<std::string> tags) {
+	std::vector<GameObject*> results;
+	for (auto& child : children) {
+		if (child->CheckTagsExists(tags)) results.push_back(child);
+	}
+	return results;
+}
+
 template <typename T>
 T* GameObject::AddComponent() {
 	T* component = new T();
