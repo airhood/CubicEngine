@@ -1,5 +1,7 @@
 #pragma once
 
+#define CORE_CLASS
+
 #include "../Util/MacroDef.h"
 #include "Application.h"
 
@@ -21,11 +23,6 @@ NAME* Get##NAME##FUNC() const {                                             \
 #define GET(NAME) Get##NAME##FUNC()
 
 namespace CubicEngine {
-
-	class Application;
-	
-	class Input::InputManager;
-	class Rendering::RenderManager;
 
 	using namespace Input;
 	using namespace Rendering;
@@ -53,3 +50,5 @@ namespace CubicEngine {
 		Rendering::RenderManager* renderManager;
 	};
 }
+
+#undef CORE_CLASS

@@ -8,8 +8,6 @@
 
 namespace CubicEngine {
 
-	class Component;
-
 	class GameInstance;
 
 	class GameObject : public Object {

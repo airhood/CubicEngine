@@ -5,10 +5,10 @@
 #include "GameObject.h"
 
 namespace CubicEngine {
+
+	class GameObject;
+
 	class Scene : public Object {
-	protected:
-
-
 	public:
 		Scene();
 		~Scene();

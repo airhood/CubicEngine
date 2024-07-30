@@ -5,6 +5,8 @@
 #include <GLFW/glfw3.h>
 #include "../Util/Shader.h"
 
+#if defined(CORE_CLASS) || defined(APPLICATION_CPP)
+
 namespace CubicEngine {
 	class Application {
 	public:
@@ -33,3 +35,5 @@ namespace CubicEngine {
 		void MainLoop();
 	};
 }
+
+#endif

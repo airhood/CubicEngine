@@ -50,8 +50,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sources\vertexShader.glsl" />
-    <None Include="Sources\fragmentShader.glsl" />
+    <None Include="Sources\Shader\vertexShader.glsl" />
+    <None Include="Sources\Shader\fragmentShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Util\Shader.h">

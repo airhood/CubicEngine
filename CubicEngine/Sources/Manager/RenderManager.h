@@ -7,7 +7,7 @@
 
 namespace CubicEngine {
 	namespace Rendering {
-		class RenderManager : public CoreBase, Rendering::RenderBase {
+		class RenderManager : public CoreBase, public Rendering::RenderBase {
 		public:
 			explicit RenderManager() = default;
 			~RenderManager();
@@ -18,6 +18,9 @@ namespace CubicEngine {
 			void Render() override;
 
 			void Exterminate() override;
+
+		private:
+
 		};
 	}
 }

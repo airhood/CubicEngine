@@ -8,9 +8,9 @@
 //                                         |___/                  
 // created by Airhood
 
+
+
 #include "Core/EngineCore.h"
 #include "Core/Application.h"
-
-#define CUBIC_ENGINE CORE
 
 #define CubicApp() CubicEngine::CORE->Init()

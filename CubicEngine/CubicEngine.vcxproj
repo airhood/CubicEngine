@@ -168,8 +168,8 @@
     <ClCompile Include="Sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sources\fragmentShader.glsl" />
-    <None Include="Sources\vertexShader.glsl" />
+    <None Include="Sources\Shader\fragmentShader.glsl" />
+    <None Include="Sources\Shader\vertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Component\Camera.h" />

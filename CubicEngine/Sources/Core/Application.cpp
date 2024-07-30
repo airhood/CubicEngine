@@ -1,3 +1,5 @@
+#define APPLICATION_CPP
+
 #include "Application.h"
 
 using namespace CubicEngine;
@@ -99,3 +101,5 @@ void Application::setTitle(std::string title) {
 std::string Application::getTitle() {
 	return title;
 }
+
+#undef APPLICATION_CPP
