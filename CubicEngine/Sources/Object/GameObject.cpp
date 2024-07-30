@@ -34,7 +34,7 @@ void GameObject::Init() {
 
 void GameObject::InitComponents() {
 	for (auto component : components) {
-		component->Init();
+		component->Init_();
 	}
 }
 
@@ -44,19 +44,52 @@ void GameObject::InitChildren() {
 	}
 }
 
-void GameObject::Tick(float elapsedTime) {
+void GameObject::PhysicsTick(float elapsedTime) {
+	PhysicsTickComponentGameInstances(elapsedTime);
+	PhysicsTickChildren(elapsedTime);
+}
+
+void GameObject::FrameTick(float elapsedTime) {
 
 }
 
-void GameObject::TickComponentGameInstances(float elapsedTime) {
+void GameObject::LateTick(float elapsedTime) {
+
+}
+
+void GameObject::PhysicsTickComponentGameInstances(float elapsedTime) {
 	for (auto game_instance : game_instances) {
-		game_instance->Tick(elapsedTime);
+		game_instance->PhysicsTick(elapsedTime);
 	}
 }
 
-void GameObject::TickChildren(float elapsedTime) {
+void GameObject::PhysicsTickChildren(float elapsedTime) {
 	for (auto child : children) {
-		child->Tick(elapsedTime);
+		child->PhysicsTick(elapsedTime);
+	}
+}
+
+void GameObject::FrameTickComponentGameInstances(float elapsedTime) {
+	for (auto game_instance : game_instances) {
+		game_instance->FrameTick(elapsedTime);
+	}
+}
+
+void GameObject::FrameTickChildren(float elapsedTime) {
+	for (auto child : children) {
+		child->FrameTick(elapsedTime);
+	}
+}
+
+void GameObject::LateTickComponentGameInstances(float elapsedTime) {
+	for (auto game_instance : game_instances) {
+		game_instance->LateTick(elapsedTime);
+	}
+}
+
+void GameObject::LateTickChildren(float elapsedTime) {
+	for (auto child : children) {
+		child->LateTick(elapsedTime);
 	}
 }
 

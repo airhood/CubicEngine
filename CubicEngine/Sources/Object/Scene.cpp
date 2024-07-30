@@ -20,9 +20,21 @@ void Scene::InitGameObjects() {
 	}
 }
 
-void Scene::Tick(float elapsedTime) {
+void Scene::PhysicsTick(float elapsedTime) {
 	for (auto game_object : game_objects) {
-		game_object->Tick(elapsedTime);
+		game_object->PhysicsTick(elapsedTime);
+	}
+}
+
+void Scene::FrameTick(float elapsedTime) {
+	for (auto game_object : game_objects) {
+		game_object->FrameTick(elapsedTime);
+	}
+}
+
+void Scene::LateTick(float elapsedTime) {
+	for (auto game_object : game_objects) {
+		game_object->LateTick(elapsedTime);
 	}
 }
 

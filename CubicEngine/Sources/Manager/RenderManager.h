@@ -2,12 +2,13 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "CoreBase.h"
+#include "ManagerBase.h"
 #include "RenderBase.h"
+#include "../Util/Shader.h"
 
 namespace CubicEngine {
 	namespace Rendering {
-		class RenderManager : public CoreBase, public Rendering::RenderBase {
+		class RenderManager : public ManagerBase, public Rendering::RenderBase {
 		public:
 			explicit RenderManager() = default;
 			~RenderManager();
@@ -20,7 +21,7 @@ namespace CubicEngine {
 			void Exterminate() override;
 
 		private:
-
+			GLFWwindow* window;
 		};
 	}
 }

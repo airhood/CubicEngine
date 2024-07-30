@@ -48,6 +48,12 @@
     <ClCompile Include="Sources\Manager\RenderManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\pugixml-master\pugixml-master\src\pugixml.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Util\pugixml\pugixml.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\vertexShader.glsl" />
@@ -96,10 +102,22 @@
     <ClInclude Include="Sources\Manager\RenderManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Manager\CoreBase.h">
+    <ClInclude Include="Sources\Manager\ManagerBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Manager\RenderBase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\pugixml-master\pugixml-master\src\pugiconfig.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\pugixml-master\pugixml-master\src\pugixml.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Util\pugixml\pugiconfig.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Util\pugixml\pugixml.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

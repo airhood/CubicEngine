@@ -38,6 +38,8 @@ void Application::Initialize() {
 		return;
 	}
 
+	CORE->Start();
+
 	glViewport(0, 0, screen_width, screen_height);
 	
 	glfwSwapInterval(1);
@@ -50,32 +52,10 @@ void Application::Initialize() {
 		}
 	};
 	glfwSetKeyCallback(window, key_callback);
-
-	LoadShaders("Sources/vertexShader.glsl", "Sources/fragmentShader.glsl");
-
-	auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height)
-	{
-		glViewport(0, 0, width, height);
-	};
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-	glClearColor(0, 0, 0, 0);
 }
 
 void Application::Start() {
-	MainLoop();
-	glfwTerminate();
-}
 
-void Application::MainLoop() {
-	while (!glfwWindowShouldClose(window)) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
 }
 
 void Application::setScreenSize(int width, int height) {

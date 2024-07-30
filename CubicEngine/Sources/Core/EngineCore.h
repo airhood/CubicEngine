@@ -2,22 +2,23 @@
 
 #define CORE_CLASS
 
+#include <iostream>
+#include <vector>
 #include "../Util/MacroDef.h"
 #include "Application.h"
 
-#include <iostream>
-
 // Managers
+#include "../Manager/ManagerBase.h" // Base
 #include "../Manager/InputManager.h"
 #include "../Manager/RenderManager.h"
 
-#define GET_FUNC(NAME, object)                                              \
-NAME* Get##NAME##FUNC() const {                                             \
-	if (typeid(NAME) == typeid(object)) {                                   \
-		return object;                                                      \
-	}                                                                       \
-	std::cout << "[GET_FUNC] Type not matching!" << std::endl;              \
-}
+#define Manager(NAME)                                               \
+public:                                                             \
+	NAME* Get##NAME##FUNC() const {                                 \
+		return obj_##NAME;                                          \
+	}                                                               \
+private:                                                            \
+	NAME* obj_##NAME;
 
 #define CORE EngineCore::getInstance()
 #define GET(NAME) Get##NAME##FUNC()
@@ -26,6 +27,15 @@ namespace CubicEngine {
 
 	using namespace Input;
 	using namespace Rendering;
+	
+	class Application;
+
+	enum class TickCycleOrder {
+		FH, // Start from the first game object and process components at high hierarchy first
+		FL, // Start from the first game object and process components at low hierarchy first
+		LH, // Start from the last game object and process components at high hierarchy first
+		LL  // Start from the last game object and process components at low hierarchy first
+	};
 
 	class EngineCore {
 		DECLARE_SINGLETON(EngineCore);
@@ -33,21 +43,27 @@ namespace CubicEngine {
 	public:
 		~EngineCore();
 
-		void Init();
-
 		Application* GetApplication();
 
-		GET_FUNC(InputManager, inputManager);
-		GET_FUNC(RenderManager, renderManager);
+		void Init();
+		void Start();
 
-	private:
+		// game loop
+		void GameLoop();
+		void PhysicsTick(float elapsedTime);
+		void FrameTick(float elapsedTime);
+		void LateTick(float elapsedTime);
+
+		Manager(InputManager);
+		Manager(RenderManager);
+
+	public:
 		bool initialized = false;
-
-	private:
+		TickCycleOrder tick_cycle_order = TickCycleOrder::FH;
 		Application* application;
 
-		Input::InputManager* inputManager;
-		Rendering::RenderManager* renderManager;
+		std::vector<ManagerBase*> managers;
+		void CacheManagers();
 	};
 }
 

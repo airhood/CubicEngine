@@ -20,9 +20,15 @@ namespace CubicEngine {
 		void Init();
 		void InitComponents();
 		void InitChildren();
-		void Tick(float elapsedTime);
-		void TickComponentGameInstances(float elapsedTime);
-		void TickChildren(float elapsedTime);
+		void PhysicsTick(float elapsedTime);
+		void FrameTick(float elapsedTime);
+		void LateTick(float elapsedTime);
+		void PhysicsTickComponentGameInstances(float elapsedTime);
+		void PhysicsTickChildren(float elapsedTime);
+		void FrameTickComponentGameInstances(float elapsedTime);
+		void FrameTickChildren(float elapsedTime);
+		void LateTickComponentGameInstances(float elapsedTime);
+		void LateTickChildren(float elapsedTime);
 		
 		void Destroy() override;
 

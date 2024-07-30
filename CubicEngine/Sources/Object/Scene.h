@@ -16,7 +16,9 @@ namespace CubicEngine {
 	private:
 		void Init();
 		void InitGameObjects();
-		void Tick(float elapsedTime);
+		void PhysicsTick(float elapsedTime);
+		void FrameTick(float elapsedTime);
+		void LateTick(float elapsedTime);
 
 		std::string name;
 

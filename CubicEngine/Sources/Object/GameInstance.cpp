@@ -4,9 +4,12 @@ using namespace CubicEngine;
 
 GameInstance::GameInstance() {
 	has_instance = true;
-	// TODO: initialize scene pointer
 }
 
 GameInstance::~GameInstance() {
 
+}
+
+void GameInstance::Init_() {
+	// TODO: get game_objects reference from SceneManager in core
 }

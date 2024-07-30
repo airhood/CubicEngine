@@ -3,7 +3,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "../Util/Shader.h"
+#include "EngineCore.h"
 
 #if defined(CORE_CLASS) || defined(APPLICATION_CPP)
 
@@ -31,8 +31,6 @@ namespace CubicEngine {
 		GLFWwindow* window;
 		GLuint vertexbuffer;
 		GLuint programID;
-
-		void MainLoop();
 	};
 }
 

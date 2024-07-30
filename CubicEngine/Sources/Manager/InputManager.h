@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "ManagerBase.h"
 
 namespace CubicEngine {
 	namespace Input {
@@ -129,13 +130,14 @@ namespace CubicEngine {
 			Menu
 		};
 
-		class InputManager {
+		class InputManager : public ManagerBase {
 		private:
 			GLFWwindow* window;
 			static const int glfw_keyCode[];
 
 		public:
 			InputManager(GLFWwindow* window);
+			void Init() override;
 			bool GetKey(KeyCode key);
 		};
 	}

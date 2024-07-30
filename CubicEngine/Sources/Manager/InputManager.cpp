@@ -8,6 +8,10 @@ InputManager::InputManager(GLFWwindow* window) {
 	this->window = window;
 }
 
+void InputManager::Init() {
+
+}
+
 bool InputManager::GetKey(KeyCode key) {
 	return glfwGetKey(window, glfw_keyCode[static_cast<int>(key)]);
 }
