@@ -14,12 +14,6 @@ namespace CubicEngine {
 
 		~GameInstance();
 
-		std::vector<GameObject*>* game_objects;
-
-		void Init_() override;
-
-		virtual void Init() = 0;
-
 		// game loop
 		virtual void Start() = 0;
 

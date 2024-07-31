@@ -11,6 +11,8 @@
 #include "../Manager/ManagerBase.h" // Base
 #include "../Manager/InputManager.h"
 #include "../Manager/RenderManager.h"
+#include "../Manager/SceneManager.h"
+#include "../Manager/GameObjectManager.h"
 
 #define Manager(NAME)                                               \
 public:                                                             \
@@ -37,6 +39,8 @@ namespace CubicEngine {
 		LL  // Start from the last game object and process components at low hierarchy first
 	};
 
+	class GameObjectManager;
+
 	class EngineCore {
 		DECLARE_SINGLETON(EngineCore);
 
@@ -56,6 +60,8 @@ namespace CubicEngine {
 
 		Manager(InputManager);
 		Manager(RenderManager);
+		Manager(SceneManager);
+		Manager(GameObjectManager);
 
 	public:
 		bool initialized = false;

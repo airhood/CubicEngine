@@ -131,14 +131,17 @@ namespace CubicEngine {
 		};
 
 		class InputManager : public ManagerBase {
+		public:
+			explicit InputManager(GLFWwindow* window);
+			~InputManager();
+
+		public:
+			void Init() override;
+			bool GetKey(KeyCode key);
+
 		private:
 			GLFWwindow* window;
 			static const int glfw_keyCode[];
-
-		public:
-			InputManager(GLFWwindow* window);
-			void Init() override;
-			bool GetKey(KeyCode key);
 		};
 	}
 }

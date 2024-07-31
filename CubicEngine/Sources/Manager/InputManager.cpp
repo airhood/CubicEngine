@@ -8,6 +8,11 @@ InputManager::InputManager(GLFWwindow* window) {
 	this->window = window;
 }
 
+CubicEngine::Input::InputManager::~InputManager()
+{
+
+}
+
 void InputManager::Init() {
 
 }

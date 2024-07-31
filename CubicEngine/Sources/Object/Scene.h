@@ -13,14 +13,12 @@ namespace CubicEngine {
 		Scene();
 		~Scene();
 
-	private:
+	public:
 		void Init();
 		void InitGameObjects();
 		void PhysicsTick(float elapsedTime);
 		void FrameTick(float elapsedTime);
 		void LateTick(float elapsedTime);
-
-		std::string name;
 
 		void AddGameObject(GameObject* game_object);
 		GameObject* GetGameObjectByName(std::string name);
@@ -32,6 +30,7 @@ namespace CubicEngine {
 		std::vector<GameObject*> GetGameObjectsByTags(std::initializer_list<std::string> tags);
 
 	private:
+		std::string name;
 		std::vector<GameObject*> game_objects;
 	};
 }

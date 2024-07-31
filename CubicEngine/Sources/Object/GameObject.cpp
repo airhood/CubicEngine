@@ -34,7 +34,7 @@ void GameObject::Init() {
 
 void GameObject::InitComponents() {
 	for (auto component : components) {
-		component->Init_();
+		component->Init();
 	}
 }
 

@@ -155,11 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\pugixml-master\pugixml-master\src\pugixml.cpp" />
     <ClCompile Include="Sources\Component\Camera.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
+    <ClCompile Include="Sources\Manager\GameObjectManager.cpp" />
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
+    <ClCompile Include="Sources\Manager\SceneManager.cpp" />
     <ClCompile Include="Sources\Object\GameInstance.cpp" />
     <ClCompile Include="Sources\Object\GameObject.cpp" />
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
@@ -174,19 +175,19 @@
     <None Include="Sources\Shader\vertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\pugixml-master\pugixml-master\src\pugiconfig.hpp" />
-    <ClInclude Include="..\..\..\..\Downloads\pugixml-master\pugixml-master\src\pugixml.hpp" />
     <ClInclude Include="Sources\Component\Camera.h" />
     <ClInclude Include="Sources\Core\Application.h" />
     <ClInclude Include="Sources\Component\Component.h" />
     <ClInclude Include="Sources\CubicEngine.h" />
     <ClInclude Include="Sources\Core\EngineCore.h" />
+    <ClInclude Include="Sources\Manager\GameObjectManager.h" />
     <ClInclude Include="Sources\Manager\ManagerBase.h" />
     <ClInclude Include="Sources\Manager\RenderBase.h" />
     <ClInclude Include="Sources\Manager\RenderManager.h" />
     <ClInclude Include="Sources\Object\GameInstance.h" />
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
+    <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Util\MacroDef.h" />
     <ClInclude Include="Sources\Object\Object.h" />
     <ClInclude Include="Sources\Object\Scene.h" />

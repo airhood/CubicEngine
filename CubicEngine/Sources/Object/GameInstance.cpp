@@ -9,7 +9,3 @@ GameInstance::GameInstance() {
 GameInstance::~GameInstance() {
 
 }
-
-void GameInstance::Init_() {
-	// TODO: get game_objects reference from SceneManager in core
-}

@@ -24,6 +24,10 @@ void EngineCore::Start() {
 
 }
 
+void EngineCore::GameLoop() {
+
+}
+
 void EngineCore::PhysicsTick(float elapsedTime) {
 	for (auto& manager : managers) {
 		manager->PhysicsTick(elapsedTime);
