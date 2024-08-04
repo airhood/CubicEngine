@@ -5,7 +5,7 @@ using namespace CubicEngine;
 IMPLEMENT_SINGLETON(EngineCore);
 
 EngineCore::EngineCore() {
-
+	application = new Application();
 }
 
 EngineCore::~EngineCore() {
@@ -13,15 +13,13 @@ EngineCore::~EngineCore() {
 }
 
 void EngineCore::Init() {
-	if (initialized) {
-		// TODO: throw error: App already initialized
-	}
-	application = new Application();
-	initialized = true;
+	CreateManagers();
+	CacheManagers();
+	InitManagers();
 }
 
 void EngineCore::Start() {
-
+	obj_GameInstanceManager->StartInstances();
 }
 
 void EngineCore::GameLoop() {
@@ -50,8 +48,24 @@ Application* EngineCore::GetApplication() {
 	return application;
 }
 
-void CubicEngine::EngineCore::CacheManagers()
+void CubicEngine::EngineCore::CreateManagers()
+{
+	obj_InputManager = new InputManager(window);
+	obj_RenderManager = new RenderManager(window);
+	obj_SceneManager = new SceneManager();
+	obj_GameObjectManager = new GameObjectManager();
+	obj_GameInstanceManager = new GameInstanceManager();
+}
+
+void EngineCore::CacheManagers()
 {
 	managers.push_back(obj_InputManager);
 	managers.push_back(obj_RenderManager);
+}
+
+void CubicEngine::EngineCore::InitManagers()
+{
+	for (auto& manager : managers) {
+		manager->Init();
+	}
 }

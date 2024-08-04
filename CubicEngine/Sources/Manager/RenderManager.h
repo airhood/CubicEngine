@@ -10,7 +10,7 @@ namespace CubicEngine {
 	namespace Rendering {
 		class RenderManager : public ManagerBase, public Rendering::RenderBase {
 		public:
-			explicit RenderManager() = default;
+			explicit RenderManager(GLFWwindow* window);
 			~RenderManager();
 
 		public:

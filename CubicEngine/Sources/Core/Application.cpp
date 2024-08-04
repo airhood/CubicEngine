@@ -12,7 +12,7 @@ Application::~Application() {
 
 }
 
-void Application::Initialize() {
+void Application::Init() {
 	if (!glfwInit()) {
 		std::cout << "Failed to initialize GLFW" << std::endl;
 		return;
@@ -38,24 +38,16 @@ void Application::Initialize() {
 		return;
 	}
 
-	CORE->Start();
-
 	glViewport(0, 0, screen_width, screen_height);
 	
 	glfwSwapInterval(1);
 
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-
-	auto key_callback = [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-			glfwSetWindowShouldClose(window, GLFW_TRUE);
-		}
-	};
-	glfwSetKeyCallback(window, key_callback);
+	CORE->window = window;
+	CORE->Init();
 }
 
 void Application::Start() {
-
+	CORE->Start();
 }
 
 void Application::setScreenSize(int width, int height) {

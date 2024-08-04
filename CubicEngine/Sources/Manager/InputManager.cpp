@@ -10,10 +10,28 @@ InputManager::InputManager(GLFWwindow* window) {
 
 CubicEngine::Input::InputManager::~InputManager()
 {
-
+	Exterminate();
 }
 
-void InputManager::Init() {
+InputManager::~InputManager()
+{
+	Exterminate();
+}
+
+void CubicEngine::Input::InputManager::Init()
+{
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+	auto key_callback = [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+			glfwSetWindowShouldClose(window, GLFW_TRUE);
+		}
+	};
+	glfwSetKeyCallback(window, key_callback);
+}
+
+void CubicEngine::Input::InputManager::Exterminate()
+{
 
 }
 

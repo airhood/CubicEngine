@@ -137,6 +137,9 @@ namespace CubicEngine {
 
 		public:
 			void Init() override;
+
+			void Exterminate() override;
+
 			bool GetKey(KeyCode key);
 
 		private:

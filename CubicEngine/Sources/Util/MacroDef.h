@@ -27,7 +27,7 @@
                                                                             \
         CLASSNAME* CLASSNAME::getInstance() {                               \
                if(instance == nullptr) {                                    \
-                      instance = new CLASSNAME;                             \
+                      instance = new CLASSNAME();                             \
                       return instance;                                      \
                }                                                            \
         }                                                                   \

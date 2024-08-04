@@ -6,10 +6,13 @@ namespace CubicEngine {
         ManagerBase() = default;
         virtual ~ManagerBase() = default;
 
-        virtual void Init() = 0;
-        virtual void PhysicsTick(float elapsedTime) = 0;
-        virtual void FrameTick(float elapsedTime) = 0;
-        virtual void LateTick(float elapsedTime) = 0;
+        virtual void Init() {}
+
+        virtual void PhysicsTick(float elapsedTime) {}
+
+        virtual void FrameTick(float elapsedTime) {}
+
+        virtual void LateTick(float elapsedTime) {}
 
         virtual void Exterminate() = 0;
     };

@@ -2,6 +2,11 @@
 
 using namespace CubicEngine::Rendering;
 
+CubicEngine::Rendering::RenderManager::RenderManager(GLFWwindow* window)
+{
+	this->window = window;
+}
+
 RenderManager::~RenderManager() {
 	Exterminate();
 }

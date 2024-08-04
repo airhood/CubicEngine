@@ -12,7 +12,7 @@ namespace CubicEngine {
 	public:
 		Application();
 		~Application();
-		void Initialize();
+		void Init();
 		void Start();
 
 		void setScreenSize(int width, int height);

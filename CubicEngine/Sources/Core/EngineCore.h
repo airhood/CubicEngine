@@ -47,6 +47,8 @@ namespace CubicEngine {
 
 		Application* GetApplication();
 
+		GLFWwindow* window;
+
 		void Init();
 		void Start();
 
@@ -62,12 +64,13 @@ namespace CubicEngine {
 		Manager(GameObjectManager);
 		Manager(GameInstanceManager);
 
-	public:
-		bool initialized = false;
+	private:
 		Application* application;
 
 		std::vector<ManagerBase*> managers;
+		void CreateManagers();
 		void CacheManagers();
+		void InitManagers();
 	};
 }
 
