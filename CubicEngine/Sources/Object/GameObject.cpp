@@ -105,6 +105,16 @@ std::string GameObject::GetName() const {
 	return name;
 }
 
+void CubicEngine::GameObject::SetEnabled(bool state)
+{
+	isEnabled = state;
+}
+
+bool CubicEngine::GameObject::IsEnabled()
+{
+	return isEnabled;
+}
+
 void GameObject::AddTag(const std::string tag) {
 	tags.insert(tag);
 }

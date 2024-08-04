@@ -1,5 +1,6 @@
 #pragma once
 
+#include <glm.hpp>
 #include <vector>
 #include "Object.h"
 #include "../Component/Component.h"
@@ -34,6 +35,8 @@ namespace CubicEngine {
 
 		void SetName(std::string name);
 		std::string GetName() const;
+		void SetEnabled(bool state);
+		bool IsEnabled();
 		void AddTag(std::string tag);
 		void AddTags(std::initializer_list<std::string> tags);
 		const std::unordered_set<std::string>& GetTags();

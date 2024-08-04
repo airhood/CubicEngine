@@ -8,9 +8,11 @@ namespace CubicEngine {
 	public:
 		Object();
 
-		virtual ~Object();
+		virtual ~Object() = default;
 
-		virtual void Destroy();
+		virtual void Destroy() {};
+
+		virtual void* Clone_Obj() {};
 
 		std::string GetObjectID() const;
 

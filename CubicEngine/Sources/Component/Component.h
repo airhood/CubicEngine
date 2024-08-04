@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Object.h"
+#include "../Object/Object.h"
 
 namespace CubicEngine {
 	class Component : public Object {
 	public:
-		Component() {}
+		Component() = default;
 		~Component() override = default;
 
 		virtual void Init() = 0;

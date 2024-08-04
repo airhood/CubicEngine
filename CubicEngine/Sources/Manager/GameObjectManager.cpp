@@ -24,7 +24,7 @@ void GameObjectManager::AddGameObject(int scene_num, GameObject* game_object)
 
 GameObject* GameObjectManager::GetGameObjectByName(int scene_num, std::string name)
 {
-	CORE->GET(SceneManager)->getScene(scene_num)->GetGameObjectByName(name);
+	return CORE->GET(SceneManager)->getScene(scene_num)->GetGameObjectByName(name);
 }
 
 GameObject* GameObjectManager::GetGameObjectByID(int scene_num, std::string id)

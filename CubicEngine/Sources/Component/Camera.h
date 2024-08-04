@@ -9,6 +9,9 @@
 namespace CubicEngine {
 	namespace Rendering {
 		class Camera : public Component {
+		public:
+
+		private:
 
 		};
 	}
