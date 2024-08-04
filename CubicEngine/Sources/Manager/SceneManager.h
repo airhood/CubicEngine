@@ -4,6 +4,9 @@
 #include "../Object/Scene.h"
 
 namespace CubicEngine {
+
+	class Scene;
+
 	class SceneManager : public ManagerBase {
 	public:
 		explicit SceneManager() = default;

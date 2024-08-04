@@ -2,10 +2,11 @@
 
 #include <glm.hpp>
 #include <vector>
+#include <unordered_set>
 #include "Object.h"
 #include "../Component/Component.h"
 #include "GameInstance.h"
-#include <unordered_set>
+#include "../Core/EngineCore.h"
 
 namespace CubicEngine {
 
@@ -60,6 +61,5 @@ namespace CubicEngine {
 		std::vector<GameObject*> children;
 
 		std::vector<Component*> components;
-		std::vector<GameInstance*> game_instances;
 	};
 }

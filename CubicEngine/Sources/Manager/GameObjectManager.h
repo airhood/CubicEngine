@@ -6,6 +6,8 @@
 
 namespace CubicEngine {
 
+	class GameObject;
+
 	class GameObjectManager : public ManagerBase {
 	public:
 		explicit GameObjectManager() = default;

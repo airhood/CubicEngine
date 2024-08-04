@@ -6,13 +6,14 @@
 #include <vector>
 #include "../Util/MacroDef.h"
 #include "Application.h"
+#include "../Manager/ManagerBase.h"
 
 // Managers
-#include "../Manager/ManagerBase.h" // Base
 #include "../Manager/InputManager.h"
 #include "../Manager/RenderManager.h"
 #include "../Manager/SceneManager.h"
 #include "../Manager/GameObjectManager.h"
+#include "../Manager/GameInstanceManager.h"
 
 #define Manager(NAME)                                               \
 public:                                                             \
@@ -32,14 +33,11 @@ namespace CubicEngine {
 	
 	class Application;
 
-	enum class TickCycleOrder {
-		FH, // Start from the first game object and process components at high hierarchy first
-		FL, // Start from the first game object and process components at low hierarchy first
-		LH, // Start from the last game object and process components at high hierarchy first
-		LL  // Start from the last game object and process components at low hierarchy first
-	};
+	class SceneManager;
 
 	class GameObjectManager;
+
+	class GameInstanceManager;
 
 	class EngineCore {
 		DECLARE_SINGLETON(EngineCore);
@@ -62,10 +60,10 @@ namespace CubicEngine {
 		Manager(RenderManager);
 		Manager(SceneManager);
 		Manager(GameObjectManager);
+		Manager(GameInstanceManager);
 
 	public:
 		bool initialized = false;
-		TickCycleOrder tick_cycle_order = TickCycleOrder::FH;
 		Application* application;
 
 		std::vector<ManagerBase*> managers;

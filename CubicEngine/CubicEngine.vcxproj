@@ -159,6 +159,7 @@
     <ClCompile Include="Sources\Component\Transform.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
+    <ClCompile Include="Sources\Manager\GameInstanceManager.cpp" />
     <ClCompile Include="Sources\Manager\GameObjectManager.cpp" />
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Manager\SceneManager.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Sources\Component\Component.h" />
     <ClInclude Include="Sources\CubicEngine.h" />
     <ClInclude Include="Sources\Core\EngineCore.h" />
+    <ClInclude Include="Sources\Manager\GameInstanceManager.h" />
     <ClInclude Include="Sources\Manager\GameObjectManager.h" />
     <ClInclude Include="Sources\Manager\ManagerBase.h" />
     <ClInclude Include="Sources\Manager\RenderBase.h" />

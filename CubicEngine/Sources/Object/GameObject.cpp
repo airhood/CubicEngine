@@ -165,7 +165,7 @@ T* GameObject::AddComponent() {
 	components.push_back(component);
 	if (component->has_instance) {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
-		game_instances.push_back(instance);
+		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
 	}
 	return component;
 }
@@ -175,7 +175,7 @@ void GameObject::AddComponent(Component* component) {
 	components.push_back(component);
 	if (component->has_instance) {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
-		game_instances.push_back(instance);
+		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
 	}
 }
 
