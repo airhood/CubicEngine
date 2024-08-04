@@ -15,14 +15,14 @@ namespace CubicEngine {
 		~GameInstance();
 
 		// game loop
-		virtual void Start() = 0;
+		virtual void Start() {}
 
-		virtual void PhysicsTick(float elapsedTime) = 0;
+		virtual void PhysicsTick(float elapsedTime) {}
 
-		virtual void FrameTick(float elapsedTime) = 0;
+		virtual void FrameTick(float elapsedTime) {}
 
-		virtual void LateTick(float elapsedTime) = 0;
+		virtual void LateTick(float elapsedTime) {}
 
-		virtual void OnDestroy() = 0;
+		virtual void OnDestroy() {}
 	};
 }

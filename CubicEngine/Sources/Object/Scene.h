@@ -14,12 +14,6 @@ namespace CubicEngine {
 		~Scene();
 
 	public:
-		void Init();
-		void InitGameObjects();
-		void PhysicsTick(float elapsedTime);
-		void FrameTick(float elapsedTime);
-		void LateTick(float elapsedTime);
-
 		void AddGameObject(GameObject* game_object);
 		GameObject* GetGameObjectByName(std::string name);
 		GameObject* GetGameObjectByID(std::string id);

@@ -9,7 +9,6 @@ namespace CubicEngine {
 		Transform() = default;
 		~Transform() override = default;
 
-		void Init() override;
 		void Destroy() override;
 
 		void* Clone_Obj() override;
@@ -18,6 +17,9 @@ namespace CubicEngine {
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 scale;
+
+		glm::vec3 GetWorldPos();
+		void SetWorldPos(glm::vec3);
 
 		glm::vec3 front();
 		glm::vec3 up();

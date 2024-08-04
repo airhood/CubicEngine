@@ -17,19 +17,6 @@ namespace CubicEngine {
 		GameObject(std::string name);
 		GameObject(std::string name, Component* component);
 		GameObject(std::string name, std::initializer_list<Component*> components);
-
-		void Init();
-		void InitComponents();
-		void InitChildren();
-		void PhysicsTick(float elapsedTime);
-		void FrameTick(float elapsedTime);
-		void LateTick(float elapsedTime);
-		void PhysicsTickComponentGameInstances(float elapsedTime);
-		void PhysicsTickChildren(float elapsedTime);
-		void FrameTickComponentGameInstances(float elapsedTime);
-		void FrameTickChildren(float elapsedTime);
-		void LateTickComponentGameInstances(float elapsedTime);
-		void LateTickChildren(float elapsedTime);
 		
 		void Destroy() override;
 

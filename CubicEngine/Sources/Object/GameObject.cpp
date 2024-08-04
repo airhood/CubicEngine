@@ -27,72 +27,6 @@ GameObject::GameObject(std::string name, std::initializer_list<Component*> compo
 	}
 }
 
-void GameObject::Init() {
-	InitComponents();
-	InitChildren();
-}
-
-void GameObject::InitComponents() {
-	for (auto component : components) {
-		component->Init();
-	}
-}
-
-void GameObject::InitChildren() {
-	for (auto child : children) {
-		child->Init();
-	}
-}
-
-void GameObject::PhysicsTick(float elapsedTime) {
-	PhysicsTickComponentGameInstances(elapsedTime);
-	PhysicsTickChildren(elapsedTime);
-}
-
-void GameObject::FrameTick(float elapsedTime) {
-
-}
-
-void GameObject::LateTick(float elapsedTime) {
-
-}
-
-void GameObject::PhysicsTickComponentGameInstances(float elapsedTime) {
-	for (auto game_instance : game_instances) {
-		game_instance->PhysicsTick(elapsedTime);
-	}
-}
-
-void GameObject::PhysicsTickChildren(float elapsedTime) {
-	for (auto child : children) {
-		child->PhysicsTick(elapsedTime);
-	}
-}
-
-void GameObject::FrameTickComponentGameInstances(float elapsedTime) {
-	for (auto game_instance : game_instances) {
-		game_instance->FrameTick(elapsedTime);
-	}
-}
-
-void GameObject::FrameTickChildren(float elapsedTime) {
-	for (auto child : children) {
-		child->FrameTick(elapsedTime);
-	}
-}
-
-void GameObject::LateTickComponentGameInstances(float elapsedTime) {
-	for (auto game_instance : game_instances) {
-		game_instance->LateTick(elapsedTime);
-	}
-}
-
-void GameObject::LateTickChildren(float elapsedTime) {
-	for (auto child : children) {
-		child->LateTick(elapsedTime);
-	}
-}
-
 void GameObject::Destroy() {
 
 }
@@ -173,24 +107,28 @@ GameObject* GameObject::GetChildByName(std::string name) {
 	for (auto child : children) {
 		if (child->GetName() == name) return child;
 	}
+	return nullptr;
 }
 
 GameObject* GameObject::GetChildByID(std::string id) {
 	for (auto child : children) {
 		if (child->GetObjectID() == id) return child;
 	}
+	return nullptr;
 }
 
 GameObject* GameObject::GetChildByTag(std::string tag) {
 	for (auto child : children) {
 		if (child->CheckTagExists(tag)) return child;
 	}
+	return nullptr;
 }
 
 GameObject* GameObject::GetChildByTags(std::initializer_list<std::string> tags) {
 	for (auto child : children) {
 		if (child->CheckTagsExists(tags)) return child;
 	}
+	return nullptr;
 }
 
 std::vector<GameObject*> GameObject::GetChildren() {
@@ -229,6 +167,7 @@ T* GameObject::AddComponent() {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
 		game_instances.push_back(instance);
 	}
+	return component;
 }
 
 void GameObject::AddComponent(Component* component) {
@@ -248,4 +187,5 @@ T* GameObject::GetComponent() {
 			return dynamic_cast<T*>(component);
 		}
 	}
+	return nullptr;
 }

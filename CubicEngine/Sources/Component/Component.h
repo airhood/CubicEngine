@@ -8,8 +8,6 @@ namespace CubicEngine {
 		Component() = default;
 		~Component() override = default;
 
-		virtual void Init() = 0;
-
 		bool has_instance = false;
 	};
 }

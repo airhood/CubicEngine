@@ -10,34 +10,6 @@ Scene::~Scene() {
 
 }
 
-void Scene::Init() {
-	InitGameObjects();
-}
-
-void Scene::InitGameObjects() {
-	for (auto game_object : game_objects) {
-		game_object->Init();
-	}
-}
-
-void Scene::PhysicsTick(float elapsedTime) {
-	for (auto game_object : game_objects) {
-		game_object->PhysicsTick(elapsedTime);
-	}
-}
-
-void Scene::FrameTick(float elapsedTime) {
-	for (auto game_object : game_objects) {
-		game_object->FrameTick(elapsedTime);
-	}
-}
-
-void Scene::LateTick(float elapsedTime) {
-	for (auto game_object : game_objects) {
-		game_object->LateTick(elapsedTime);
-	}
-}
-
 void Scene::AddGameObject(GameObject* game_object) {
 	game_objects.push_back(game_object);
 }

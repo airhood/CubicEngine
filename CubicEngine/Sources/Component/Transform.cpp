@@ -2,11 +2,6 @@
 
 using namespace CubicEngine;
 
-void Transform::Init()
-{
-
-}
-
 void Transform::Destroy()
 {
 
@@ -28,6 +23,16 @@ Transform* Transform::Clone()
     copy->rotation = rotation;
     copy->scale = scale;
     return copy;
+}
+
+glm::vec3 CubicEngine::Transform::GetWorldPos()
+{
+    return glm::vec3();
+}
+
+void CubicEngine::Transform::SetWorldPos(glm::vec3)
+{
+
 }
 
 glm::vec3 Transform::front()
