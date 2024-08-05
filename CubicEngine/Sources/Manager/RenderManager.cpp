@@ -2,11 +2,6 @@
 
 using namespace CubicEngine::Rendering;
 
-CubicEngine::Rendering::RenderManager::RenderManager(GLFWwindow* window)
-{
-	this->window = window;
-}
-
 RenderManager::~RenderManager() {
 	Exterminate();
 }
@@ -18,7 +13,7 @@ void RenderManager::Init() {
 	{
 		glViewport(0, 0, width, height);
 	};
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(CORE->window, framebuffer_size_callback);
 
 	glClearColor(0, 0, 0, 0);
 }
@@ -32,7 +27,7 @@ void RenderManager::Render() {
 
 
 
-	glfwSwapBuffers(window);
+	glfwSwapBuffers(CORE->window);
 	glfwPollEvents();
 }
 

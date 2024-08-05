@@ -13,6 +13,7 @@ EngineCore::~EngineCore() {
 }
 
 void EngineCore::Init() {
+	glfwSetWindowUserPointer(window, new PointerHolder());
 	CreateManagers();
 	CacheManagers();
 	InitManagers();
@@ -50,8 +51,8 @@ Application* EngineCore::GetApplication() {
 
 void CubicEngine::EngineCore::CreateManagers()
 {
-	obj_InputManager = new InputManager(window);
-	obj_RenderManager = new RenderManager(window);
+	obj_InputManager = new InputManager();
+	obj_RenderManager = new RenderManager();
 	obj_SceneManager = new SceneManager();
 	obj_GameObjectManager = new GameObjectManager();
 	obj_GameInstanceManager = new GameInstanceManager();

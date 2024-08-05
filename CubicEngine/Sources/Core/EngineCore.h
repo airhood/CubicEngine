@@ -4,9 +4,11 @@
 
 #include <iostream>
 #include <vector>
+
 #include "../Util/MacroDef.h"
 #include "Application.h"
 #include "../Manager/ManagerBase.h"
+#include "../Util/PointerHolder.h"
 
 // Managers
 #include "../Manager/InputManager.h"
@@ -28,16 +30,20 @@ private:                                                            \
 
 namespace CubicEngine {
 
-	using namespace Input;
-	using namespace Rendering;
 	
 	class Application;
-
+	namespace Input {
+		class InputManager;
+	}
+	namespace Rendering {
+		class RenderManager;
+	}
 	class SceneManager;
-
 	class GameObjectManager;
-
 	class GameInstanceManager;
+
+	using namespace Input;
+	using namespace Rendering;
 
 	class EngineCore {
 		DECLARE_SINGLETON(EngineCore);

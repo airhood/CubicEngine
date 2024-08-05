@@ -192,6 +192,8 @@
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
+    <ClInclude Include="Sources\Util\PointerHolder.h" />
+    <ClInclude Include="Sources\Util\Key.h" />
     <ClInclude Include="Sources\Util\MacroDef.h" />
     <ClInclude Include="Sources\Object\Object.h" />
     <ClInclude Include="Sources\Object\Scene.h" />
