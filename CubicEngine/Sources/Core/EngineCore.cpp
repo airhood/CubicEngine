@@ -49,8 +49,7 @@ Application* EngineCore::GetApplication() {
 	return application;
 }
 
-void CubicEngine::EngineCore::CreateManagers()
-{
+void CubicEngine::EngineCore::CreateManagers() {
 	obj_InputManager = new InputManager();
 	obj_RenderManager = new RenderManager();
 	obj_SceneManager = new SceneManager();
@@ -58,14 +57,12 @@ void CubicEngine::EngineCore::CreateManagers()
 	obj_GameInstanceManager = new GameInstanceManager();
 }
 
-void EngineCore::CacheManagers()
-{
+void EngineCore::CacheManagers() {
 	managers.push_back(obj_InputManager);
 	managers.push_back(obj_RenderManager);
 }
 
-void CubicEngine::EngineCore::InitManagers()
-{
+void CubicEngine::EngineCore::InitManagers() {
 	for (auto& manager : managers) {
 		manager->Init();
 	}

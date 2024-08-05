@@ -57,21 +57,9 @@ void Application::setScreenSize(int width, int height) {
 	glViewport(0, 0, screen_width, screen_height);
 }
 
-int Application::getScreenWidth() {
-	return screen_width;
-}
-
-int Application::getScreenHeight() {
-	return screen_height;
-}
-
 void Application::setTitle(std::string title) {
 	this->title = title;
 	glfwSetWindowTitle(window, title.c_str());
-}
-
-std::string Application::getTitle() {
-	return title;
 }
 
 #undef APPLICATION_CPP

@@ -6,7 +6,7 @@ namespace CubicEngine {
 
 	class Object {
 	public:
-		Object();
+		Object() = default;
 
 		virtual ~Object() = default;
 
@@ -14,7 +14,7 @@ namespace CubicEngine {
 
 		virtual void* Clone_Obj() { return nullptr; }
 
-		std::string GetObjectID() const;
+		std::string GetObjectID() const { return objectID; }
 
 	private:
 		std::string objectID;

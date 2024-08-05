@@ -27,52 +27,10 @@ GameObject::GameObject(std::string name, std::initializer_list<Component*> compo
 	}
 }
 
-void GameObject::Destroy() {
-
-}
-
-void GameObject::SetName(std::string name) {
-	this->name = name;
-}
-
-std::string GameObject::GetName() const {
-	return name;
-}
-
-void CubicEngine::GameObject::SetEnabled(bool state)
-{
-	isEnabled = state;
-}
-
-bool CubicEngine::GameObject::IsEnabled()
-{
-	return isEnabled;
-}
-
-void GameObject::AddTag(const std::string tag) {
-	tags.insert(tag);
-}
-
-void GameObject::AddTags(std::initializer_list<std::string> tags) {
-	this->tags.insert(tags);
-}
-
-const std::unordered_set<std::string>& GameObject::GetTags() {
-	return tags;
-}
-
-void GameObject::RemoveTag(std::string tag) {
-	tags.erase(tag);
-}
-
 void GameObject::RemoveTags(std::initializer_list<std::string> tags) {
 	for (auto& tag : tags) {
 		this->tags.erase(tag);
 	}
-}
-
-void GameObject::ClearTags() {
-	tags.clear();
 }
 
 bool GameObject::CheckTagExists(std::string tag) {
@@ -89,18 +47,6 @@ bool GameObject::CheckTagsExists(std::initializer_list<std::string> tag) {
 		}
 	}
 	return true;
-}
-
-void GameObject::SetParent(GameObject* parent) {
-	this->parent = parent;
-}
-
-GameObject* GameObject::GetParent() {
-	return parent;
-}
-
-void GameObject::AddChild(GameObject* child) {
-	children.push_back(child);
 }
 
 GameObject* GameObject::GetChildByName(std::string name) {

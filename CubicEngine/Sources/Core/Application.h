@@ -16,11 +16,11 @@ namespace CubicEngine {
 		void Start();
 
 		void setScreenSize(int width, int height);
-		int getScreenWidth();
-		int getScreenHeight();
+		int getScreenWidth() { return screen_width; }
+		int getScreenHeight() { return screen_height; }
 
 		void setTitle(std::string title);
-		std::string getTitle();
+		std::string getTitle() { return title; }
 
 	private:
 		bool initialized;

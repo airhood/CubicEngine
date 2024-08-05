@@ -168,6 +168,7 @@
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
     <ClCompile Include="Sources\Object\Object.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
+    <ClCompile Include="Sources\Object\Script.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />
     <ClCompile Include="Sources\Util\Shader.cpp" />
     <ClCompile Include="Sources\main.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
+    <ClInclude Include="Sources\Object\Script.h" />
     <ClInclude Include="Sources\Util\PointerHolder.h" />
     <ClInclude Include="Sources\Util\Key.h" />
     <ClInclude Include="Sources\Util\MacroDef.h" />
