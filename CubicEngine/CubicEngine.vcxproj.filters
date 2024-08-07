@@ -27,9 +27,6 @@
     <ClCompile Include="Sources\Manager\InputManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Object\Object.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Object\GameObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>

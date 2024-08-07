@@ -21,9 +21,9 @@ namespace CubicEngine {
 		void OpenScene(Scene* scene);
 		void OpenScene(int scene_num);
 
-		Scene* getCurrentScene();
-		int getCurrentSceneNum() { return current_scene_num; }
-		Scene* getScene(int scene_num);
+		Scene* GetCurrentScene();
+		int GetCurrentSceneNum() { return current_scene_num; }
+		Scene* GetScene(int scene_num);
 
 	private:
 		std::vector<Scene*> scenes;

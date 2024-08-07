@@ -166,7 +166,6 @@
     <ClCompile Include="Sources\Object\GameInstance.cpp" />
     <ClCompile Include="Sources\Object\GameObject.cpp" />
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
-    <ClCompile Include="Sources\Object\Object.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
     <ClCompile Include="Sources\Object\Script.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />

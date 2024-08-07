@@ -15,6 +15,7 @@ void SceneManager::Exterminate() {
 }
 
 void CubicEngine::SceneManager::StageScene(Scene* scene) {
+	scene->scene_num = scenes.size();
 	scenes.push_back(scene);
 }
 
@@ -29,7 +30,7 @@ void SceneManager::OpenScene(int scene_num) {
 	}
 }
 
-Scene* SceneManager::getCurrentScene() {
+Scene* SceneManager::GetCurrentScene() {
 	if (current_scene_num > -1) {
 		if (scenes.size() > current_scene_num) {
 			return scenes[current_scene_num];
@@ -38,7 +39,7 @@ Scene* SceneManager::getCurrentScene() {
 	return nullptr;
 }
 
-Scene* SceneManager::getScene(int scene_num) {
+Scene* SceneManager::GetScene(int scene_num) {
 	if (scenes.size() > scene_num) {
 		return scenes[scene_num];
 	}

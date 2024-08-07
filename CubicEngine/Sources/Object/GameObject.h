@@ -3,6 +3,7 @@
 #include <glm.hpp>
 #include <vector>
 #include <unordered_set>
+
 #include "Object.h"
 #include "../Component/Component.h"
 #include "GameInstance.h"
@@ -10,7 +11,7 @@
 
 namespace CubicEngine {
 
-	class GameInstance;
+	class Component;
 
 	class GameObject : public Object {
 	public:
@@ -20,6 +21,8 @@ namespace CubicEngine {
 		GameObject(std::string name, std::initializer_list<Component*> components);
 		
 		void Destroy() override;
+
+		int GetRootSceneNum() { return root_scene_num; }
 
 		void SetName(std::string name) { this->name = name; }
 		std::string GetName() const { return name; }
@@ -51,6 +54,10 @@ namespace CubicEngine {
 		void AddComponent(Component* component);
 		template <typename T>
 		T* GetComponent();
+
+	private:
+		friend class Scene;
+		int root_scene_num;
 
 	private:
 		std::string name;

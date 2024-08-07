@@ -11,6 +11,7 @@ Scene::~Scene() {
 }
 
 void Scene::AddGameObject(GameObject* game_object) {
+	game_object->root_scene_num = scene_num;
 	game_objects.push_back(game_object);
 }
 

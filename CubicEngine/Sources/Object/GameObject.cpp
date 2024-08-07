@@ -27,6 +27,10 @@ GameObject::GameObject(std::string name, std::initializer_list<Component*> compo
 	}
 }
 
+void CubicEngine::GameObject::Destroy() {
+
+}
+
 void GameObject::RemoveTags(std::initializer_list<std::string> tags) {
 	for (auto& tag : tags) {
 		this->tags.erase(tag);
@@ -107,7 +111,12 @@ std::vector<GameObject*> GameObject::GetChildrenByTags(std::initializer_list<std
 
 template <typename T>
 T* GameObject::AddComponent() {
+	if (!std::is_base_of(Component, T)) {
+		// TODO: throw error
+		return nullptr;
+	}
 	T* component = new T();
+	component->root_game_object = this;
 	components.push_back(component);
 	if (component->has_instance) {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
@@ -119,7 +128,7 @@ T* GameObject::AddComponent() {
 void GameObject::AddComponent(Component* component) {
 	if (component == nullptr) return;
 	components.push_back(component);
-	if (component->has_instance) {
+	if (component->InstanceCount()) {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
 		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
 	}

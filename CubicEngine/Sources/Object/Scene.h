@@ -24,6 +24,10 @@ namespace CubicEngine {
 		std::vector<GameObject*> GetGameObjectsByTags(std::initializer_list<std::string> tags);
 
 	private:
+		friend class SceneManager;
+		int scene_num;
+
+	private:
 		std::string name;
 		std::vector<GameObject*> game_objects;
 	};
