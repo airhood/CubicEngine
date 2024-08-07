@@ -19,7 +19,7 @@ namespace CubicEngine {
 		GameObject(std::string name);
 		GameObject(std::string name, Component* component);
 		GameObject(std::string name, std::initializer_list<Component*> components);
-		
+
 		void Destroy() override;
 
 		int GetRootSceneNum() { return root_scene_num; }
@@ -69,4 +69,33 @@ namespace CubicEngine {
 
 		std::vector<Component*> components;
 	};
+
+	class EngineCore;
+
+	template <typename T>
+	T* GameObject::AddComponent() {
+		if (!std::is_base_of(Component, T)) {
+			// TODO: throw error
+			return nullptr;
+		}
+		T* component = new T();
+		component->root_game_object = this;
+		components.push_back(component);
+		if (component->has_instance) {
+			Component* _component = dynamic_cast<Component*>(component);
+			EngineCore::getInstance()->GetGameInstanceManagerFUNC()->AddGameInstances(_component->GetGameInstances());
+		}
+		return component;
+	}
+
+	template <typename T>
+	T* GameObject::GetComponent() {
+		for (auto component : components) {
+			if (component == nullptr) continue;
+			if (typeid(component) == typeid(T*)) {
+				return dynamic_cast<T*>(component);
+			}
+		}
+		return nullptr;
+	}
 }

@@ -20,6 +20,12 @@ void CubicEngine::GameInstanceManager::AddGameInstance(GameInstance* instance)
 	game_instances.push_back(instance);
 }
 
+void CubicEngine::GameInstanceManager::AddGameInstances(std::vector<GameInstance*> instances) {
+	for (auto& instance : instances) {
+		AddGameInstance(instance);
+	}
+}
+
 void CubicEngine::GameInstanceManager::StartInstances()
 {
 	for (auto& instance : game_instances) {

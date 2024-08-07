@@ -1,5 +1,4 @@
-#include "GameObject.h"
-#include <vector>
+#include "GameObject.h";
 
 using namespace CubicEngine;
 
@@ -109,22 +108,6 @@ std::vector<GameObject*> GameObject::GetChildrenByTags(std::initializer_list<std
 	return results;
 }
 
-template <typename T>
-T* GameObject::AddComponent() {
-	if (!std::is_base_of(Component, T)) {
-		// TODO: throw error
-		return nullptr;
-	}
-	T* component = new T();
-	component->root_game_object = this;
-	components.push_back(component);
-	if (component->has_instance) {
-		GameInstance* instance = dynamic_cast<GameInstance*>(component);
-		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
-	}
-	return component;
-}
-
 void GameObject::AddComponent(Component* component) {
 	if (component == nullptr) return;
 	components.push_back(component);
@@ -132,15 +115,4 @@ void GameObject::AddComponent(Component* component) {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
 		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
 	}
-}
-
-template <typename T>
-T* GameObject::GetComponent() {
-	for (auto component : components) {
-		if (component == nullptr) continue;
-		if (typeid(component) == typeid(T*)) {
-			return dynamic_cast<T*>(component);
-		}
-	}
-	return nullptr;
 }

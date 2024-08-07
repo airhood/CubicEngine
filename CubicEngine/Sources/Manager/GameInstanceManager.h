@@ -19,6 +19,8 @@ namespace CubicEngine {
 
 		void AddGameInstance(GameInstance* instance);
 
+		void AddGameInstances(std::vector<GameInstance*> instances);
+
 		void StartInstances();
 
 		void PhysicsTickInstances(float elapsedTime);
