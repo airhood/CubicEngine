@@ -7,7 +7,7 @@ RenderManager::~RenderManager() {
 }
 
 void RenderManager::Init() {
-	LoadShaders("Sources/vertexShader.glsl", "Sources/fragmentShader.glsl");
+	shader = new Shader("Sources/vertexShader.glsl", "Sources/fragmentShader.glsl");
 
 	auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height)
 	{

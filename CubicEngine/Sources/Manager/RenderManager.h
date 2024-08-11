@@ -21,6 +21,9 @@ namespace CubicEngine {
 			void Render() override;
 
 			void Exterminate() override;
+
+		private:
+			Shader* shader;
 		};
 	}
 }
