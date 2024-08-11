@@ -57,6 +57,7 @@ namespace CubicEngine {
 
 		void Init();
 		void Start();
+		void Quit();
 
 		// game loop
 		void GameLoop();

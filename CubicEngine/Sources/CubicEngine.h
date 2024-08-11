@@ -10,7 +10,9 @@
 
 
 
+// Essential includes
 #include "Core/EngineCore.h"
 #include "Core/Application.h"
+#include "Util/MemorySystem.h"
 
 #define CubicApp() CubicEngine::CORE->Init()

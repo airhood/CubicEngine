@@ -170,7 +170,12 @@
     <ClCompile Include="Sources\Object\Script.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />
     <ClCompile Include="Sources\Util\Shader.cpp" />
-    <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\fragmentShader.glsl" />
@@ -193,6 +198,8 @@
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\Script.h" />
+    <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
+    <ClInclude Include="Sources\Util\MemorySystem.h" />
     <ClInclude Include="Sources\Util\PointerHolder.h" />
     <ClInclude Include="Sources\Util\Key.h" />
     <ClInclude Include="Sources\Util\MacroDef.h" />

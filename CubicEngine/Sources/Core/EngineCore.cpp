@@ -23,6 +23,10 @@ void EngineCore::Start() {
 	obj_GameInstanceManager->StartInstances();
 }
 
+void CubicEngine::EngineCore::Quit() {
+
+}
+
 void EngineCore::GameLoop() {
 
 }

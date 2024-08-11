@@ -141,5 +141,11 @@
     <ClInclude Include="Sources\Object\Script.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\Util\MemorySystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Test\MemorySystemTest.cpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
