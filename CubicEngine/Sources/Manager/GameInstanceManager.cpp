@@ -1,6 +1,6 @@
 #include "GameInstanceManager.h"
 
-using namespace CubicEngine;
+using namespace CubicEngine::Core;
 
 GameInstanceManager::~GameInstanceManager()
 {

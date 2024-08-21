@@ -6,6 +6,10 @@
 
 namespace CubicEngine {
 
+	namespace Core {
+		class SceneManager;
+	}
+
 	class GameObject;
 
 	class Scene : public Object {
@@ -24,7 +28,7 @@ namespace CubicEngine {
 		std::vector<GameObject*> GetGameObjectsByTags(std::initializer_list<std::string> tags);
 
 	private:
-		friend class SceneManager;
+		friend class CubicEngine::Core::SceneManager;
 		int scene_num;
 
 	private:

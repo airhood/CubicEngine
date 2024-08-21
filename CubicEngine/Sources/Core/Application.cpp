@@ -3,6 +3,7 @@
 #include "Application.h"
 
 using namespace CubicEngine;
+using namespace CubicEngine::Core;
 
 Application::Application() {
 

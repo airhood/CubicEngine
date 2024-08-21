@@ -1,6 +1,6 @@
 #include "GameObjectManager.h"
 
-using namespace CubicEngine;
+using namespace CubicEngine::Core;
 
 GameObjectManager::~GameObjectManager()
 {

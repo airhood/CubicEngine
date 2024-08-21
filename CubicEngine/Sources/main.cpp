@@ -4,5 +4,5 @@ using namespace CubicEngine;
 
 int main(void)
 {
-
+	CubicApp();
 }

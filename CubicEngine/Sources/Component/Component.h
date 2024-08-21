@@ -4,6 +4,12 @@
 #include "../Object/GameObject.h"
 #include "../Object/GameInstance.h"
 
+#include "../Editor/Inspector/InspectorProperty.h"
+
+#define component() friend CubicEngine::Editor::Inspector::InspectorProperty
+
+#define component_setting static void _component_setting()
+
 namespace CubicEngine {
 
 	class GameObject;

@@ -5,6 +5,9 @@
 #include <iostream>
 #include <vector>
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include "../Util/MacroDef.h"
 #include "Application.h"
 #include "../Manager/ManagerBase.h"
@@ -25,12 +28,11 @@ public:                                                             \
 private:                                                            \
 	NAME* obj_##NAME;
 
-#define CORE EngineCore::getInstance()
+#define CORE CubicEngine::Core::EngineCore::getInstance()
 #define GET(NAME) Get##NAME##FUNC()
 
 namespace CubicEngine {
 
-	
 	class Application;
 	namespace Input {
 		class InputManager;
@@ -38,47 +40,50 @@ namespace CubicEngine {
 	namespace Rendering {
 		class RenderManager;
 	}
-	class SceneManager;
-	class GameObjectManager;
-	class GameInstanceManager;
-
 	using namespace Input;
 	using namespace Rendering;
 
-	class EngineCore {
-		DECLARE_SINGLETON(EngineCore);
+	namespace Core {
 
-	public:
-		~EngineCore();
+		class SceneManager;
+		class GameObjectManager;
+		class GameInstanceManager;
 
-		Application* GetApplication();
+		class EngineCore {
+			DECLARE_SINGLETON(EngineCore);
 
-		GLFWwindow* window;
+		public:
+			~EngineCore();
 
-		void Init();
-		void Start();
-		void Quit();
+			Application* GetApplication();
 
-		// game loop
-		void GameLoop();
-		void PhysicsTick(float elapsedTime);
-		void FrameTick(float elapsedTime);
-		void LateTick(float elapsedTime);
+			GLFWwindow* window;
 
-		Manager(InputManager);
-		Manager(RenderManager);
-		Manager(SceneManager);
-		Manager(GameObjectManager);
-		Manager(GameInstanceManager);
+			void Init();
+			void Start();
+			void Quit();
 
-	private:
-		Application* application;
+			// game loop
+			void GameLoop();
+			void PhysicsTick(float elapsedTime);
+			void FrameTick(float elapsedTime);
+			void LateTick(float elapsedTime);
 
-		std::vector<ManagerBase*> managers;
-		void CreateManagers();
-		void CacheManagers();
-		void InitManagers();
-	};
+			Manager(InputManager);
+			Manager(RenderManager);
+			Manager(SceneManager);
+			Manager(GameObjectManager);
+			Manager(GameInstanceManager);
+
+		private:
+			Application* application;
+
+			std::vector<ManagerBase*> managers;
+			void CreateManagers();
+			void CacheManagers();
+			void InitManagers();
+		};
+	}
 }
 
 #undef CORE_CLASS

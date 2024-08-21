@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-using namespace CubicEngine;
+using namespace CubicEngine::Core;
 
 SceneManager::~SceneManager() {
 
@@ -14,12 +14,12 @@ void SceneManager::Exterminate() {
 
 }
 
-void CubicEngine::SceneManager::StageScene(Scene* scene) {
+void SceneManager::StageScene(CubicEngine::Scene* scene) {
 	scene->scene_num = scenes.size();
 	scenes.push_back(scene);
 }
 
-void SceneManager::OpenScene(Scene* scene) {
+void SceneManager::OpenScene(CubicEngine::Scene* scene) {
 	StageScene(scene);
 	current_scene_num = scenes.size() - 1;
 }
@@ -30,7 +30,7 @@ void SceneManager::OpenScene(int scene_num) {
 	}
 }
 
-Scene* SceneManager::GetCurrentScene() {
+CubicEngine::Scene* SceneManager::GetCurrentScene() {
 	if (current_scene_num > -1) {
 		if (scenes.size() > current_scene_num) {
 			return scenes[current_scene_num];
@@ -39,7 +39,7 @@ Scene* SceneManager::GetCurrentScene() {
 	return nullptr;
 }
 
-Scene* SceneManager::GetScene(int scene_num) {
+CubicEngine::Scene* SceneManager::GetScene(int scene_num) {
 	if (scenes.size() > scene_num) {
 		return scenes[scene_num];
 	}

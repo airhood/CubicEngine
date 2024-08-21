@@ -27,6 +27,7 @@ namespace CubicEngine {
 			bool GetKeyPress(KeyCode key);
 			bool GetKeyRelease(KeyCode key);
 
+		private:
 			static const int glfw_keyCode[];
 			std::vector<int> frame_pressed_keys;
 			std::vector<int> frame_released_keys;

@@ -1,6 +1,6 @@
 #include "EngineCore.h"
 
-using namespace CubicEngine;
+using namespace CubicEngine::Core;
 
 IMPLEMENT_SINGLETON(EngineCore);
 
@@ -23,7 +23,7 @@ void EngineCore::Start() {
 	obj_GameInstanceManager->StartInstances();
 }
 
-void CubicEngine::EngineCore::Quit() {
+void EngineCore::Quit() {
 
 }
 
@@ -49,11 +49,11 @@ void EngineCore::LateTick(float elapsedTime) {
 	}
 }
 
-Application* EngineCore::GetApplication() {
+CubicEngine::Application* EngineCore::GetApplication() {
 	return application;
 }
 
-void CubicEngine::EngineCore::CreateManagers() {
+void EngineCore::CreateManagers() {
 	obj_InputManager = new InputManager();
 	obj_RenderManager = new RenderManager();
 	obj_SceneManager = new SceneManager();
@@ -66,7 +66,7 @@ void EngineCore::CacheManagers() {
 	managers.push_back(obj_RenderManager);
 }
 
-void CubicEngine::EngineCore::InitManagers() {
+void EngineCore::InitManagers() {
 	for (auto& manager : managers) {
 		manager->Init();
 	}

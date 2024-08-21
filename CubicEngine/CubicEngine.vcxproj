@@ -176,6 +176,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Sources\Util\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\fragmentShader.glsl" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\Script.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
+    <ClInclude Include="Sources\Editor\Inspector\InspectorProperty.h" />
     <ClInclude Include="Sources\Util\MemorySystem.h" />
     <ClInclude Include="Sources\Util\PointerHolder.h" />
     <ClInclude Include="Sources\Util\Key.h" />
@@ -208,6 +210,7 @@
     <ClInclude Include="Sources\Util\pugixml\pugiconfig.hpp" />
     <ClInclude Include="Sources\Util\pugixml\pugixml.hpp" />
     <ClInclude Include="Sources\Util\Shader.h" />
+    <ClInclude Include="Sources\Util\Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

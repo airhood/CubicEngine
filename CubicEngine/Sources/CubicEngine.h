@@ -15,4 +15,4 @@
 #include "Core/Application.h"
 #include "Util/MemorySystem.h"
 
-#define CubicApp() CubicEngine::CORE->Init()
+#define CubicApp() CORE->Init()

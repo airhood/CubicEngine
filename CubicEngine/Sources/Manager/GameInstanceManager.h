@@ -7,29 +7,31 @@ namespace CubicEngine {
 
 	class GameInstance;
 
-	class GameInstanceManager : public ManagerBase {
-	public:
-		explicit GameInstanceManager() = default;
-		~GameInstanceManager();
+	namespace Core {
+		class GameInstanceManager : public ManagerBase {
+		public:
+			explicit GameInstanceManager() = default;
+			~GameInstanceManager();
 
-	public:
-		void Init() override;
+		public:
+			void Init() override;
 
-		void Exterminate() override;
+			void Exterminate() override;
 
-		void AddGameInstance(GameInstance* instance);
+			void AddGameInstance(GameInstance* instance);
 
-		void AddGameInstances(std::vector<GameInstance*> instances);
+			void AddGameInstances(std::vector<GameInstance*> instances);
 
-		void StartInstances();
+			void StartInstances();
 
-		void PhysicsTickInstances(float elapsedTime);
+			void PhysicsTickInstances(float elapsedTime);
 
-		void FrameTickInstances(float elapsedTime);
+			void FrameTickInstances(float elapsedTime);
 
-		void LateTickInstances(float elapsedTime);
+			void LateTickInstances(float elapsedTime);
 
-	private:
-		std::vector<GameInstance*> game_instances;
-	};
+		private:
+			std::vector<GameInstance*> game_instances;
+		};
+	}
 }
