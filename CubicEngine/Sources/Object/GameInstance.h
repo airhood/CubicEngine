@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../CubicEngine.h"
+
 #include "../Component/Component.h"
 #include "../Object/GameObject.h"
 

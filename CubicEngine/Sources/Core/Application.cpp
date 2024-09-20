@@ -24,7 +24,7 @@ void Application::Init() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Mac OS only
 
-	window = glfwCreateWindow(1920, 1080, "CubicEngine", NULL, NULL);
+	window = glfwCreateWindow(1920, 1080, title.c_str(), NULL, NULL);
 
 	if (window == NULL) {
 		std::cout << "Failed to open GLFW window" << std::endl;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../CubicEngine.h"
+
 #include <glm.hpp>
 #include <vector>
 #include <unordered_set>
@@ -8,6 +10,7 @@
 #include "../Component/Component.h"
 #include "GameInstance.h"
 #include "../Core/EngineCore.h"
+#include "../Component/Transform.h"
 
 namespace CubicEngine {
 
@@ -37,9 +40,9 @@ namespace CubicEngine {
 		bool CheckTagExists(std::string tag);
 		bool CheckTagsExists(std::initializer_list<std::string> tags);
 
-		void SetParent(GameObject* parent) { this->parent = parent; }
+		void SetParent(GameObject* parent);
 		GameObject* GetParent() { return parent; }
-		void AddChild(GameObject* child) { children.push_back(child); }
+		void AddChild(GameObject* child);
 		GameObject* GetChildByName(std::string name);
 		GameObject* GetChildByID(std::string id);
 		GameObject* GetChildByTag(std::string tag);
@@ -55,9 +58,14 @@ namespace CubicEngine {
 		template <typename T>
 		T* GetComponent();
 
+		Transform* transform() { return _transform; }
+
 	private:
 		friend class Scene;
 		int root_scene_num;
+
+		friend class GameObject;
+		void DeleteChildPtr(GameObject* child);
 
 	private:
 		std::string name;
@@ -68,6 +76,7 @@ namespace CubicEngine {
 		std::vector<GameObject*> children;
 
 		std::vector<Component*> components;
+		Transform* _transform;
 	};
 
 	class EngineCore;

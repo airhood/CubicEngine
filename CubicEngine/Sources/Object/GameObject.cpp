@@ -4,14 +4,23 @@ using namespace CubicEngine;
 
 GameObject::GameObject() {
 	this->name = "";
+	Transform* transform = new Transform();
+	components.push_back(transform);
+	this->_transform = transform;
 }
 
 GameObject::GameObject(std::string name) {
 	this->name = name;
+	Transform* transform = new Transform();
+	components.push_back(transform);
+	this->_transform = transform;
 }
 
 GameObject::GameObject(std::string name, Component* component) {
 	this->name = name;
+	Transform* transform = new Transform();
+	components.push_back(transform);
+	this->_transform = transform;
 	if (component != nullptr) {
 		this->components.push_back(component);
 	}
@@ -19,6 +28,9 @@ GameObject::GameObject(std::string name, Component* component) {
 
 GameObject::GameObject(std::string name, std::initializer_list<Component*> components) {
 	this->name = name;
+	Transform* transform = new Transform();
+	this->components.push_back(transform);
+	this->_transform = transform;
 	for (auto component : components) {
 		if (component != nullptr) {
 			this->components.push_back(component);
@@ -27,7 +39,15 @@ GameObject::GameObject(std::string name, std::initializer_list<Component*> compo
 }
 
 void CubicEngine::GameObject::Destroy() {
+	for (auto& component : components) {
+		component->Destroy();
+		delete component;
+	}
 
+	for (auto& child : children) {
+		child->Destroy();
+		delete child;
+	}
 }
 
 void GameObject::RemoveTags(std::initializer_list<std::string> tags) {
@@ -50,6 +70,20 @@ bool GameObject::CheckTagsExists(std::initializer_list<std::string> tag) {
 		}
 	}
 	return true;
+}
+
+void GameObject::SetParent(GameObject* parent) {
+	if (parent == nullptr) return;
+	parent->DeleteChildPtr(this);
+	parent->AddChild(this);
+
+}
+
+void GameObject::AddChild(GameObject* child) {
+	if (child == nullptr) return;
+	child->parent = this;
+	child->transform()->_parent = _transform;
+	children.push_back(child);
 }
 
 GameObject* GameObject::GetChildByName(std::string name) {
@@ -115,4 +149,9 @@ void GameObject::AddComponent(Component* component) {
 		GameInstance* instance = dynamic_cast<GameInstance*>(component);
 		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
 	}
+}
+
+void CubicEngine::GameObject::DeleteChildPtr(GameObject* child) {
+	if (child == nullptr) return;
+	children.erase(remove(children.begin(), children.end(), child));
 }

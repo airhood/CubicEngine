@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../CubicEngine.h"
+
 namespace CubicEngine {
     class ManagerBase {
     public:

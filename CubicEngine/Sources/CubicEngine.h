@@ -16,3 +16,4 @@
 #include "Util/MemorySystem.h"
 
 #define CubicApp() CORE->Init()
+#define GetApplication() CORE->GetApplication()
