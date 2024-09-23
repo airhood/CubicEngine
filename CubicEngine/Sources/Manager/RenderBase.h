@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../CubicEngine.h"
-
 namespace CubicEngine {
 	namespace Rendering {
 		class RenderBase {

@@ -1,20 +1,20 @@
 #pragma once
 
-#include "../CubicEngine.h"
-
 #include <glm.hpp>
 #include <vector>
 #include <unordered_set>
 
 #include "Object.h"
-#include "../Component/Component.h"
 #include "GameInstance.h"
 #include "../Core/EngineCore.h"
+#include "../Component/Component.h"
 #include "../Component/Transform.h"
 
 namespace CubicEngine {
 
 	class Component;
+
+	class Transform;
 
 	class GameObject : public Object {
 	public:

@@ -2,11 +2,11 @@
 
 using namespace CubicEngine;
 
-float CubicEngine::Time::initTime = 0.0f;
-float CubicEngine::Time::currentPhysicsTime = 0.0f;
-float CubicEngine::Time::currentFrameTime = 0.0f;
-float CubicEngine::Time::lastPhysicsTime = 0.0f;
-float CubicEngine::Time::lastFrameTime = 0.0f;
+float Time::initTime = 0.0f;
+float Time::currentPhysicsTime = 0.0f;
+float Time::currentFrameTime = 0.0f;
+float Time::lastPhysicsTime = 0.0f;
+float Time::lastFrameTime = 0.0f;
 
 float Time::time() {
     return glfwGetTime() - initTime;

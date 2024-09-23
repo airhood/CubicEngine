@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../CubicEngine.h"
-
 #include "ManagerBase.h"
 #include "../Object/Scene.h"
 

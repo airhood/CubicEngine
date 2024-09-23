@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../CubicEngine.h"
-
 #include "glm.hpp"
 #include "Component.h"
 

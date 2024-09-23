@@ -1,12 +1,7 @@
 #pragma once
 
-#include "../CubicEngine.h"
-
+#include <vector>
 #include "../Object/Object.h"
-#include "../Object/GameObject.h"
-#include "../Object/GameInstance.h"
-
-#include "../Editor/Inspector/InspectorProperty.h"
 
 namespace CubicEngine {
 

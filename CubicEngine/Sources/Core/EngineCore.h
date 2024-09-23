@@ -2,8 +2,6 @@
 
 #define CORE_CLASS
 
-#include "../CubicEngine.h"
-
 #include <iostream>
 #include <vector>
 
@@ -36,6 +34,7 @@ private:                                                            \
 namespace CubicEngine {
 
 	class Application;
+
 	namespace Input {
 		class InputManager;
 	}

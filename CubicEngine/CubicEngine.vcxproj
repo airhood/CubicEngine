@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Component\Camera.cpp" />
+    <ClCompile Include="Sources\Component\Component.cpp" />
     <ClCompile Include="Sources\Component\Transform.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
@@ -200,7 +201,6 @@
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\Script.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
-    <ClInclude Include="Sources\Editor\Inspector\InspectorProperty.h" />
     <ClInclude Include="Sources\Util\MemorySystem.h" />
     <ClInclude Include="Sources\Util\PointerHolder.h" />
     <ClInclude Include="Sources\Util\Key.h" />
