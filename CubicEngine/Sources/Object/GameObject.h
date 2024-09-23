@@ -25,23 +25,23 @@ namespace CubicEngine {
 
 		void Destroy() override;
 
-		int GetRootSceneNum() { return root_scene_num; }
+		int GetRootSceneNum();
 
-		void SetName(std::string name) { this->name = name; }
-		std::string GetName() const { return name; }
-		void SetEnabled(bool state) { isEnabled = state; }
-		bool IsEnabled() { return isEnabled; }
-		void AddTag(std::string tag) { tags.insert(tag); }
-		void AddTags(std::initializer_list<std::string> tags) { this->tags.insert(tags); }
-		const std::unordered_set<std::string>& GetTags() { return tags; }
-		void RemoveTag(std::string tag) { tags.erase(tag); }
+		void SetName(std::string name);
+		std::string GetName() const;
+		void SetEnabled(bool state);
+		bool IsEnabled();
+		void AddTag(std::string tag);
+		void AddTags(std::initializer_list<std::string> tags);
+		const std::unordered_set<std::string> GetTags();
+		void RemoveTag(std::string tag);
 		void RemoveTags(std::initializer_list<std::string> tags);
-		void ClearTags() { tags.clear(); }
+		void ClearTags();
 		bool CheckTagExists(std::string tag);
 		bool CheckTagsExists(std::initializer_list<std::string> tags);
 
 		void SetParent(GameObject* parent);
-		GameObject* GetParent() { return parent; }
+		GameObject* GetParent();
 		void AddChild(GameObject* child);
 		GameObject* GetChildByName(std::string name);
 		GameObject* GetChildByID(std::string id);

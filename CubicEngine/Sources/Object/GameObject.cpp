@@ -50,10 +50,50 @@ void CubicEngine::GameObject::Destroy() {
 	}
 }
 
+int GameObject::GetRootSceneNum() {
+	return root_scene_num;
+}
+
+void GameObject::SetName(std::string name) {
+	this->name = name;
+}
+
+std::string GameObject::GetName() const {
+	return name;
+}
+
+void GameObject::SetEnabled(bool state) {
+	isEnabled = state;
+}
+
+bool GameObject::IsEnabled() {
+	return isEnabled;
+}
+
+void GameObject::AddTag(std::string tag) {
+	tags.insert(tag);
+}
+
+void GameObject::AddTags(std::initializer_list<std::string> tags) {
+	this->tags.insert(tags);
+}
+
+const std::unordered_set<std::string> GameObject::GetTags() {
+	return tags;
+}
+
+void GameObject::RemoveTag(std::string tag) {
+	tags.erase(tag);
+}
+
 void GameObject::RemoveTags(std::initializer_list<std::string> tags) {
 	for (auto& tag : tags) {
 		this->tags.erase(tag);
 	}
+}
+
+void GameObject::ClearTags() {
+	tags.clear();
 }
 
 bool GameObject::CheckTagExists(std::string tag) {
@@ -77,6 +117,10 @@ void GameObject::SetParent(GameObject* parent) {
 	parent->DeleteChildPtr(this);
 	parent->AddChild(this);
 
+}
+
+GameObject* GameObject::GetParent() {
+	return parent;
 }
 
 void GameObject::AddChild(GameObject* child) {

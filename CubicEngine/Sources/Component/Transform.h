@@ -7,7 +7,6 @@
 
 namespace CubicEngine {
 	class Transform : public Component {
-		component();
 	public:
 		Transform();
 		~Transform() override = default;

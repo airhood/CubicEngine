@@ -8,6 +8,12 @@
 #if defined(CORE_CLASS) || defined(APPLICATION_CPP)
 
 namespace CubicEngine {
+
+	struct Resolution {
+		int width;
+		int height;
+	};
+
 	class Application {
 	public:
 		Application();
@@ -15,17 +21,21 @@ namespace CubicEngine {
 		void Init();
 		void Start();
 
-		void setScreenSize(int width, int height);
-		int getScreenWidth() { return screen_width; }
-		int getScreenHeight() { return screen_height; }
+		void SetResolution(int width, int height);
+		void SetResolution(Resolution resolution);
+		Resolution GetResolution();
+		int GetResolutionWidth();
+		int GetResolutionHeight();
 
-		void setTitle(std::string title);
-		std::string getTitle() { return title; }
+		void SetTitle(std::string title);
+		std::string GetTitle();
 
 	private:
 		bool initialized;
-		int screen_width, screen_height;
+		Resolution resolution;
 		std::string title;
+
+		void ApplyResolution();
 
 		// GL
 		GLFWwindow* window;

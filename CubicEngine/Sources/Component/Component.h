@@ -8,8 +8,6 @@
 
 #include "../Editor/Inspector/InspectorProperty.h"
 
-#define component() friend CubicEngine::Editor::Inspector::InspectorProperty
-
 namespace CubicEngine {
 
 	class GameObject;
@@ -21,13 +19,13 @@ namespace CubicEngine {
 		Component() = default;
 		~Component() override = default;
 
-		int SceneNum() { return scene_num; }
-		GameObject* RootGameObject() { return root_game_object; }
+		int SceneNum();
+		GameObject* RootGameObject();
 		
-		int AddGameInstance(GameInstance* game_instance) { game_instances.push_back(game_instance); }
-		std::vector<GameInstance*> GetGameInstances() { return game_instances; }
-		GameInstance* GetGameInstance(int instance_num) { return game_instances[instance_num]; }
-		int InstanceCount() { return game_instances.size(); }
+		int AddGameInstance(GameInstance* game_instance);
+		std::vector<GameInstance*> GetGameInstances();
+		GameInstance* GetGameInstance(int instance_num);
+		int InstanceCount();
 
 	private:
 		int scene_num;

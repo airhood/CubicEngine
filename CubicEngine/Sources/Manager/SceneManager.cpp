@@ -39,6 +39,10 @@ CubicEngine::Scene* SceneManager::GetCurrentScene() {
 	return nullptr;
 }
 
+int SceneManager::GetCurrentSceneNum() {
+	return current_scene_num;
+}
+
 CubicEngine::Scene* SceneManager::GetScene(int scene_num) {
 	if (scenes.size() > scene_num) {
 		return scenes[scene_num];

@@ -39,7 +39,7 @@ void Application::Init() {
 		return;
 	}
 
-	glViewport(0, 0, screen_width, screen_height);
+	glViewport(0, 0, resolution.width, resolution.height);
 	
 	glfwSwapInterval(1);
 
@@ -51,16 +51,39 @@ void Application::Start() {
 	CORE->Start();
 }
 
-void Application::setScreenSize(int width, int height) {
-	screen_width = width;
-	screen_height = height;
-	glfwSetWindowSize(window, screen_width, screen_height);
-	glViewport(0, 0, screen_width, screen_height);
+void Application::SetResolution(int width, int height) {
+	resolution.width = width;
+	resolution.height = height;
 }
 
-void Application::setTitle(std::string title) {
+void Application::SetResolution(Resolution resolution) {
+	this->resolution = resolution;
+}
+
+void Application::ApplyResolution() {
+	glfwSetWindowSize(window, resolution.width, resolution.height);
+	glViewport(0, 0, resolution.width, resolution.height);
+}
+
+Resolution Application::GetResolution() {
+	return resolution;
+}
+
+int Application::GetResolutionWidth() {
+	return resolution.width;
+}
+
+int Application::GetResolutionHeight() {
+	return resolution.height;
+}
+
+void Application::SetTitle(std::string title) {
 	this->title = title;
 	glfwSetWindowTitle(window, title.c_str());
+}
+
+std::string Application::GetTitle() {
+	return title;
 }
 
 #undef APPLICATION_CPP
