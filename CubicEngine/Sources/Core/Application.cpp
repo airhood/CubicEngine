@@ -24,7 +24,7 @@ void Application::Init() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Mac OS only
 
-	window = glfwCreateWindow(1920, 1080, title.c_str(), NULL, NULL);
+	window = glfwCreateWindow(resolution.width, resolution.height, title.c_str(), NULL, NULL);
 
 	if (window == NULL) {
 		std::cout << "Failed to open GLFW window" << std::endl;
@@ -75,6 +75,14 @@ int Application::GetResolutionWidth() {
 
 int Application::GetResolutionHeight() {
 	return resolution.height;
+}
+
+void Application::SetFPS(int fps) {
+	this->fps = fps;
+}
+
+int Application::GetFPS() {
+	return fps;
 }
 
 void Application::SetTitle(std::string title) {

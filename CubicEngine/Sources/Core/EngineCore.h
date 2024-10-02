@@ -77,12 +77,17 @@ namespace CubicEngine {
 			Manager(GameInstanceManager);
 
 		private:
+			bool running = false;
+
 			Application* application;
+
+			void EngineMain();
 
 			std::vector<ManagerBase*> managers;
 			void CreateManagers();
 			void CacheManagers();
 			void InitManagers();
+
 		};
 	}
 }

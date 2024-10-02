@@ -10,6 +10,8 @@ namespace CubicEngine {
 	struct Resolution {
 		int width;
 		int height;
+
+		Resolution(int width, int height) : width(width), height(height) {}
 	};
 
 	class Application {
@@ -24,13 +26,16 @@ namespace CubicEngine {
 		Resolution GetResolution();
 		int GetResolutionWidth();
 		int GetResolutionHeight();
+		void SetFPS(int fps);
+		int GetFPS();
 
 		void SetTitle(std::string title);
 		std::string GetTitle();
 
 	private:
 		bool initialized;
-		Resolution resolution;
+		Resolution resolution = Resolution(1920, 1080);
+		int fps = 60;
 		std::string title;
 
 		void ApplyResolution();

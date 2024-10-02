@@ -30,6 +30,7 @@
                       instance = new CLASSNAME();                           \
                       return instance;                                      \
                }                                                            \
+               return instance;                                             \
         }                                                                   \
                                                                             \
         void CLASSNAME::deleteInstance() {                                  \

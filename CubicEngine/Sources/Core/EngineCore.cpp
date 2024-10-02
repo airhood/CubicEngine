@@ -1,4 +1,5 @@
 #include "EngineCore.h"
+#include <Windows.h>
 
 using namespace CubicEngine::Core;
 
@@ -12,6 +13,10 @@ EngineCore::~EngineCore() {
 
 }
 
+CubicEngine::Application* EngineCore::GetApplication() {
+	return application;
+}
+
 void EngineCore::Init() {
 	glfwSetWindowUserPointer(window, new PointerHolder());
 	CreateManagers();
@@ -20,7 +25,9 @@ void EngineCore::Init() {
 }
 
 void EngineCore::Start() {
+	running = true;
 	obj_GameInstanceManager->StartInstances();
+	EngineMain();
 }
 
 void EngineCore::Quit() {
@@ -49,8 +56,12 @@ void EngineCore::LateTick(float elapsedTime) {
 	}
 }
 
-CubicEngine::Application* EngineCore::GetApplication() {
-	return application;
+void EngineCore::EngineMain() {
+	const int delay = 1000 / (application->GetFPS());
+	while (running) {
+		GameLoop();
+		Sleep(delay);
+	}
 }
 
 void EngineCore::CreateManagers() {
