@@ -34,10 +34,6 @@ void EngineCore::Quit() {
 
 }
 
-void EngineCore::GameLoop() {
-
-}
-
 void EngineCore::PhysicsTick(float elapsedTime) {
 	for (auto& manager : managers) {
 		manager->PhysicsTick(elapsedTime);
@@ -57,10 +53,20 @@ void EngineCore::LateTick(float elapsedTime) {
 }
 
 void EngineCore::EngineMain() {
-	const int delay = 1000 / (application->GetFPS());
-	while (running) {
-		GameLoop();
-		Sleep(delay);
+	const int frame_delay = 1000 / (application->GetFPS());
+	while (running && (!glfwWindowShouldClose(window))) {
+		Time::updateFrameTime();
+		float delta_frame_time = Time::deltaFrameTime();
+		FrameTick(delta_frame_time);
+		LateTick(delta_frame_time);
+		Render();
+		Sleep(frame_delay);
+	}
+}
+
+void EngineCore::Render() {
+	for (auto& render_manager : render_managers) {
+		render_manager->Render();
 	}
 }
 
@@ -75,6 +81,11 @@ void EngineCore::CreateManagers() {
 void EngineCore::CacheManagers() {
 	managers.push_back(obj_InputManager);
 	managers.push_back(obj_RenderManager);
+	managers.push_back(obj_SceneManager);
+	managers.push_back(obj_GameObjectManager);
+	managers.push_back(obj_GameInstanceManager);
+	
+	render_managers.push_back(obj_RenderManager);
 }
 
 void EngineCore::InitManagers() {

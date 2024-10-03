@@ -22,6 +22,9 @@ namespace CubicEngine {
 
 			void Exterminate() override;
 
+			static const char* vertex_shader;
+			static const char* fragment_shader;
+
 		private:
 			Shader* shader;
 		};

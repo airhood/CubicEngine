@@ -20,6 +20,7 @@ namespace CubicEngine {
 		~Application();
 		void Init();
 		void Start();
+		void Quit();
 
 		void SetResolution(int width, int height);
 		void SetResolution(Resolution resolution);

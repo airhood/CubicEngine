@@ -12,6 +12,7 @@
 #include "Application.h"
 #include "../Manager/ManagerBase.h"
 #include "../Util/PointerHolder.h"
+#include "../Util/Time.h"
 
 // Managers
 #include "../Manager/InputManager.h"
@@ -65,7 +66,6 @@ namespace CubicEngine {
 			void Quit();
 
 			// game loop
-			void GameLoop();
 			void PhysicsTick(float elapsedTime);
 			void FrameTick(float elapsedTime);
 			void LateTick(float elapsedTime);
@@ -83,7 +83,10 @@ namespace CubicEngine {
 
 			void EngineMain();
 
+			void Render();
+
 			std::vector<ManagerBase*> managers;
+			std::vector<RenderBase*> render_managers;
 			void CreateManagers();
 			void CacheManagers();
 			void InitManagers();

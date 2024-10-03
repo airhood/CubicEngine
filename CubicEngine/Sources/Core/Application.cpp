@@ -18,7 +18,6 @@ void Application::Init() {
 		std::cout << "Failed to initialize GLFW" << std::endl;
 		return;
 	}
-	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -31,15 +30,20 @@ void Application::Init() {
 		glfwTerminate();
 		return;
 	}
+
 	glfwMakeContextCurrent(window);
+	auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	};
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK) {
 		std::cout << "Failed to initialize GLEW" << std::endl;
 		glfwTerminate();
 		return;
 	}
-
-	glViewport(0, 0, resolution.width, resolution.height);
 	
 	glfwSwapInterval(1);
 
@@ -49,6 +53,11 @@ void Application::Init() {
 
 void Application::Start() {
 	CORE->Start();
+}
+
+void Application::Quit() {
+	CORE->Quit();
+	glfwTerminate();
 }
 
 void Application::SetResolution(int width, int height) {
