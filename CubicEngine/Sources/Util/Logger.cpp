@@ -4,7 +4,7 @@
 
 using namespace CubicEngine;
 
-LogEntry::LogEntry(LogLevel lvl, const std::string& msg) : level(lvl), message(msg) {}
+std::vector<LogEntry> Logger::logs;
 
 void Logger::log(LogLevel level, const std::string& message) {
     LogEntry entry(level, message);
@@ -12,7 +12,7 @@ void Logger::log(LogLevel level, const std::string& message) {
     saveToFile(entry);
 }
 
-std::vector<LogEntry> Logger::search(LogLevel level) const {
+std::vector<LogEntry> Logger::search(LogLevel level) {
     std::vector<LogEntry> results;
     for (const auto& log : logs) {
         if (log.level == level) {
@@ -22,7 +22,7 @@ std::vector<LogEntry> Logger::search(LogLevel level) const {
     return results;
 }
 
-void Logger::printLogs(LogLevel level) const {
+void Logger::printLogs(LogLevel level) {
     for (const auto& log : search(level)) {
         std::cout << "[" << logLevelToString(log.level) << "] " << log.message << std::endl;
     }
@@ -35,7 +35,7 @@ void Logger::saveToFile(const LogEntry& entry) {
     }
 }
 
-std::string Logger::logLevelToString(LogLevel level) const {
+std::string Logger::logLevelToString(LogLevel level) {
     switch (level) {
         case LogLevel::ERROR:   return "ERROR";
         case LogLevel::WARNING: return "WARNING";

@@ -35,15 +35,8 @@ private:                                                            \
 namespace CubicEngine {
 
 	class Application;
-
-	namespace Input {
-		class InputManager;
-	}
-	namespace Rendering {
-		class RenderManager;
-	}
-	using namespace Input;
-	using namespace Rendering;
+	class InputManager;
+	class RenderManager;
 
 	namespace Core {
 

@@ -38,7 +38,7 @@ GameObject::GameObject(std::string name, std::initializer_list<Component*> compo
 	}
 }
 
-void CubicEngine::GameObject::Destroy() {
+void GameObject::Destroy() {
 	for (auto& component : components) {
 		component->Destroy();
 		delete component;

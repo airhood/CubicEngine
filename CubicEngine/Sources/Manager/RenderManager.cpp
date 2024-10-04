@@ -1,6 +1,6 @@
 #include "RenderManager.h"
 
-using namespace CubicEngine::Rendering;
+using namespace CubicEngine;
 
 const char* RenderManager::vertex_shader = "Sources/Shader/vertexShader.glsl";
 const char* RenderManager::fragment_shader = "Sources/Shader/fragmentShader.glsl";

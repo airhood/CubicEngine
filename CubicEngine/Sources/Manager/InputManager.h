@@ -10,27 +10,25 @@
 #include "../Core/EngineCore.h"
 
 namespace CubicEngine {
-	namespace Input {
-		class InputManager : public ManagerBase {
-		public:
-			explicit InputManager();
-			~InputManager();
+	class InputManager : public ManagerBase {
+	public:
+		explicit InputManager();
+		~InputManager();
 
-		public:
-			void Init() override;
+	public:
+		void Init() override;
 
-			void FrameTick(float elapsedTime) override;
+		void FrameTick(float elapsedTime) override;
 
-			void Exterminate() override;
+		void Exterminate() override;
 
-			bool GetKey(KeyCode key);
-			bool GetKeyPress(KeyCode key);
-			bool GetKeyRelease(KeyCode key);
+		bool GetKey(KeyCode key);
+		bool GetKeyPress(KeyCode key);
+		bool GetKeyRelease(KeyCode key);
 
-		private:
-			static const int glfw_keyCode[];
-			std::vector<int> frame_pressed_keys;
-			std::vector<int> frame_released_keys;
-		};
-	}
+	private:
+		static const int glfw_keyCode[];
+		std::vector<int> frame_pressed_keys;
+		std::vector<int> frame_released_keys;
+	};
 }

@@ -10,23 +10,24 @@ namespace CubicEngine {
         MESSAGE
     };
 
-    struct LogEntry {
+    class LogEntry {
+    public:
         LogLevel level;
         std::string message;
 
-        LogEntry(LogLevel lvl, const std::string& msg);
+        LogEntry(LogLevel lvl, const std::string& msg) : level(lvl), message(msg) {}
     };
 
     class Logger {
     public:
-        void log(LogLevel level, const std::string& message);
-        std::vector<LogEntry> search(LogLevel level) const;
-        void printLogs(LogLevel level) const;
+        static void log(LogLevel level, const std::string& message);
+        static std::vector<LogEntry> search(LogLevel level);
+        static void printLogs(LogLevel level);
 
     private:
-        std::vector<LogEntry> logs;
-        void saveToFile(const LogEntry& entry);
-        std::string logLevelToString(LogLevel level) const;
+        static std::vector<LogEntry> logs;
+        static void saveToFile(const LogEntry& entry);
+        static std::string logLevelToString(LogLevel level);
     };
 
 }

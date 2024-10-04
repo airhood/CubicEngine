@@ -9,24 +9,22 @@
 #include "../Core/EngineCore.h"
 
 namespace CubicEngine {
-	namespace Rendering {
-		class RenderManager : public ManagerBase, public Rendering::RenderBase {
-		public:
-			explicit RenderManager() = default;
-			~RenderManager();
+	class RenderManager : public ManagerBase, public RenderBase {
+	public:
+		explicit RenderManager() = default;
+		~RenderManager();
 
-		public:
-			void Init() override;
-			void SetViewport();
-			void Render() override;
+	public:
+		void Init() override;
+		void SetViewport();
+		void Render() override;
 
-			void Exterminate() override;
+		void Exterminate() override;
 
-			static const char* vertex_shader;
-			static const char* fragment_shader;
+		static const char* vertex_shader;
+		static const char* fragment_shader;
 
-		private:
-			Shader* shader;
-		};
-	}
+	private:
+		Shader* shader;
+	};
 }
