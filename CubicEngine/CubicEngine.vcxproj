@@ -127,8 +127,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\assimp-5.4.3;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -148,8 +148,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\assimp-5.4.3;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="Sources\Component\Camera.cpp" />
     <ClCompile Include="Sources\Component\Component.cpp" />
+    <ClCompile Include="Sources\Component\MeshRenderer.cpp" />
     <ClCompile Include="Sources\Component\Transform.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
@@ -169,6 +170,8 @@
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
     <ClCompile Include="Sources\Object\Script.cpp" />
+    <ClCompile Include="Sources\Util\Logger.cpp" />
+    <ClCompile Include="Sources\Util\Mesh.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />
     <ClCompile Include="Sources\Util\Shader.cpp" />
     <ClCompile Include="Sources\main.cpp">
@@ -185,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Component\Camera.h" />
+    <ClInclude Include="Sources\Component\MeshRenderer.h" />
     <ClInclude Include="Sources\Component\Transform.h" />
     <ClInclude Include="Sources\Core\Application.h" />
     <ClInclude Include="Sources\Component\Component.h" />
@@ -201,7 +205,11 @@
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\Script.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
+    <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h" />
+    <ClInclude Include="Sources\Util\Logger.h" />
+    <ClInclude Include="Sources\Util\Material.h" />
     <ClInclude Include="Sources\Util\MemorySystem.h" />
+    <ClInclude Include="Sources\Util\Mesh.h" />
     <ClInclude Include="Sources\Util\PointerHolder.h" />
     <ClInclude Include="Sources\Util\Key.h" />
     <ClInclude Include="Sources\Util\MacroDef.h" />
@@ -210,6 +218,7 @@
     <ClInclude Include="Sources\Util\pugixml\pugiconfig.hpp" />
     <ClInclude Include="Sources\Util\pugixml\pugixml.hpp" />
     <ClInclude Include="Sources\Util\Shader.h" />
+    <ClInclude Include="Sources\Util\Texture.h" />
     <ClInclude Include="Sources\Util\Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
