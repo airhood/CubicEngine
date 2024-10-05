@@ -14,20 +14,19 @@ namespace CubicEngine {
 		Component() = default;
 		~Component() override = default;
 
+		virtual void Init() {};
+
+		void Destroy() override;
+
+		void* Clone_Obj() override;
+		Component* Clone();
+
 		int SceneNum();
 		GameObject* RootGameObject();
-		
-		int AddGameInstance(GameInstance* game_instance);
-		std::vector<GameInstance*> GetGameInstances();
-		GameInstance* GetGameInstance(int instance_num);
-		int InstanceCount();
 
 	private:
 		int scene_num;
 		friend class GameObject;
 		GameObject* root_game_object;
-
-	private:
-		std::vector<GameInstance*> game_instances;
 	};
 }

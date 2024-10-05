@@ -16,15 +16,21 @@ namespace CubicEngine {
 
 	public:
 		void Init() override;
+
 		void SetViewport();
+
 		void Render() override;
 
 		void Exterminate() override;
+
+		void AddRenderer(RenderBase* renderer);
 
 		static const char* vertex_shader;
 		static const char* fragment_shader;
 
 	private:
 		Shader* shader;
+
+		std::vector<RenderBase*> renderers;
 	};
 }

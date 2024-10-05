@@ -11,18 +11,14 @@ void Transform::Destroy() {
 }
 
 void* Transform::Clone_Obj() {
-    Transform* clone = new Transform();
-    clone->position = position;
-    clone->rotation = rotation;
-    clone->scale = scale;
-    return clone;
+    return Clone();
 }
 
 Transform* Transform::Clone() {
     Transform* clone = new Transform();
-    clone->position = position;
-    clone->rotation = rotation;
-    clone->scale = scale;
+    clone->position = this->position;
+    clone->rotation = this->rotation;
+    clone->scale = this->scale;
     return clone;
 }
 

@@ -5,7 +5,7 @@
 #include <unordered_set>
 
 #include "Object.h"
-#include "GameInstance.h"
+#include "../Component/InstanceComponent.h"
 #include "../Core/EngineCore.h"
 #include "../Component/Component.h"
 #include "../Component/Transform.h"
@@ -24,6 +24,9 @@ namespace CubicEngine {
 		GameObject(std::string name, std::initializer_list<Component*> components);
 
 		void Destroy() override;
+
+		void* Clone_Obj() override;
+		GameObject* Clone();
 
 		int GetRootSceneNum();
 
@@ -71,6 +74,7 @@ namespace CubicEngine {
 		std::string name;
 		bool isEnabled = true;
 		std::unordered_set<std::string> tags;
+		int layer;
 
 		GameObject* parent = nullptr;
 		std::vector<GameObject*> children;
@@ -81,18 +85,21 @@ namespace CubicEngine {
 
 	class EngineCore;
 
+	class InstanceComponent;
+
 	template <typename T>
 	T* GameObject::AddComponent() {
-		if (!std::is_base_of(Component, T)) {
+		if (!std::is_base_of<Component, T>::value) {
 			// TODO: throw error
 			return nullptr;
 		}
 		T* component = new T();
 		component->root_game_object = this;
 		components.push_back(component);
-		if (component->has_instance) {
-			Component* _component = dynamic_cast<Component*>(component);
-			EngineCore::getInstance()->GetGameInstanceManagerFUNC()->AddGameInstances(_component->GetGameInstances());
+		if (std::is_base_of<InstanceComponent, T>::value) {
+			InstanceComponent* instance_component = dynamic_cast<InstanceComponent*>(component);
+			EngineCore::getInstance()->GetInstanceComponentManagerFUNC()->AddGameInstance(instance_component);
+			instance_component->Init();
 		}
 		return component;
 	}

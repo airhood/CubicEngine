@@ -33,7 +33,7 @@
     <ClCompile Include="Sources\Object\Scene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Object\GameInstance.cpp">
+    <ClCompile Include="Sources\Component\InstanceComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Core\EngineCore.cpp">
@@ -57,10 +57,7 @@
     <ClCompile Include="Sources\Component\Transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Manager\GameInstanceManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Object\Script.cpp">
+    <ClCompile Include="Sources\Manager\InstanceComponentManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Util\Time.cpp">
@@ -108,7 +105,7 @@
     <ClInclude Include="Sources\Component\Component.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Object\GameInstance.h">
+    <ClInclude Include="Sources\Component\InstanceComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\EngineCore.h">
@@ -147,16 +144,13 @@
     <ClInclude Include="Sources\Component\Transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Manager\GameInstanceManager.h">
+    <ClInclude Include="Sources\Manager\InstanceComponentManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\Key.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\PointerHolder.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Object\Script.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\MemorySystem.h">

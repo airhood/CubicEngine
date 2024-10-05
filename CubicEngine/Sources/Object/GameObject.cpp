@@ -50,6 +50,25 @@ void GameObject::Destroy() {
 	}
 }
 
+void* GameObject::Clone_Obj() {
+	return Clone();
+}
+
+GameObject* GameObject::Clone() {
+	GameObject* clone = new GameObject();
+	clone->name = this->name;
+	clone->isEnabled = this->isEnabled;
+	clone->tags = this->tags;
+	clone->layer = this->layer;
+	for (auto& child : children) {
+		clone->children.push_back(child->Clone());
+	}
+	for (auto& component : components) {
+
+	}
+	return clone;
+}
+
 int GameObject::GetRootSceneNum() {
 	return root_scene_num;
 }
@@ -189,13 +208,14 @@ std::vector<GameObject*> GameObject::GetChildrenByTags(std::initializer_list<std
 void GameObject::AddComponent(Component* component) {
 	if (component == nullptr) return;
 	components.push_back(component);
-	if (component->InstanceCount()) {
-		GameInstance* instance = dynamic_cast<GameInstance*>(component);
-		CORE->GET(GameInstanceManager)->AddGameInstance(instance);
+	if (std::is_base_of<Component, std::decay_t<decltype(*component)>>::value) {
+		InstanceComponent* instance_component = dynamic_cast<InstanceComponent*>(component);
+		CORE->GET(InstanceComponentManager)->AddGameInstance(instance_component);
+		instance_component->Init();
 	}
 }
 
-void CubicEngine::GameObject::DeleteChildPtr(GameObject* child) {
+void GameObject::DeleteChildPtr(GameObject* child) {
 	if (child == nullptr) return;
 	children.erase(remove(children.begin(), children.end(), child));
 }

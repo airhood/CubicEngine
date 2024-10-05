@@ -19,7 +19,7 @@
 #include "../Manager/RenderManager.h"
 #include "../Manager/SceneManager.h"
 #include "../Manager/GameObjectManager.h"
-#include "../Manager/GameInstanceManager.h"
+#include "../Manager/InstanceComponentManager.h"
 
 #define Manager(NAME)                                               \
 public:                                                             \
@@ -42,7 +42,7 @@ namespace CubicEngine {
 
 		class SceneManager;
 		class GameObjectManager;
-		class GameInstanceManager;
+		class InstanceComponentManager;
 
 		class EngineCore {
 			DECLARE_SINGLETON(EngineCore);
@@ -67,7 +67,7 @@ namespace CubicEngine {
 			Manager(RenderManager);
 			Manager(SceneManager);
 			Manager(GameObjectManager);
-			Manager(GameInstanceManager);
+			Manager(InstanceComponentManager);
 
 		private:
 			bool running = false;

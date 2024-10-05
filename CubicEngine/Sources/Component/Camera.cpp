@@ -1,6 +1,10 @@
 #include "Camera.h"
 
-using namespace CubicEngine::Rendering;
+using namespace CubicEngine;
+
+void Camera::Render() {
+
+}
 
 glm::mat4 Camera::GetViewMatrix() {
 	Transform* transform = RootGameObject()->GetComponent<Transform>();
