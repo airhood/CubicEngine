@@ -12,6 +12,7 @@ namespace CubicEngine {
 		void Destroy() override;
 
 		void* Clone_Obj() override;
+		Component* Clone_Comp() override;
 		Transform* Clone();
 
 		glm::vec3 position;

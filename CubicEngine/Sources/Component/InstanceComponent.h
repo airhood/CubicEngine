@@ -8,7 +8,7 @@ namespace CubicEngine {
 
 	class Scene;
 
-	class InstanceComponent : public Component {
+	class InstanceComponent abstract : public Component {
 	public:
 		InstanceComponent();
 

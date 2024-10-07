@@ -64,7 +64,7 @@ GameObject* GameObject::Clone() {
 		clone->children.push_back(child->Clone());
 	}
 	for (auto& component : components) {
-
+		clone->components.push_back(component->Clone_Comp());
 	}
 	return clone;
 }

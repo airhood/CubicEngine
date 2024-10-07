@@ -1,7 +1,7 @@
 #pragma once
 
 namespace CubicEngine {
-    class ManagerBase {
+    class ManagerBase abstract {
     public:
         ManagerBase() = default;
         virtual ~ManagerBase() = default;

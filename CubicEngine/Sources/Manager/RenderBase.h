@@ -1,7 +1,7 @@
 #pragma once
 
 namespace CubicEngine {
-	class RenderBase {
+	class RenderBase abstract {
 	public:
 		RenderBase() = default;
 		virtual ~RenderBase() = default;

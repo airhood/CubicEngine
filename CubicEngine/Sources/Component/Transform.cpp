@@ -10,6 +10,10 @@ void Transform::Destroy() {
 
 }
 
+Component* Transform::Clone_Comp() {
+    return Clone();
+}
+
 void* Transform::Clone_Obj() {
     return Clone();
 }

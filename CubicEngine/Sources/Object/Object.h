@@ -5,7 +5,7 @@
 
 namespace CubicEngine {
 
-	class Object {
+	class Object abstract {
 	public:
 		Object() = default;
 
@@ -13,7 +13,7 @@ namespace CubicEngine {
 
 		virtual void Destroy() {}
 
-		virtual void* Clone_Obj() { return nullptr; }
+		virtual void* Clone_Obj() = 0;
 
 		virtual std::string ToString() { return ""; };
 

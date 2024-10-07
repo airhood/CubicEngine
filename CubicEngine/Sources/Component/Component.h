@@ -9,17 +9,14 @@ namespace CubicEngine {
 
 	class GameInstance;
 
-	class Component : public Object {
+	class Component abstract : public Object {
 	public:
 		Component() = default;
 		~Component() override = default;
 
 		virtual void Init() {};
 
-		void Destroy() override;
-
-		void* Clone_Obj() override;
-		Component* Clone();
+		virtual Component* Clone_Comp() = 0;
 
 		int SceneNum();
 		GameObject* RootGameObject();
