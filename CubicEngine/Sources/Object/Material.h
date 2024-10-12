@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Shader.h"
+#include "../Util/Shader.h"
 
 namespace CubicEngine {
 	class Material {

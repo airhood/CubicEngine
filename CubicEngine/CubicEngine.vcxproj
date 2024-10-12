@@ -175,7 +175,7 @@
     <ClCompile Include="Sources\Object\Scene.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp" />
     <ClCompile Include="Sources\Util\Logger.cpp" />
-    <ClCompile Include="Sources\Util\Mesh.cpp" />
+    <ClCompile Include="Sources\Object\Mesh.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />
     <ClCompile Include="Sources\Util\Shader.cpp" />
     <ClCompile Include="Sources\main.cpp">
@@ -207,12 +207,13 @@
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
+    <ClInclude Include="Sources\Object\Layer.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h" />
     <ClInclude Include="Sources\Util\Logger.h" />
-    <ClInclude Include="Sources\Util\Material.h" />
+    <ClInclude Include="Sources\Object\Material.h" />
     <ClInclude Include="Sources\Util\MemorySystem.h" />
-    <ClInclude Include="Sources\Util\Mesh.h" />
+    <ClInclude Include="Sources\Object\Mesh.h" />
     <ClInclude Include="Sources\Util\PointerHolder.h" />
     <ClInclude Include="Sources\Util\Key.h" />
     <ClInclude Include="Sources\Util\MacroDef.h" />
@@ -221,7 +222,7 @@
     <ClInclude Include="Sources\Util\pugixml\pugiconfig.hpp" />
     <ClInclude Include="Sources\Util\pugixml\pugixml.hpp" />
     <ClInclude Include="Sources\Util\Shader.h" />
-    <ClInclude Include="Sources\Util\Texture.h" />
+    <ClInclude Include="Sources\Object\Texture.h" />
     <ClInclude Include="Sources\Util\Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

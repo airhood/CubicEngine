@@ -66,7 +66,7 @@
     <ClCompile Include="Sources\Component\Component.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Util\Mesh.cpp">
+    <ClCompile Include="Sources\Object\Mesh.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Component\MeshRenderer.cpp">
@@ -162,13 +162,13 @@
     <ClInclude Include="Sources\Util\Time.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Util\Mesh.h">
+    <ClInclude Include="Sources\Object\Mesh.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Util\Texture.h">
+    <ClInclude Include="Sources\Object\Texture.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Util\Material.h">
+    <ClInclude Include="Sources\Object\Material.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Component\MeshRenderer.h">
@@ -178,6 +178,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Object\Layer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

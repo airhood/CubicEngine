@@ -9,6 +9,7 @@
 #include "../Core/EngineCore.h"
 #include "../Component/Component.h"
 #include "../Component/Transform.h"
+#include "Layer.h"
 
 namespace CubicEngine {
 
@@ -74,7 +75,7 @@ namespace CubicEngine {
 		std::string name;
 		bool isEnabled = true;
 		std::unordered_set<std::string> tags;
-		int layer;
+		Layer layer;
 
 		GameObject* parent = nullptr;
 		std::vector<GameObject*> children;
