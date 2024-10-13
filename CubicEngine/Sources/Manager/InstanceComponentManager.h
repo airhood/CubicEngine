@@ -7,29 +7,27 @@ namespace CubicEngine {
 
 	class InstanceComponent;
 
-	namespace Core {
-		class InstanceComponentManager : public ManagerBase {
-		public:
-			explicit InstanceComponentManager() = default;
-			~InstanceComponentManager();
+	class InstanceComponentManager : public ManagerBase {
+	public:
+		explicit InstanceComponentManager() = default;
+		~InstanceComponentManager();
 
-		public:
-			void Init() override;
+	public:
+		void Init() override;
 
-			void PhysicsTick(float elapsedTime) override;
+		void PhysicsTick(float elapsedTime) override;
 
-			void FrameTick(float elapsedTime) override;
+		void FrameTick(float elapsedTime) override;
 
-			void LateTick(float elapsedTime) override;
+		void LateTick(float elapsedTime) override;
 
-			void Exterminate() override;
+		void Exterminate() override;
 
-			void AddGameInstance(InstanceComponent* instance_component);
+		void AddGameInstance(InstanceComponent* instance_component);
 
-			void StartInstances();
+		void StartInstances();
 
-		private:
-			std::vector<InstanceComponent*> instance_components;
-		};
-	}
+	private:
+		std::vector<InstanceComponent*> instance_components;
+	};
 }

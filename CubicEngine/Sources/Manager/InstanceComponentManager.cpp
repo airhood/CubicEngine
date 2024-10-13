@@ -1,6 +1,6 @@
 #include "InstanceComponentManager.h"
 
-using namespace CubicEngine::Core;
+using namespace CubicEngine;
 
 InstanceComponentManager::~InstanceComponentManager()
 {

@@ -8,19 +8,17 @@ namespace CubicEngine {
 
 	class GameObject;
 
-	namespace Core {
-		class GameObjectManager : public ManagerBase {
-		public:
-			explicit GameObjectManager() = default;
-			~GameObjectManager();
+	class GameObjectManager : public ManagerBase {
+	public:
+		explicit GameObjectManager() = default;
+		~GameObjectManager();
 
-		public:
-			void Init() override;
+	public:
+		void Init() override;
 
-			void Exterminate() override;
+		void Exterminate() override;
 
-		public:
+	public:
 
-		};
-	}
+	};
 }

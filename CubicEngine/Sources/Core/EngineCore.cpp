@@ -76,6 +76,7 @@ void EngineCore::CreateManagers() {
 	obj_SceneManager = new SceneManager();
 	obj_GameObjectManager = new GameObjectManager();
 	obj_InstanceComponentManager = new InstanceComponentManager();
+	obj_LayerManager = new LayerManager();
 }
 
 void EngineCore::CacheManagers() {
@@ -84,6 +85,7 @@ void EngineCore::CacheManagers() {
 	managers.push_back(obj_SceneManager);
 	managers.push_back(obj_GameObjectManager);
 	managers.push_back(obj_InstanceComponentManager);
+	managers.push_back(obj_LayerManager);
 	
 	render_managers.push_back(obj_RenderManager);
 }

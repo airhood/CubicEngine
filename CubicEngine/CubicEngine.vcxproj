@@ -167,11 +167,13 @@
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
     <ClCompile Include="Sources\Manager\InstanceComponentManager.cpp" />
     <ClCompile Include="Sources\Manager\GameObjectManager.cpp" />
+    <ClCompile Include="Sources\Manager\LayerManager.cpp" />
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Manager\SceneManager.cpp" />
     <ClCompile Include="Sources\Component\InstanceComponent.cpp" />
     <ClCompile Include="Sources\Object\GameObject.cpp" />
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
+    <ClCompile Include="Sources\Object\LayerMask.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp" />
     <ClCompile Include="Sources\Util\Logger.cpp" />
@@ -200,6 +202,7 @@
     <ClInclude Include="Sources\Core\EngineCore.h" />
     <ClInclude Include="Sources\Manager\InstanceComponentManager.h" />
     <ClInclude Include="Sources\Manager\GameObjectManager.h" />
+    <ClInclude Include="Sources\Manager\LayerManager.h" />
     <ClInclude Include="Sources\Manager\ManagerBase.h" />
     <ClInclude Include="Sources\Manager\RenderBase.h" />
     <ClInclude Include="Sources\Manager\RenderManager.h" />
@@ -207,7 +210,7 @@
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
-    <ClInclude Include="Sources\Object\Layer.h" />
+    <ClInclude Include="Sources\Object\LayerMask.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h" />
     <ClInclude Include="Sources\Util\Logger.h" />
