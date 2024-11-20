@@ -4,7 +4,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <string>
-#include "../Mesh.h"
+#include "../../Object/Mesh.h"
 #include "../Logger.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>

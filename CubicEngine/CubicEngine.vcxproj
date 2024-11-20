@@ -127,6 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +147,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -171,15 +173,22 @@
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Manager\SceneManager.cpp" />
     <ClCompile Include="Sources\Component\InstanceComponent.cpp" />
+    <ClCompile Include="Sources\Object\Color.cpp" />
+    <ClCompile Include="Sources\Object\Color32.cpp" />
     <ClCompile Include="Sources\Object\GameObject.cpp" />
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
     <ClCompile Include="Sources\Object\LayerMask.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
-    <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp" />
+    <ClCompile Include="Sources\Object\Texture.cpp" />
+    <ClCompile Include="Sources\Object\Texture2D.cpp" />
+    <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Sources\Util\Logger.cpp" />
     <ClCompile Include="Sources\Object\Mesh.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />
-    <ClCompile Include="Sources\Util\Shader.cpp" />
+    <ClCompile Include="Sources\Object\Shader.cpp" />
     <ClCompile Include="Sources\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
@@ -207,12 +216,18 @@
     <ClInclude Include="Sources\Manager\RenderBase.h" />
     <ClInclude Include="Sources\Manager\RenderManager.h" />
     <ClInclude Include="Sources\Component\InstanceComponent.h" />
+    <ClInclude Include="Sources\Object\Color.h" />
+    <ClInclude Include="Sources\Object\Color32.h" />
     <ClInclude Include="Sources\Object\GameObject.h" />
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\LayerMask.h" />
+    <ClInclude Include="Sources\Object\Texture2D.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
-    <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h" />
+    <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Sources\Util\Logger.h" />
     <ClInclude Include="Sources\Object\Material.h" />
     <ClInclude Include="Sources\Util\MemorySystem.h" />
@@ -224,7 +239,7 @@
     <ClInclude Include="Sources\Object\Scene.h" />
     <ClInclude Include="Sources\Util\pugixml\pugiconfig.hpp" />
     <ClInclude Include="Sources\Util\pugixml\pugixml.hpp" />
-    <ClInclude Include="Sources\Util\Shader.h" />
+    <ClInclude Include="Sources\Object\Shader.h" />
     <ClInclude Include="Sources\Object\Texture.h" />
     <ClInclude Include="Sources\Util\Time.h" />
   </ItemGroup>

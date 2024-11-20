@@ -21,7 +21,7 @@ namespace CubicEngine {
 
 		Material* material;
 
-		unsigned int VAO, VBO, EBO;
+		GLuint VAO, VBO, EBO;
 
 		void setupMesh();
 	};

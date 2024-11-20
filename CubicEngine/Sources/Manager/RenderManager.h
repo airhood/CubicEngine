@@ -5,7 +5,7 @@
 
 #include "ManagerBase.h"
 #include "RenderBase.h"
-#include "../Util/Shader.h"
+#include "../Object/Shader.h"
 #include "../Core/EngineCore.h"
 
 namespace CubicEngine {

@@ -18,7 +18,7 @@
     <ClCompile Include="Sources\main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Util\Shader.cpp">
+    <ClCompile Include="Sources\Object\Shader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Core\Application.cpp">
@@ -84,13 +84,25 @@
     <ClCompile Include="Sources\Object\LayerMask.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Object\Texture.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Object\Texture2D.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Object\Color.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Object\Color32.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\vertexShader.glsl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Util\Shader.h">
+    <ClInclude Include="Sources\Object\Shader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\Application.h">
@@ -190,6 +202,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Manager\LayerManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Object\Color.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Object\Texture2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Object\Color32.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

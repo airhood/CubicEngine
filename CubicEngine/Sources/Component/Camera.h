@@ -18,7 +18,10 @@ namespace CubicEngine {
 		void Render() override;
 
 		glm::mat4 GetViewMatrix();
-	private:
+		glm::mat4 GetProjectionMatrix();
+		glm::mat4 GetViewProjectionMatrix();
+
+		float fov, aspectRatio, nearPlane, farPlane;
 
 	};
 }

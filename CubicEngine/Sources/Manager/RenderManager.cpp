@@ -24,6 +24,8 @@ void RenderManager::Render() {
 
 	// TODO: calculate render order. Layer->major, Render order->minor
 
+
+
 	glfwSwapBuffers(CORE->window);
 	glfwPollEvents();
 }

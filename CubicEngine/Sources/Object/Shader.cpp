@@ -56,7 +56,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     glCompileShader(vertex);
     checkCompileErrors(vertex, "VERTEX");
     // fragment Shader
-    fragment = glCreateShader(GL_FRAGMENT_SHADER);
+    fragment = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(fragment, 1, &fShaderCode, NULL);
     glCompileShader(fragment);
     checkCompileErrors(fragment, "FRAGMENT");
