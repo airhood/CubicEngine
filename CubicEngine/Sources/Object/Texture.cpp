@@ -2,7 +2,7 @@
 
 using namespace CubicEngine;
 
-Format Texture::format() const {
+TextureFormat Texture::format() const {
 	return _format;
 }
 

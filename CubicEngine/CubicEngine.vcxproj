@@ -178,6 +178,7 @@
     <ClCompile Include="Sources\Object\GameObject.cpp" />
     <ClCompile Include="Sources\Manager\InputManager.cpp" />
     <ClCompile Include="Sources\Object\LayerMask.cpp" />
+    <ClCompile Include="Sources\Object\Material.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
     <ClCompile Include="Sources\Object\Texture.cpp" />
     <ClCompile Include="Sources\Object\Texture2D.cpp" />
@@ -199,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\fragmentShader.glsl" />
+    <None Include="Sources\Shader\TestShader.csl" />
     <None Include="Sources\Shader\vertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +224,7 @@
     <ClInclude Include="Sources\Manager\InputManager.h" />
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\LayerMask.h" />
+    <ClInclude Include="Sources\Object\Pass.h" />
     <ClInclude Include="Sources\Object\Texture2D.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h">

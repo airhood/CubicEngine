@@ -37,13 +37,13 @@ void Texture2D::Load(unsigned char* data) {
 
 	int gl_format;
 	switch (_format) {
-		case Format::RGBA:
+		case TextureFormat::RGBA:
 			gl_format = GL_RGBA;
 			break;
-		case Format::RGB:
+		case TextureFormat::RGB:
 			gl_format = GL_RGB;
 			break;
-		case Format::GRAYSCALE:
+		case TextureFormat::GRAYSCALE:
 			gl_format = GL_R8;
 			break;
 		default:
@@ -68,13 +68,13 @@ void Texture2D::Release() {
 unsigned char* Texture2D::ConvertData() const {
 	int channel;
 	switch (_format) {
-		case Format::RGBA:
+		case TextureFormat::RGBA:
 			channel = 4;
 			break;
-		case Format::RGB:
+		case TextureFormat::RGB:
 			channel = 3;
 			break;
-		case Format::GRAYSCALE:
+		case TextureFormat::GRAYSCALE:
 			channel = 1;
 			break;
 		default:

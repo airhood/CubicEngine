@@ -96,10 +96,14 @@
     <ClCompile Include="Sources\Object\Color32.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Object\Material.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\vertexShader.glsl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
+    <None Include="Sources\Shader\TestShader.csl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Object\Shader.h">
@@ -211,6 +215,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Object\Color32.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Object\Pass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

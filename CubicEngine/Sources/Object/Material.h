@@ -5,6 +5,8 @@
 namespace CubicEngine {
 	class Material {
 	public:
+		Material();
+
 		Shader* shader;
 
 		void SetBool(const std::string& name, bool value) const;
@@ -23,12 +25,15 @@ namespace CubicEngine {
 
 		void SetVec4(const std::string& name, const glm::vec4& value) const;
 
-		void SetVec4(const std::string& name, float x, float y, float z, float w);
+		void SetVec4(const std::string& name, float x, float y, float z, float w) const;
 
 		void SetMat2(const std::string& name, const glm::mat2& mat) const;
 
 		void SetMat3(const std::string& name, const glm::mat3& mat) const;
 
 		void SetMat4(const std::string& name, const glm::mat4& mat) const;
+
+	private:
+		GLuint shaderProgram = 0;
 	};
 }

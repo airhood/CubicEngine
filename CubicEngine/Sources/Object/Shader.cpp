@@ -5,8 +5,6 @@
 #include <fstream>
 #include <algorithm>
 #include <sstream>
-using namespace std;
-
 #include <stdlib.h>
 #include <string.h>
 
@@ -16,62 +14,66 @@ using namespace std;
 
 using namespace CubicEngine;
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath) {
-    // 1. retrieve the vertex/fragment source code from filePath
-    std::string vertexCode;
-    std::string fragmentCode;
-    std::ifstream vShaderFile;
-    std::ifstream fShaderFile;
-    // ensure ifstream objects can throw exceptions:
-    vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-    fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-    try
-    {
-        // open files
-        vShaderFile.open(vertexPath);
-        fShaderFile.open(fragmentPath);
-        std::stringstream vShaderStream, fShaderStream;
-        // read file's buffer contents into streams
-        vShaderStream << vShaderFile.rdbuf();
-        fShaderStream << fShaderFile.rdbuf();
-        // close file handlers
-        vShaderFile.close();
-        fShaderFile.close();
-        // convert stream into string
-        vertexCode = vShaderStream.str();
-        fragmentCode = fShaderStream.str();
-    }
-    catch (std::ifstream::failure& e)
-    {
-        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
-    }
-    const char* vShaderCode = vertexCode.c_str();
-    const char* fShaderCode = fragmentCode.c_str();
+Shader* Shader::Load(const std::string& path) {
+    std::string code;
+    std::ifstream file;
 
-    // 2. compile shaders
-    unsigned int vertex, fragment;
-    // vertex shader
-    vertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex, 1, &vShaderCode, NULL);
-    glCompileShader(vertex);
-    checkCompileErrors(vertex, "VERTEX");
-    // fragment Shader
-    fragment = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(fragment, 1, &fShaderCode, NULL);
-    glCompileShader(fragment);
-    checkCompileErrors(fragment, "FRAGMENT");
-    // shader Program
-    ID = glCreateProgram();
-    glAttachShader(ID, vertex);
-    glAttachShader(ID, fragment);
-    glLinkProgram(ID);
-    checkCompileErrors(ID, "PROGRAM");
-    // delete the shaders as they're linked into our program now and no longer necessary
-    glDeleteShader(vertex);
-    glDeleteShader(fragment);
+    file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try {
+        file.open(path);
+        std::stringstream stream;
+        stream << file.rdbuf();
+        code = stream.str();
+    }
+    catch (std::ifstream::failure& e) {
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+        return nullptr;
+    }
+
+    return nullptr;
 }
 
-void CubicEngine::Shader::checkCompileErrors(unsigned int shader, std::string type) {
+Shader* Shader::LoadPass(const std::string& code) {
+
+}
+
+GLuint Shader::Load_GL_Shader(const std::string& code, InternalShaderType type) {
+    const char* code_ = code.c_str();
+
+    GLenum gl_shaderType;
+    std::string str_shaderType;
+    switch (type) {
+        case InternalShaderType::VERTEX:
+            gl_shaderType = GL_VERTEX_SHADER;
+            str_shaderType = "VERTEX";
+            break;
+        case InternalShaderType::FRAGMENT:
+            gl_shaderType = GL_FRAGMENT_SHADER;
+            str_shaderType = "FRAGMENT";
+            break;
+        case InternalShaderType::GEOMETRY:
+            gl_shaderType = GL_GEOMETRY_SHADER;
+            str_shaderType = "GEOMETRY";
+            break;
+        case InternalShaderType::COMPUTE:
+            gl_shaderType = GL_COMPUTE_SHADER;
+            str_shaderType = "COMPUTE";
+            break;
+        default:
+            return 0;
+    }
+
+    GLuint shader;
+    shader = glCreateShader(gl_shaderType);
+    glShaderSource(shader, 1, &code_, NULL);
+    glCompileShader(shader);
+    checkCompileErrors(shader, str_shaderType);
+
+    return shader;
+}
+
+void Shader::checkCompileErrors(GLuint shader, std::string type) {
     int success;
     char infoLog[1024];
     if (type != "PROGRAM")

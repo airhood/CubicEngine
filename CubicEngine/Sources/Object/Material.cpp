@@ -2,6 +2,10 @@
 
 using namespace CubicEngine;
 
+Material::Material() {
+	shaderProgram = glCreateProgram();
+}
+
 void Material::SetBool(const std::string& name, bool value) const {
 	glUniform1i(glGetUniformLocation(shader->ID, name.c_str()), (int)value);
 }

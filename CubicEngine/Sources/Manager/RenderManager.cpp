@@ -10,7 +10,7 @@ RenderManager::~RenderManager() {
 }
 
 void RenderManager::Init() {
-	shader = new Shader(vertex_shader, fragment_shader);
+
 }
 
 void RenderManager::SetViewport() {

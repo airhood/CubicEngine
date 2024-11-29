@@ -29,8 +29,6 @@ namespace CubicEngine {
 		static const char* fragment_shader;
 
 	private:
-		Shader* shader;
-
 		std::vector<RenderBase*> renderers;
 	};
 }

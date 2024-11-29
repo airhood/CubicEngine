@@ -6,15 +6,15 @@
 
 namespace CubicEngine {
 
-    enum class Format {
-        RGBA,       // 4개의 색상 채널 (Red, Green, Blue, Alpha)
-        RGB,        // 3개의 색상 채널 (Red, Green, Blue)
-        GRAYSCALE,  // 1개의 채널 (Gray)
+    enum class TextureFormat {
+        RGBA,       // 4 color channels (Red, Green, Blue, Alpha)
+        RGB,        // 3 color channels (Red, Green, Blue)
+        GRAYSCALE,  // 1 color channel (Gray)
     };
 
     class Texture abstract {
     public:
-        Format format() const;
+        TextureFormat format() const;
         void setCPUMemorySyncState(bool state);
         bool getCPUMemorySyncState() const;
 
@@ -22,7 +22,7 @@ namespace CubicEngine {
 
     protected:
         Color* data;
-        Format _format = Format::RGBA;
+        TextureFormat _format = TextureFormat::RGBA;
         bool cpuMemorySyncState = true;
 
         // GL
