@@ -34,10 +34,6 @@ Shader* Shader::Load(const std::string& path) {
     return nullptr;
 }
 
-Shader* Shader::LoadPass(const std::string& code) {
-
-}
-
 GLuint Shader::Load_GL_Shader(const std::string& code, InternalShaderType type) {
     const char* code_ = code.c_str();
 
