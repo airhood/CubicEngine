@@ -6,6 +6,20 @@ Material::Material() {
 	shaderProgram = glCreateProgram();
 }
 
+void Material::Destroy() {
+
+}
+
+void* Material::Clone_Obj() {
+	return Clone();
+}
+
+Material* Material::Clone() {
+	Material* material = new Material();
+	material->shader = shader;
+	return material;
+}
+
 void Material::SetBool(const std::string& name, bool value) const {
 	for (int pass = 0; pass < shader->passes.size(); pass++) {
 		PassSetBool(pass, name, value);

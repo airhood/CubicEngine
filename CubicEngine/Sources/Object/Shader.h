@@ -9,18 +9,24 @@
 #include <iostream>
 #include <vector>
 
+#include "Object.h"
 #include "Pass.h"
 
 namespace CubicEngine {
 
-    class Shader
-    {
+    class Shader : public Object {
         enum class InternalShaderType {
             VERTEX,
             FRAGMENT,
             GEOMETRY,
             COMPUTE
         };
+
+    public:
+        void Destroy() override;
+
+    private:
+        void* Clone_Obj() override;
 
     public:
         static Shader* Load(const std::string& path);

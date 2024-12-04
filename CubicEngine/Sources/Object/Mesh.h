@@ -2,6 +2,7 @@
 
 #include <glm.hpp>
 #include <vector>
+#include "Object.h"
 #include "Texture.h"
 #include "Material.h"
 
@@ -20,9 +21,15 @@ namespace CubicEngine {
 		float m_Weights[MAX_BONE_INFLUENCE];
 	};
 
-	class Mesh {
+	class Mesh : public Object {
 	public:
 		Mesh() = default;
+
+		void Destroy() override;
+
+		void* Clone_Obj() override;
+
+		Mesh* Clone();
 
 		std::vector<Vertex> vertices;
 		std::vector<unsigned int> indices;

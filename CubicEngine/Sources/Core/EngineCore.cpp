@@ -1,4 +1,5 @@
 #include "EngineCore.h"
+#include "../Manager/RenderBase.h"
 #include <Windows.h>
 
 using namespace CubicEngine::Core;

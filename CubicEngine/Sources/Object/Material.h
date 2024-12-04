@@ -1,11 +1,18 @@
 #pragma once
 
+#include "Object.h"
 #include "Shader.h"
 
 namespace CubicEngine {
-	class Material {
+	class Material : public Object {
 	public:
 		Material();
+
+		void Destroy() override;
+
+		void* Clone_Obj() override;
+
+		Material* Clone();
 
 		Shader* shader;
 

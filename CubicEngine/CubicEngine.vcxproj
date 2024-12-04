@@ -164,6 +164,8 @@
     <ClCompile Include="Sources\Component\Camera.cpp" />
     <ClCompile Include="Sources\Component\Component.cpp" />
     <ClCompile Include="Sources\Component\MeshRenderer.cpp" />
+    <ClCompile Include="Sources\Component\Renderer.cpp" />
+    <ClCompile Include="Sources\Component\Renderer2D.cpp" />
     <ClCompile Include="Sources\Component\Transform.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
@@ -207,6 +209,8 @@
   <ItemGroup>
     <ClInclude Include="Sources\Component\Camera.h" />
     <ClInclude Include="Sources\Component\MeshRenderer.h" />
+    <ClInclude Include="Sources\Component\Renderer.h" />
+    <ClInclude Include="Sources\Component\Renderer2D.h" />
     <ClInclude Include="Sources\Component\Transform.h" />
     <ClInclude Include="Sources\Core\Application.h" />
     <ClInclude Include="Sources\Component\Component.h" />

@@ -2,6 +2,14 @@
 
 using namespace CubicEngine;
 
+MeshRenderer::~MeshRenderer() {
+
+}
+
+void MeshRenderer::Destroy() {
+
+}
+
 void MeshRenderer::SetMesh(Mesh* mesh) {
 	this->mesh = mesh;
 	setupMesh();
@@ -19,7 +27,7 @@ Material* MeshRenderer::GetMaterial() {
 	return material;
 }
 
-void MeshRenderer::Draw() {
+void MeshRenderer::Render() {
 
 }
 

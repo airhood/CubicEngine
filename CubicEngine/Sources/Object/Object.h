@@ -7,8 +7,6 @@ namespace CubicEngine {
 
 	class Object abstract {
 	public:
-		Object() = default;
-
 		virtual ~Object() = default;
 
 		virtual void Destroy() {}

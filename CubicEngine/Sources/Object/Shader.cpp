@@ -1,3 +1,4 @@
+#include "shader.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -7,12 +8,18 @@
 #include <sstream>
 #include <stdlib.h>
 #include <string.h>
-
 #include <GL/glew.h>
 
-#include "shader.h"
 
 using namespace CubicEngine;
+
+void Shader::Destroy() {
+
+}
+
+void* Shader::Clone_Obj() {
+    return nullptr;
+}
 
 Shader* Shader::Load(const std::string& path) {
     std::string code;

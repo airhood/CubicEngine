@@ -9,6 +9,24 @@ Texture2D::Texture2D(int width, int height) {
 	data = new Color[width * height];
 }
 
+void* Texture2D::Clone_Obj() {
+	return Clone();
+}
+
+Texture2D* Texture2D::Clone() {
+	Texture2D* texture2d = new Texture2D();
+	texture2d->_width = _width;
+	texture2d->_height = _height;
+	texture2d->data = new Color[_width * _height];
+	for (int i = 0; i < (_width * _height); i++) {
+		texture2d->data[i] = data[i];
+	}
+	texture2d->_format = _format;
+	texture2d->cpuMemorySyncState = cpuMemorySyncState;
+
+	return texture2d;
+}
+
 void Texture2D::SetPixel(int x, int y, Color color) const {
 	if (!cpuMemorySyncState) {
 		// TODO: throw error

@@ -37,6 +37,8 @@ namespace CubicEngine {
 
 	class Application;
 
+	class RenderBase;
+
 	class InputManager;
 	class RenderManager;
 	class SceneManager;

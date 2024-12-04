@@ -6,6 +6,10 @@ namespace CubicEngine {
 	class Texture2D : public Texture {
 	public:
 		Texture2D(int width, int height);
+
+		void* Clone_Obj() override;
+
+		Texture2D* Clone();
 		
 		void SetPixel(int x, int y, Color color) const;
 		Color GetPixel(int x, int y) const;

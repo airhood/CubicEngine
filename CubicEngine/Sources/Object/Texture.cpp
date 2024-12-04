@@ -2,6 +2,10 @@
 
 using namespace CubicEngine;
 
+void Texture::Destroy() {
+
+}
+
 TextureFormat Texture::format() const {
 	return _format;
 }

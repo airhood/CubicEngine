@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <glm.hpp>
+#include "Object.h"
 #include "Color.h"
 
 namespace CubicEngine {
@@ -12,8 +13,14 @@ namespace CubicEngine {
         GRAYSCALE,  // 1 color channel (Gray)
     };
 
-    class Texture abstract {
+    class Texture abstract : public Object {
     public:
+        virtual ~Texture() = default;
+
+        void Destroy() override;
+
+        virtual void* Clone_Obj() = 0;
+
         TextureFormat format() const;
         void setCPUMemorySyncState(bool state);
         bool getCPUMemorySyncState() const;
