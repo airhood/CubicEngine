@@ -182,6 +182,7 @@
     <ClCompile Include="Sources\Object\LayerMask.cpp" />
     <ClCompile Include="Sources\Object\Material.cpp" />
     <ClCompile Include="Sources\Object\Scene.cpp" />
+    <ClCompile Include="Sources\Object\Sprite.cpp" />
     <ClCompile Include="Sources\Object\Texture.cpp" />
     <ClCompile Include="Sources\Object\Texture2D.cpp" />
     <ClCompile Include="Sources\ShaderCompiler\ShaderCompiler.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Sources\Manager\SceneManager.h" />
     <ClInclude Include="Sources\Object\LayerMask.h" />
     <ClInclude Include="Sources\Object\Pass.h" />
+    <ClInclude Include="Sources\Object\Sprite.h" />
     <ClInclude Include="Sources\Object\Texture2D.h" />
     <ClInclude Include="Sources\ShaderCompiler\ShaderCompiler.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />

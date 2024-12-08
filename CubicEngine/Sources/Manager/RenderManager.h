@@ -9,6 +9,7 @@
 
 namespace CubicEngine {
 
+	class Camera;
 	class Renderer;
 
 	class RenderManager : public ManagerBase, public RenderBase {
@@ -23,9 +24,15 @@ namespace CubicEngine {
 
 		void Render() override;
 
+		void RenderCamera(Camera* camera);
+
 		void Exterminate() override;
 
+		void SetCamera(Camera* camera);
+
 		void AddRenderer(Renderer* renderer);
+
+		void RemoveRenderer(Renderer* renderer);
 
 		void OnRenderOrderChanged();
 
@@ -33,6 +40,7 @@ namespace CubicEngine {
 		static const char* fragment_shader;
 
 	private:
+		Camera* camera;
 		std::vector<Renderer*> renderers;
 	};
 }

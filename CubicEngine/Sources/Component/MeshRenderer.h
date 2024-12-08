@@ -15,12 +15,12 @@ namespace CubicEngine {
 		void Destroy() override;
 
 		void SetMesh(Mesh* mesh);
-		Mesh* GetMesh();
+		Mesh* GetMesh() const;
 		
 		void SetMaterial(Material* material);
-		Material* GetMaterial();
+		Material* GetMaterial() const;
 
-		void Render() override;
+		void Render(Camera* camera) override;
 
 	private:
 		Mesh* mesh;

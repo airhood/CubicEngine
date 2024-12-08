@@ -15,7 +15,7 @@ void MeshRenderer::SetMesh(Mesh* mesh) {
 	setupMesh();
 }
 
-Mesh* MeshRenderer::GetMesh() {
+Mesh* MeshRenderer::GetMesh() const {
 	return mesh;
 }
 
@@ -23,11 +23,11 @@ void MeshRenderer::SetMaterial(Material* material) {
 	this->material = material;
 }
 
-Material* MeshRenderer::GetMaterial() {
+Material* MeshRenderer::GetMaterial() const {
 	return material;
 }
 
-void MeshRenderer::Render() {
+void MeshRenderer::Render(Camera* camera) {
 
 }
 

@@ -10,6 +10,9 @@ namespace CubicEngine {
 		void* Clone_Obj() override;
 
 		Texture2D* Clone();
+
+		int width() const;
+		int height() const;
 		
 		void SetPixel(int x, int y, Color color) const;
 		Color GetPixel(int x, int y) const;

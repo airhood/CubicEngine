@@ -16,6 +16,7 @@ namespace CubicEngine {
 
 		virtual void Init() {};
 
+		void* Clone_Obj() override;
 		virtual Component* Clone_Comp() = 0;
 
 		int SceneNum();

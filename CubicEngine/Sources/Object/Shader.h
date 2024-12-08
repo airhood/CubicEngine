@@ -33,6 +33,7 @@ namespace CubicEngine {
 
     private:
         friend class Material;
+        friend class Renderer;
         std::vector<Pass> passes;
 
     private:

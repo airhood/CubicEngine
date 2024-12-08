@@ -34,6 +34,7 @@ namespace CubicEngine {
 
         // GL
         friend class MeshRenderer;
+        friend class Renderer;
         GLuint gl_textureID = 0;
     };
 }

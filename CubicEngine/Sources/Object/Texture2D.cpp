@@ -14,9 +14,7 @@ void* Texture2D::Clone_Obj() {
 }
 
 Texture2D* Texture2D::Clone() {
-	Texture2D* texture2d = new Texture2D();
-	texture2d->_width = _width;
-	texture2d->_height = _height;
+	Texture2D* texture2d = new Texture2D(_width, _height);
 	texture2d->data = new Color[_width * _height];
 	for (int i = 0; i < (_width * _height); i++) {
 		texture2d->data[i] = data[i];
@@ -25,6 +23,14 @@ Texture2D* Texture2D::Clone() {
 	texture2d->cpuMemorySyncState = cpuMemorySyncState;
 
 	return texture2d;
+}
+
+int Texture2D::width() const {
+	return _width;
+}
+
+int Texture2D::height() const {
+	return _height;
 }
 
 void Texture2D::SetPixel(int x, int y, Color color) const {
