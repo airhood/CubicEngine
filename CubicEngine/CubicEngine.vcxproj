@@ -185,7 +185,7 @@
     <ClCompile Include="Sources\Object\Sprite.cpp" />
     <ClCompile Include="Sources\Object\Texture.cpp" />
     <ClCompile Include="Sources\Object\Texture2D.cpp" />
-    <ClCompile Include="Sources\ShaderCompiler\ShaderCompiler.cpp" />
+    <ClCompile Include="Sources\Util\ShaderCompiler.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -203,6 +203,8 @@
     <ClCompile Include="Sources\Util\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Sources\Shader\Cubic2D.csl" />
+    <None Include="Sources\Shader\Cubic2D_LC.csl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
     <None Include="Sources\Shader\TestShader.csl" />
     <None Include="Sources\Shader\vertexShader.glsl" />
@@ -233,7 +235,7 @@
     <ClInclude Include="Sources\Object\Pass.h" />
     <ClInclude Include="Sources\Object\Sprite.h" />
     <ClInclude Include="Sources\Object\Texture2D.h" />
-    <ClInclude Include="Sources\ShaderCompiler\ShaderCompiler.h" />
+    <ClInclude Include="Sources\Util\ShaderCompiler.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest.cpp" />
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

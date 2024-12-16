@@ -99,7 +99,7 @@
     <ClCompile Include="Sources\Object\Material.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ShaderCompiler\ShaderCompiler.cpp">
+    <ClCompile Include="Sources\Util\ShaderCompiler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Component\Renderer2D.cpp">
@@ -116,6 +116,8 @@
     <None Include="Sources\Shader\vertexShader.glsl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
     <None Include="Sources\Shader\TestShader.csl" />
+    <None Include="Sources\Shader\Cubic2D_LC.csl" />
+    <None Include="Sources\Shader\Cubic2D.csl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Object\Shader.h">
@@ -232,7 +234,7 @@
     <ClInclude Include="Sources\Object\Pass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ShaderCompiler\ShaderCompiler.h">
+    <ClInclude Include="Sources\Util\ShaderCompiler.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Component\Renderer2D.h">

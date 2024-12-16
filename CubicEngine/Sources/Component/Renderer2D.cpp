@@ -58,11 +58,12 @@ void Renderer2D::Render(Camera* camera) {
     glm::mat4 view = camera->GetViewMatrix();
     glm::mat4 projection = camera->GetProjectionMatrix();
 
-    glm::mat4 mvp = projection * view * model;
-
     for (int i = 0; i < ShaderPassCount(material->shader); i++) {
         UseShader(material->shader, i);
-        material->PassSetMat4(i, "u_MVP", mvp);
+        //material->PassSetMat4(i, "u_MVP", mvp);
+        material->PassSetMat4(i, "model", model);
+        material->PassSetMat4(i, "view", view);
+        material->PassSetMat4(i, "projection", projection);
         BindTexture(GL_TEXTURE_2D, sprite->texture);
 
         glBindVertexArray(VAO);

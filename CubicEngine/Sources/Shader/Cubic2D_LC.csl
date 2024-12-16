@@ -1,0 +1,52 @@
+$shader_lang GLSL
+
+$pass
+@vertex
+
+#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 aTexCoords;
+layout (location = 2) in vec3 aNormal;
+
+out vec2 TexCoords;
+out vec3 FragPos;
+out vec3 Normal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main() {
+    TexCoords = aTexCoords;
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    Normal = mat3(transpose(inverse(model))) * aNormal; // 법선 변환
+    gl_Position = projection * view * vec4(FragPos, 1.0);
+}
+
+$end
+
+$pass
+@fragment
+
+#version 330 core
+struct Light {
+    vec3 position;
+    vec3 color;
+};
+
+uniform sampler2D texture_diffuse1; // 텍스처 유니폼
+in vec3 FragPos;
+in vec3 Normal;
+in vec2 TexCoords;
+
+out vec4 FragColor;
+
+uniform vec3 viewPos;
+
+void main() {
+    vec3 texColor = texture(texture_diffuse1, TexCoords).rgb; // 텍스처 매핑
+    vec3 ambient = 0.1 * texColor;
+    FragColor = vec4(ambient, 1.0); // 텍스처 색상 기반으로 출력
+}
+
+$end

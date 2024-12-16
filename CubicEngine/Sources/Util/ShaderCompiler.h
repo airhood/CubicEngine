@@ -4,10 +4,15 @@
 #include <vector>
 
 namespace CubicEngine {
-	
-	struct ShaderPassResult {
+
+	struct ShaderPassGLShader {
 		std::string type;
 		std::string code;
+	};
+	
+	struct ShaderPassResult {
+		int passIndex;
+		std::vector<ShaderPassGLShader> shaderPassGLShaders;
 	};
 
 	struct ShaderCompileResult {
@@ -18,9 +23,9 @@ namespace CubicEngine {
 
 	class ShaderCompiler {
 	public:
-		ShaderCompileResult Compile_csl(std::string code);
+		static ShaderCompileResult Compile_csl(std::string code);
 
 	private:
-		ShaderPassResult CompilePass(std::string passCode);
+		static ShaderPassResult CompilePass(std::string passCode);
 	};
 }

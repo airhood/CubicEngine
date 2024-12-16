@@ -9,9 +9,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <GL/glew.h>
-
+#include "../Util/ShaderCompiler.h"
 
 using namespace CubicEngine;
+
+Shader::~Shader() {
+
+}
 
 void Shader::Destroy() {
 
@@ -22,8 +26,8 @@ void* Shader::Clone_Obj() {
 }
 
 Shader* Shader::Load(const std::string& path) {
-    std::string code;
     std::ifstream file;
+    std::string code;
 
     file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
@@ -37,6 +41,42 @@ Shader* Shader::Load(const std::string& path) {
         std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
         return nullptr;
     }
+
+    auto compileResult = ShaderCompiler::Compile_csl(code);
+
+    if (compileResult.error) return nullptr;
+
+    Shader* shader = new Shader();
+
+    const int GLSL = 0;
+    const int HLSL = 1;
+    const int CG = 2;
+    
+    int shaderLang;
+
+    auto applyShaderCommands = [&]() -> bool {
+        for (auto& shaderCommand : compileResult.shaderCommands) {
+            if (shaderCommand.first == "$shader_lang") {
+                if (shaderCommand.second == "GLSL") {
+                    shaderLang = GLSL;
+                }
+                else if (shaderCommand.second == "HLSL") {
+                    shaderLang = HLSL;
+                }
+                else if (shaderCommand.second == "CG") {
+                    shaderLang = CG;
+                }
+                else {
+                    // TODO: throw error
+                    return false;
+                }
+            }
+            else {
+                // TODO: throw error
+                return false;
+            }
+        }
+    };
 
     return nullptr;
 }

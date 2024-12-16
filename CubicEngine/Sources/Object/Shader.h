@@ -23,9 +23,12 @@ namespace CubicEngine {
         };
 
     public:
+        ~Shader();
+
         void Destroy() override;
 
     private:
+        Shader() = default;
         void* Clone_Obj() override;
 
     public:
