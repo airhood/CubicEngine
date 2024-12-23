@@ -3,7 +3,7 @@
 using namespace CubicEngine;
 
 void Renderer::UseShader(Shader* shader, int pass) {
-	glUseProgram(shader->passes[pass].shaderProgram);
+	glUseProgram(shader->passes[pass]->shaderProgram);
 }
 
 int Renderer::ShaderPassCount(Shader* shader) {
