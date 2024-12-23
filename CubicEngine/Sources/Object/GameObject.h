@@ -10,6 +10,7 @@
 #include "../Component/Component.h"
 #include "../Component/Transform.h"
 #include "LayerMask.h"
+#include "../Util/Logger.h"
 
 namespace CubicEngine {
 
@@ -91,7 +92,7 @@ namespace CubicEngine {
 	template <typename T>
 	T* GameObject::AddComponent() {
 		if (!std::is_base_of<Component, T>::value) {
-			// TODO: throw error
+			Logger::Log(LogLevel::ERROR, "Cannot add non-component object as a component")
 			return nullptr;
 		}
 		T* component = new T();

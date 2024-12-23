@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <GL/glew.h>
+#include "../Util/Logger.h"
 #include "../Util/ShaderCompiler.h"
 
 using namespace CubicEngine;
@@ -54,31 +55,114 @@ Shader* Shader::Load(const std::string& path) {
     
     int shaderLang;
 
-    auto applyShaderCommands = [&]() -> bool {
-        for (auto& shaderCommand : compileResult.shaderCommands) {
-            if (shaderCommand.first == "$shader_lang") {
-                if (shaderCommand.second == "GLSL") {
-                    shaderLang = GLSL;
-                }
-                else if (shaderCommand.second == "HLSL") {
-                    shaderLang = HLSL;
-                }
-                else if (shaderCommand.second == "CG") {
-                    shaderLang = CG;
-                }
-                else {
-                    // TODO: throw error
-                    return false;
-                }
+    for (auto& shaderCommand : compileResult.shaderCommands) {
+        if (shaderCommand.first == "$shader_lang") {
+            if (shaderCommand.second == "GLSL") {
+                shaderLang = GLSL;
+            }
+            else if (shaderCommand.second == "HLSL") {
+                shaderLang = HLSL;
+            }
+            else if (shaderCommand.second == "CG") {
+                shaderLang = CG;
             }
             else {
-                // TODO: throw error
+                Logger::Log(LogLevel::ERROR, "Unsupported shader language \'" + shaderCommand.second + "\'",
+                    "shader_path: " + path);
                 return false;
             }
         }
-    };
+        else {
+            Logger::Log(LogLevel::ERROR, "Unsupported shader command \'" + shaderCommand.first + "\'",
+                "shader_path: " + path);
+            return false;
+        }
+    }
 
-    return nullptr;
+    int errorGlobal = false;
+    for (auto& passResult : compileResult.passResults) {
+        Pass* pass = new Pass();
+        std::vector<unsigned int> glShaders;
+        int glShaderIndex = 0;
+        bool error = false;
+        for (auto& glShader : passResult.shaderPassGLShaders) {
+            auto ConvertShaderType = [](std::string shaderType) {
+                if (shaderType == "vertex") {
+                    return GL_VERTEX_SHADER;
+                }
+                else if (shaderType == "fragment") {
+                    return GL_FRAGMENT_SHADER;
+                }
+                else if (shaderType == "geometry") {
+                    return GL_GEOMETRY_SHADER;
+                }
+                else if (shaderType == "compute") {
+                    return GL_COMPUTE_SHADER;
+                }
+                else {
+                    return 0;
+                }
+            };
+
+            auto glShaderType = ConvertShaderType(glShader.type);
+            if (glShaderType == 0) {
+                Logger::Log(LogLevel::ERROR, "Unsupported shader type \'" + glShader.type + "\'",
+                    "shader_path: " + path + ", pass: " + std::to_string(passResult.passIndex)
+                    + ", shader_block: " + std::to_string(glShaderIndex));
+                continue;
+            }
+
+            const char* shaderCode = glShader.code.c_str();
+            int success;
+            char infoLog[512];
+
+            unsigned int shader = glCreateShader(glShaderType);
+            glShaderSource(shader, 1, &shaderCode, NULL);
+            glCompileShader(shader);
+            glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+            if (!success) {
+                glGetShaderInfoLog(shader, 512, NULL, infoLog);
+                Logger::Log(LogLevel::ERROR,
+                    "Shader compile failed. InfoLog: " + std::string(infoLog),
+                    "shader_path: " + path + ", pass: " + std::to_string(passResult.passIndex)
+                    + ", shader_block: " + std::to_string(glShaderIndex));
+                error = true;
+                continue;
+            }
+
+            glShaders.push_back(shader);
+
+            glShaderIndex++;
+        }
+        
+        if (error) continue;
+
+        pass->shaderProgram = glCreateProgram();
+
+        for (auto& glShader : glShaders) {
+            glAttachShader(pass->shaderProgram, glShader);
+        }
+        int success;
+        char infoLog[512];
+        glLinkProgram(pass->shaderProgram);
+        glGetProgramiv(pass->shaderProgram, GL_LINK_STATUS, &success);
+        if (!success) {
+            Logger::Log(LogLevel::ERROR, "Shader linking failed. InfoLog: " + std::string(infoLog),
+                "shader_path: " + path);
+            errorGlobal = true;
+            continue;
+        }
+
+        for (auto& glShader : glShaders) {
+            glDeleteShader(glShader);
+        }
+
+        shader->passes.push_back(pass);
+    }
+
+    if (errorGlobal) return nullptr;
+
+    return shader;
 }
 
 GLuint Shader::Load_GL_Shader(const std::string& code, InternalShaderType type) {

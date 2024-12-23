@@ -8,6 +8,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "../Util/Logger.h"
+
 #include "../Util/MacroDef.h"
 #include "Application.h"
 #include "../Manager/ManagerBase.h"

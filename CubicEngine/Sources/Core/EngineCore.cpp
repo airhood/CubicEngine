@@ -20,6 +20,7 @@ CubicEngine::Application* EngineCore::GetApplication() {
 
 void EngineCore::Init() {
 	glfwSetWindowUserPointer(window, new PointerHolder());
+	Logger::Init();
 	CreateManagers();
 	CacheManagers();
 	InitManagers();

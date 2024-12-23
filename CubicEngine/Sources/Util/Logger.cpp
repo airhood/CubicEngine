@@ -8,14 +8,14 @@
 
 using namespace CubicEngine;
 
-LogEntry::LogEntry(LogLevel lvl, const std::string& msg, const std::string& src)
-    : level(lvl), message(msg), source(src), timestamp(Logger::currentTime()) {}
+LogEntry::LogEntry(LogLevel level, const std::string& message, const std::string& source)
+    : level(level), message(message), source(source), timestamp(Logger::CurrentTime()) {}
 
 std::vector<LogEntry> Logger::logs;
 std::mutex Logger::logMutex;
-std::string Logger::logFile = "log.txt";
+std::string Logger::logFileName = "runtime";
 
-std::string Logger::currentTime() {
+std::string Logger::CurrentTime() {
     auto now = std::chrono::system_clock::now();
     auto time = std::chrono::system_clock::to_time_t(now);
     std::ostringstream oss;
@@ -32,16 +32,20 @@ std::string Logger::currentTime() {
     return oss.str();
 }
 
-void Logger::log(LogLevel level, const std::string& message, const std::string& source) {
+void Logger::Init() {
+    RotateLogFile();
+}
+
+void Logger::Log(LogLevel level, const std::string& message, const std::string& source) {
     LogEntry entry(level, message, source);
     {
         std::lock_guard<std::mutex> guard(logMutex);
         logs.push_back(entry);
     }
-    saveToFile(entry);
+    SaveToFile(entry);
 }
 
-std::vector<LogEntry> Logger::search(LogLevel level) {
+std::vector<LogEntry> Logger::Search(LogLevel level) {
     std::vector<LogEntry> results;
     {
         std::lock_guard<std::mutex> guard(logMutex);
@@ -54,27 +58,27 @@ std::vector<LogEntry> Logger::search(LogLevel level) {
     return results;
 }
 
-void Logger::printLogs(LogLevel level) {
+void Logger::PrintLogs(LogLevel level) {
     {
         std::lock_guard<std::mutex> guard(logMutex);
-        for (const auto& log : search(level)) {
-            std::cout << "[" << log.timestamp << "] [" << logLevelToString(log.level)
-                << "] [" << log.source << "] " << log.message << std::endl;
+        for (const auto& log : Search(level)) {
+            std::cout << "[" << log.timestamp << "] [" << LogLevelToString(log.level)
+                << "] " << log.message << " (" << log.source << ")" << std::endl;
         }
     }
 }
 
-void Logger::saveToFile(const LogEntry& entry) {
-    rotateLogFile();  // 로그 파일 회전 확인
-    std::ofstream file(logFile, std::ios::app);
+void Logger::SaveToFile(const LogEntry& entry) {
+    std::ofstream file(logFileName + ".log", std::ios::app);
     if (file) {
-        file << "[" << entry.timestamp << "] [" << logLevelToString(entry.level)
-            << "] [" << entry.source << "] " << entry.message << std::endl;
+        file << "[" << entry.timestamp << "] [" << LogLevelToString(entry.level)
+            << "] " << entry.message << " (" << entry.source << ")" << std::endl;
     }
 }
 
-std::string Logger::logLevelToString(LogLevel level) {
+std::string Logger::LogLevelToString(LogLevel level) {
     switch (level) {
+        case LogLevel::TRACE: return "TRACE";
         case LogLevel::DEBUG:  return "DEBUG";
         case LogLevel::INFO:   return "INFO";
         case LogLevel::WARNING: return "WARNING";
@@ -84,22 +88,48 @@ std::string Logger::logLevelToString(LogLevel level) {
     }
 }
 
-void Logger::rotateLogFile() {
-    std::ifstream file(logFile, std::ios::ate | std::ios::binary);
-    if (file.tellg() > 1024 * 1024) {  // 1MB 크기 제한
-        file.close();
-        std::string rotatedLogFile = logFile + ".old";
-        std::rename(logFile.c_str(), rotatedLogFile.c_str());
+void Logger::RotateLogFile() {
+    auto file_exists = [](const std::string& filename) -> bool {
+        struct stat buffer;
+        return (stat(filename.c_str(), &buffer) == 0);
+    };
+
+    bool file_state = file_exists("log.meta");
+
+    std::fstream meta_file("log.meta", std::ios::in, std::ios::out);
+
+    if (!file_state) {
+        meta_file << "0";
+        meta_file.close();
+        return;
     }
+
+    std::string file_index_s;
+    std::getline(meta_file, file_index_s);
+
+    int file_index = std::stoi(file_index_s);
+
+    if (!file_exists(logFileName + ".log")) {
+        meta_file.close();
+        return;
+    }
+
+    std::ifstream file(logFileName + ".log", std::ios::ate | std::ios::binary);
+    file.close();
+    std::string rotatedLogFile = logFileName + "-" + std::to_string(file_index + 1) + ".log";
+    std::rename((logFileName + ".log").c_str(), rotatedLogFile.c_str());
+    
+    meta_file << std::to_string(file_index + 1);
+    meta_file.close();
+
+    //if (file.tellg() > 1024 * 1024) {  // 1MB 크기 제한
+    //    file.close();
+    //    std::string rotatedLogFile = logFileName + "-old" + ".log";
+    //    std::rename((logFileName + ".log").c_str(), rotatedLogFile.c_str());
+    //}
 }
 
-// 로그 파일을 설정하는 메서드
-void Logger::setLogFile(const std::string& filename) {
-    logFile = filename;
-}
-
-// 로그 목록을 초기화하는 메서드
-void Logger::clearLogs() {
+void Logger::ClearLogs() {
     {
         std::lock_guard<std::mutex> guard(logMutex);
         logs.clear();

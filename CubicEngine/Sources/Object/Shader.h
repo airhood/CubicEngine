@@ -37,7 +37,7 @@ namespace CubicEngine {
     private:
         friend class Material;
         friend class Renderer;
-        std::vector<Pass> passes;
+        std::vector<Pass*> passes;
 
     private:
         static GLuint Load_GL_Shader(const std::string& code, InternalShaderType type);

@@ -7,6 +7,7 @@
 namespace CubicEngine {
 
     enum class LogLevel {
+        TRACE,
         DEBUG,
         INFO,
         WARNING,
@@ -16,7 +17,7 @@ namespace CubicEngine {
 
     class LogEntry {
     public:
-        LogEntry(LogLevel lvl, const std::string& msg, const std::string& src);
+        LogEntry(LogLevel level, const std::string& message, const std::string& source);
 
         LogLevel level;
         std::string message;
@@ -26,22 +27,23 @@ namespace CubicEngine {
 
     class Logger {
     public:
-        static std::string currentTime();
+        static void Init();
 
-        static void log(LogLevel level, const std::string& message, const std::string& source = "Unknown");
-        static std::vector<LogEntry> search(LogLevel level);
-        static void printLogs(LogLevel level);
-        static void clearLogs();
-        static void setLogFile(const std::string& filename);
+        static std::string CurrentTime();
+
+        static void Log(LogLevel level, const std::string& message, const std::string& source = "Unknown");
+        static std::vector<LogEntry> Search(LogLevel level);
+        static void PrintLogs(LogLevel level);
+        static void ClearLogs();
 
     private:
         static std::vector<LogEntry> logs;
         static std::mutex logMutex;
-        static std::string logFile;
+        static std::string logFileName;
 
-        static void saveToFile(const LogEntry& entry);
-        static std::string logLevelToString(LogLevel level);
-        static void rotateLogFile();
+        static void SaveToFile(const LogEntry& entry);
+        static std::string LogLevelToString(LogLevel level);
+        static void RotateLogFile();
     };
 
 }
