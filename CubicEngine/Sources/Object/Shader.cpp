@@ -49,37 +49,47 @@ Shader* Shader::Load(const std::string& path) {
 
     Shader* shader = new Shader();
 
-    const int GLSL = 0;
-    const int HLSL = 1;
-    const int CG = 2;
+    int errorGlobal = false;
+
+    const int SHADERLANG_NULL = 0;
+    const int SHADERLANG_GLSL = 1;
+    const int SHADERLANG_HLSL = 2;
+    const int SHADERLANG_CG = 3;
+    const int SHADERLANG_ERROR = 4;
     
-    int shaderLang;
+    int shaderLang = SHADERLANG_NULL;
 
     for (auto& shaderCommand : compileResult.shaderCommands) {
         if (shaderCommand.first == "$shader_lang") {
             if (shaderCommand.second == "GLSL") {
-                shaderLang = GLSL;
+                shaderLang = SHADERLANG_GLSL;
             }
             else if (shaderCommand.second == "HLSL") {
-                shaderLang = HLSL;
+                shaderLang = SHADERLANG_HLSL;
             }
             else if (shaderCommand.second == "CG") {
-                shaderLang = CG;
+                shaderLang = SHADERLANG_CG;
             }
             else {
+                shaderLang = SHADERLANG_ERROR;
                 Logger::Log(LogLevel::ERROR, "Unsupported shader language \'" + shaderCommand.second + "\'",
                     "shader_path: " + path);
-                return false;
+                errorGlobal = true;
             }
         }
         else {
             Logger::Log(LogLevel::ERROR, "Unsupported shader command \'" + shaderCommand.first + "\'",
                 "shader_path: " + path);
-            return false;
+            errorGlobal = true;
         }
     }
 
-    int errorGlobal = false;
+    if (shaderLang == SHADERLANG_NULL) {
+        Logger::Log(LogLevel::ERROR, "Shader language is undefined",
+            "shader_path: " + path);
+        return nullptr;
+    }
+
     for (auto& passResult : compileResult.passResults) {
         Pass* pass = new Pass();
         std::vector<unsigned int> glShaders;

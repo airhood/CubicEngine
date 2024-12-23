@@ -92,7 +92,7 @@ namespace CubicEngine {
 	template <typename T>
 	T* GameObject::AddComponent() {
 		if (!std::is_base_of<Component, T>::value) {
-			Logger::Log(LogLevel::ERROR, "Cannot add non-component object as a component")
+			Logger::Log(LogLevel::ERROR, "Cannot add non-component object as a component");
 			return nullptr;
 		}
 		T* component = new T();
