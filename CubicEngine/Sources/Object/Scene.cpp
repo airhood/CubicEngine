@@ -10,6 +10,31 @@ Scene::~Scene() {
 
 }
 
+void Scene::Destroy() {
+
+}
+
+void* Scene::Clone_Obj() {
+	return Clone();
+}
+
+Scene* Scene::Clone() {
+	Scene* scene = new Scene();
+	scene->name = name;
+	for (auto* game_object : game_objects) {
+		scene->game_objects.push_back(game_object->Clone());
+	}
+	return scene;
+}
+
+void Scene::SetName(std::string name) {
+	this->name = name;
+}
+
+std::string Scene::GetName() {
+	return name;
+}
+
 void Scene::AddGameObject(GameObject* game_object) {
 	game_object->root_scene_num = scene_num;
 	game_objects.push_back(game_object);

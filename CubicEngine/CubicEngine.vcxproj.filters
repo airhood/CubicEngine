@@ -33,9 +33,6 @@
     <ClCompile Include="Sources\Object\Scene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Component\InstanceComponent.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Core\EngineCore.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -48,16 +45,13 @@
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Manager\GameObjectManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Manager\SceneManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Component\Transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Manager\InstanceComponentManager.cpp">
+    <ClCompile Include="Sources\Manager\ComponentInstanceManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Util\Time.cpp">
@@ -120,6 +114,9 @@
     <ClCompile Include="Sources\Test\RendererTest\GameManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Util\MemorySystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\vertexShader.glsl" />
@@ -150,7 +147,7 @@
     <ClInclude Include="Sources\Component\Component.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Component\InstanceComponent.h">
+    <ClInclude Include="Sources\Component\ComponentInstanceBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\EngineCore.h">
@@ -180,16 +177,13 @@
     <ClInclude Include="Sources\Util\pugixml\pugixml.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Manager\GameObjectManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Manager\SceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Component\Transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Manager\InstanceComponentManager.h">
+    <ClInclude Include="Sources\Manager\ComponentInstanceManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\Key.h">

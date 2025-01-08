@@ -2,6 +2,8 @@
 
 using namespace CubicEngine;
 
+#include "GameManager.h"
+
 int main(void)
 {
 	CubicApp();
@@ -10,4 +12,10 @@ int main(void)
 	app->SetResolution(1920, 1080);
 	app->Init();
 	app->Start();
+
+	Scene* scene = new Scene();
+	scene->SetName("test scene");
+	CORE->GET(SceneManager)->StageScene(scene);
+
+	GameManager* game_manager = new GameManager();
 }

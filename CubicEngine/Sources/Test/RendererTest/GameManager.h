@@ -1,11 +1,15 @@
 #pragma once
 
 #include "../../CubicEngine.h"
-#include "../../Object/GameObject.h"
-#include "../../Component/InstanceComponent.h"
+#include "../../Component/Component.h"
 
 using namespace CubicEngine;
 
-class GameManager : public InstanceComponent {
+class GameManager : public Component {
+public:
+	GameManager() = default;
+
 	void Start() override;
+
+	Component* Clone_Comp() override { return nullptr; }
 };

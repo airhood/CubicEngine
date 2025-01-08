@@ -2,14 +2,13 @@
 
 #include <vector>
 #include "../Object/Object.h"
+#include "ComponentInstanceBase.h"
 
 namespace CubicEngine {
 
 	class GameObject;
 
-	class GameInstance;
-
-	class Component abstract : public Object {
+	class Component abstract : public Object, ComponentInstanceBase {
 	public:
 		Component() = default;
 		~Component() override = default;
@@ -19,11 +18,12 @@ namespace CubicEngine {
 		void* Clone_Obj() override;
 		virtual Component* Clone_Comp() = 0;
 
-		int SceneNum();
 		GameObject* RootGameObject();
 
+		int RootSceneNum();
+		int CurrentSceneNum();
+
 	private:
-		int scene_num;
 		friend class GameObject;
 		GameObject* root_game_object;
 	};

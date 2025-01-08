@@ -28,7 +28,6 @@ void EngineCore::Init() {
 
 void EngineCore::Start() {
 	running = true;
-	obj_InstanceComponentManager->StartInstances();
 	EngineMain();
 }
 
@@ -76,8 +75,7 @@ void EngineCore::CreateManagers() {
 	obj_InputManager = new InputManager();
 	obj_RenderManager = new RenderManager();
 	obj_SceneManager = new SceneManager();
-	obj_GameObjectManager = new GameObjectManager();
-	obj_InstanceComponentManager = new InstanceComponentManager();
+	obj_ComponentInstanceManager = new ComponentInstanceManager();
 	obj_LayerManager = new LayerManager();
 }
 
@@ -85,8 +83,7 @@ void EngineCore::CacheManagers() {
 	managers.push_back(obj_InputManager);
 	managers.push_back(obj_RenderManager);
 	managers.push_back(obj_SceneManager);
-	managers.push_back(obj_GameObjectManager);
-	managers.push_back(obj_InstanceComponentManager);
+	managers.push_back(obj_ComponentInstanceManager);
 	managers.push_back(obj_LayerManager);
 	
 	render_managers.push_back(obj_RenderManager);

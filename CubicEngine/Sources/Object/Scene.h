@@ -16,6 +16,14 @@ namespace CubicEngine {
 		~Scene();
 
 	public:
+		void Destroy() override;
+
+		void* Clone_Obj() override;
+		Scene* Clone();
+
+		void SetName(std::string name);
+		std::string GetName();
+
 		void AddGameObject(GameObject* game_object);
 		GameObject* GetGameObjectByName(std::string name);
 		GameObject* GetGameObjectByID(std::string id);
@@ -27,7 +35,7 @@ namespace CubicEngine {
 
 	private:
 		friend class SceneManager;
-		int scene_num;
+		int scene_num = -1;
 
 	private:
 		std::string name;

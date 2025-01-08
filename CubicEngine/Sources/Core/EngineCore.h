@@ -20,8 +20,7 @@
 #include "../Manager/InputManager.h"
 #include "../Manager/RenderManager.h"
 #include "../Manager/SceneManager.h"
-#include "../Manager/GameObjectManager.h"
-#include "../Manager/InstanceComponentManager.h"
+#include "../Manager/ComponentInstanceManager.h"
 #include "../Manager/LayerManager.h"
 
 #define Manager(NAME)                                               \
@@ -44,8 +43,7 @@ namespace CubicEngine {
 	class InputManager;
 	class RenderManager;
 	class SceneManager;
-	class GameObjectManager;
-	class InstanceComponentManager;
+	class ComponentInstanceManager;
 	class LayerManager;
 
 	namespace Core {
@@ -71,8 +69,7 @@ namespace CubicEngine {
 			Manager(InputManager);
 			Manager(RenderManager);
 			Manager(SceneManager);
-			Manager(GameObjectManager);
-			Manager(InstanceComponentManager);
+			Manager(ComponentInstanceManager);
 			Manager(LayerManager);
 
 		private:

@@ -208,11 +208,10 @@ std::vector<GameObject*> GameObject::GetChildrenByTags(std::initializer_list<std
 void GameObject::AddComponent(Component* component) {
 	if (component == nullptr) return;
 	components.push_back(component);
-	if (std::is_base_of<Component, std::decay_t<decltype(*component)>>::value) {
-		InstanceComponent* instance_component = dynamic_cast<InstanceComponent*>(component);
-		CORE->GET(InstanceComponentManager)->AddGameInstance(instance_component);
-		instance_component->Init();
-	}
+}
+
+int GameObject::RootSceneNum() {
+	return root_scene_num;
 }
 
 void GameObject::DeleteChildPtr(GameObject* child) {

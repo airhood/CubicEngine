@@ -5,7 +5,6 @@
 #include <unordered_set>
 
 #include "Object.h"
-#include "../Component/InstanceComponent.h"
 #include "../Core/EngineCore.h"
 #include "../Component/Component.h"
 #include "../Component/Transform.h"
@@ -64,6 +63,8 @@ namespace CubicEngine {
 		T* GetComponent();
 
 		Transform* transform() { return _transform; }
+
+		int RootSceneNum();
 
 	private:
 		friend class Scene;

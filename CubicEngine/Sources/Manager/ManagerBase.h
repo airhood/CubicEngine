@@ -8,6 +8,8 @@ namespace CubicEngine {
 
         virtual void Init() {}
 
+        virtual void Start() {}
+
         virtual void PhysicsTick(float elapsedTime) {}
 
         virtual void FrameTick(float elapsedTime) {}

@@ -173,12 +173,10 @@
     <ClCompile Include="Sources\Component\Transform.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
-    <ClCompile Include="Sources\Manager\InstanceComponentManager.cpp" />
-    <ClCompile Include="Sources\Manager\GameObjectManager.cpp" />
+    <ClCompile Include="Sources\Manager\ComponentInstanceManager.cpp" />
     <ClCompile Include="Sources\Manager\LayerManager.cpp" />
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Manager\SceneManager.cpp" />
-    <ClCompile Include="Sources\Component\InstanceComponent.cpp" />
     <ClCompile Include="Sources\Object\Color.cpp" />
     <ClCompile Include="Sources\Object\Color32.cpp" />
     <ClCompile Include="Sources\Object\GameObject.cpp" />
@@ -195,6 +193,7 @@
     </ClCompile>
     <ClCompile Include="Sources\Test\RendererTest\GameManager.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\main.cpp" />
+    <ClCompile Include="Sources\Util\MemorySystem.cpp" />
     <ClCompile Include="Sources\Util\ShaderCompiler.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -227,13 +226,12 @@
     <ClInclude Include="Sources\Component\Component.h" />
     <ClInclude Include="Sources\CubicEngine.h" />
     <ClInclude Include="Sources\Core\EngineCore.h" />
-    <ClInclude Include="Sources\Manager\InstanceComponentManager.h" />
-    <ClInclude Include="Sources\Manager\GameObjectManager.h" />
+    <ClInclude Include="Sources\Manager\ComponentInstanceManager.h" />
     <ClInclude Include="Sources\Manager\LayerManager.h" />
     <ClInclude Include="Sources\Manager\ManagerBase.h" />
     <ClInclude Include="Sources\Manager\RenderBase.h" />
     <ClInclude Include="Sources\Manager\RenderManager.h" />
-    <ClInclude Include="Sources\Component\InstanceComponent.h" />
+    <ClInclude Include="Sources\Component\ComponentInstanceBase.h" />
     <ClInclude Include="Sources\Object\Color.h" />
     <ClInclude Include="Sources\Object\Color32.h" />
     <ClInclude Include="Sources\Object\GameObject.h" />
