@@ -54,7 +54,7 @@ GameObject* Scene::GetGameObjectByID(std::string id) {
 	return nullptr;
 }
 
-GameObject* CubicEngine::Scene::GetGameObjectByTag(std::string tag)
+GameObject* Scene::GetGameObjectByTag(std::string tag)
 {
 	for (auto& game_object : game_objects) {
 		if (game_object->CheckTagExists(tag)) return game_object;
@@ -62,7 +62,7 @@ GameObject* CubicEngine::Scene::GetGameObjectByTag(std::string tag)
 	return nullptr;
 }
 
-GameObject* CubicEngine::Scene::GetGameObjectByTags(std::initializer_list<std::string> tags)
+GameObject* Scene::GetGameObjectByTags(std::initializer_list<std::string> tags)
 {
 	for (auto& game_object : game_objects) {
 		if (game_object->CheckTagsExists(tags)) return game_object;
@@ -70,7 +70,11 @@ GameObject* CubicEngine::Scene::GetGameObjectByTags(std::initializer_list<std::s
 	return nullptr;
 }
 
-std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByName(std::string name)
+std::vector<GameObject*> Scene::GetAllGameObjects() {
+	return game_objects;
+}
+
+std::vector<GameObject*> Scene::GetGameObjectsByName(std::string name)
 {
 	std::vector<GameObject*> results;
 	for (auto& game_object : game_objects) {
@@ -79,7 +83,7 @@ std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByName(std::string na
 	return results;
 }
 
-std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByTag(std::string tag)
+std::vector<GameObject*> Scene::GetGameObjectsByTag(std::string tag)
 {
 	std::vector<GameObject*> results;
 	for (auto& game_object : game_objects) {
@@ -88,7 +92,7 @@ std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByTag(std::string tag
 	return results;
 }
 
-std::vector<GameObject*> CubicEngine::Scene::GetGameObjectsByTags(std::initializer_list<std::string> tags)
+std::vector<GameObject*> Scene::GetGameObjectsByTags(std::initializer_list<std::string> tags)
 {
 	std::vector<GameObject*> results;
 	for (auto& game_object : game_objects) {

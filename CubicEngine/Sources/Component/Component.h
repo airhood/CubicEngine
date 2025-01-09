@@ -8,7 +8,7 @@ namespace CubicEngine {
 
 	class GameObject;
 
-	class Component abstract : public Object, ComponentInstanceBase {
+	class Component abstract : public Object, public ComponentInstanceBase {
 	public:
 		Component() = default;
 		~Component() override = default;

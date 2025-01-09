@@ -61,6 +61,9 @@ namespace CubicEngine {
 		void AddComponent(Component* component);
 		template <typename T>
 		T* GetComponent();
+		template <typename T>
+		std::vector<T*> GetComponents();
+		std::vector<Component*> GetAllComponents();
 
 		Transform* transform() { return _transform; }
 
@@ -109,6 +112,17 @@ namespace CubicEngine {
 
 	template <typename T>
 	T* GameObject::GetComponent() {
+		for (auto component : components) {
+			if (component == nullptr) continue;
+			if (typeid(component) == typeid(T*)) {
+				return dynamic_cast<T*>(component);
+			}
+		}
+		return nullptr;
+	}
+
+	template <typename T>
+	std::vector<T*> GameObject::GetComponents() {
 		for (auto component : components) {
 			if (component == nullptr) continue;
 			if (typeid(component) == typeid(T*)) {

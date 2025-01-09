@@ -17,5 +17,8 @@ int main(void)
 	scene->SetName("test scene");
 	CORE->GET(SceneManager)->StageScene(scene);
 
+	GameObject* game_object = new GameObject();
 	GameManager* game_manager = new GameManager();
+	game_object->AddComponent(game_manager);
+	scene->AddGameObject(game_object);
 }

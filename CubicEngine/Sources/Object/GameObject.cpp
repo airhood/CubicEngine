@@ -210,6 +210,10 @@ void GameObject::AddComponent(Component* component) {
 	components.push_back(component);
 }
 
+std::vector<Component*> GameObject::GetAllComponents() {
+	return components;
+}
+
 int GameObject::RootSceneNum() {
 	return root_scene_num;
 }

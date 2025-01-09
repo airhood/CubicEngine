@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../CubicEngine.h"
+#include "../../Object/GameObject.h"
 #include "../../Component/Component.h"
 
 using namespace CubicEngine;

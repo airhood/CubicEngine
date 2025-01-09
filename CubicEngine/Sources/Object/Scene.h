@@ -29,6 +29,7 @@ namespace CubicEngine {
 		GameObject* GetGameObjectByID(std::string id);
 		GameObject* GetGameObjectByTag(std::string tag);
 		GameObject* GetGameObjectByTags(std::initializer_list<std::string> tags);
+		std::vector<GameObject*> GetAllGameObjects();
 		std::vector<GameObject*> GetGameObjectsByName(std::string name);
 		std::vector<GameObject*> GetGameObjectsByTag(std::string tag);
 		std::vector<GameObject*> GetGameObjectsByTags(std::initializer_list<std::string> tags);
