@@ -14,6 +14,10 @@ namespace CubicEngine {
 		Renderer2D() = default;
 		~Renderer2D();
 
+		void* Clone_Obj() override;
+
+		Component* Clone_Comp() override;
+
 		void Destroy() override;
 
 		void Init() override;

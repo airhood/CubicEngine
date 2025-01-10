@@ -7,6 +7,18 @@ Renderer2D::~Renderer2D() {
 
 }
 
+void* Renderer2D::Clone_Obj() {
+    return Clone_Comp();
+}
+
+Component* Renderer2D::Clone_Comp() {
+    Renderer2D* renderer2D = new Renderer2D();
+    renderer2D->sprite = sprite->Clone();
+    renderer2D->material = material;
+    
+    return renderer2D;
+}
+
 void Renderer2D::Destroy() {
 
 }
