@@ -15,18 +15,18 @@ void SceneManager::Exterminate() {
 }
 
 void SceneManager::StageScene(Scene* scene) {
-	scene->scene_num = scenes.size();
+	scene->scene_num = scenes.size(); // scene_num starts from 0
 	scenes.push_back(scene);
 }
 
 void SceneManager::OpenScene(Scene* scene) {
 	StageScene(scene);
-	current_scene_num = scenes.size() - 1;
+	current_scene_num = scene->scene_num;
 }
 
 void SceneManager::OpenScene(int scene_num) {
 	if (scenes.size() > scene_num) {
-		OpenScene(scenes[scene_num]);
+		current_scene_num = scene_num;
 	}
 }
 
@@ -39,7 +39,7 @@ Scene* SceneManager::GetCurrentScene() {
 	return nullptr;
 }
 
-int SceneManager::GetCurrentSceneNum() {
+int SceneManager::GetCurrentSceneNum() const {
 	return current_scene_num;
 }
 

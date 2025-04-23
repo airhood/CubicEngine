@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -128,15 +128,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\fmt\include;$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\assimp\lib;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmtd.lib;assimp.lib;glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\fmt\build-debug\Debug;$(ProjectDir)Dependencies\assimp\lib;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -149,7 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\fmt\include\fmt;$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -158,8 +159,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\assimp\lib;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmt.lib;assimp.lib;glfw3.lib;opengl32.lib;User32.lib;glew32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\fmt\build-release\Release;$(ProjectDir)Dependencies\assimp\lib;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\lib\Release\x64;$(ProjectDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -193,6 +194,8 @@
     </ClCompile>
     <ClCompile Include="Sources\Test\RendererTest\GameManager.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\main.cpp" />
+    <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.cpp" />
+    <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.h" />
     <ClCompile Include="Sources\Util\MemorySystem.cpp" />
     <ClCompile Include="Sources\Util\ShaderCompiler.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp">
@@ -217,6 +220,10 @@
     <None Include="Sources\Shader\vertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dependencies\fmt\include\fmt\args.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Dependencies\fmt\include\fmt\format.h" />
     <ClInclude Include="Sources\Component\Camera.h" />
     <ClInclude Include="Sources\Component\MeshRenderer.h" />
     <ClInclude Include="Sources\Component\Renderer.h" />
@@ -241,6 +248,7 @@
     <ClInclude Include="Sources\Object\Pass.h" />
     <ClInclude Include="Sources\Object\Sprite.h" />
     <ClInclude Include="Sources\Object\Texture2D.h" />
+    <ClInclude Include="Sources\Setting.h" />
     <ClInclude Include="Sources\Test\RendererTest\GameManager.h" />
     <ClInclude Include="Sources\Util\ShaderCompiler.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest\MemorySystemTest.cpp" />

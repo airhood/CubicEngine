@@ -10,6 +10,7 @@
 #include "../Component/Transform.h"
 #include "LayerMask.h"
 #include "../Util/Logger.h"
+#include "../Component/Renderer.h"
 
 namespace CubicEngine {
 
@@ -91,8 +92,6 @@ namespace CubicEngine {
 
 	class EngineCore;
 
-	class InstanceComponent;
-
 	template <typename T>
 	T* GameObject::AddComponent() {
 		if (!std::is_base_of<Component, T>::value) {
@@ -102,11 +101,11 @@ namespace CubicEngine {
 		T* component = new T();
 		component->root_game_object = this;
 		components.push_back(component);
-		if (std::is_base_of<InstanceComponent, T>::value) {
-			InstanceComponent* instance_component = dynamic_cast<InstanceComponent*>(component);
-			EngineCore::getInstance()->GetInstanceComponentManagerFUNC()->AddGameInstance(instance_component);
-			instance_component->Init();
+
+		if (dynamic_cast<Renderer*>(component)) {
+			Core::EngineCore::getInstance()->GetRenderManagerFUNC();
 		}
+
 		return component;
 	}
 

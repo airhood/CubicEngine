@@ -9,7 +9,7 @@ namespace CubicEngine {
 
 	class Sprite;
 
-	class Renderer2D : public Component, public Renderer {
+	class Renderer2D : public Renderer {
 	public:
 		Renderer2D() = default;
 		~Renderer2D();

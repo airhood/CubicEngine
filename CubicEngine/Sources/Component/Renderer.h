@@ -2,12 +2,15 @@
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
-#include "Camera.h"
-#include "../Object/Shader.h"
-#include "../Object/Texture.h"
+#include "../Component/Component.h"
 
 namespace CubicEngine {
-	class Renderer abstract {
+
+	class Camera;
+	class Shader;
+	class Texture;
+
+	class Renderer abstract : public Component {
 	protected:
 		Renderer() = default;
 		virtual ~Renderer() = default;

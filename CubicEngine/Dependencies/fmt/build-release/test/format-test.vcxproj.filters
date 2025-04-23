@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\airhood\source\repos\CubicEngine\CubicEngine\Dependencies\fmt\test\format-test.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\airhood\source\repos\CubicEngine\CubicEngine\Dependencies\fmt\test\mock-allocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\airhood\source\repos\CubicEngine\CubicEngine\Dependencies\fmt\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6EA8FB79-65BA-3279-B2D8-6E262068964A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{60D88654-9C63-3131-B5BD-47C52DF9CF58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -22,7 +22,7 @@ namespace CubicEngine {
 		void OpenScene(int scene_num);
 
 		Scene* GetCurrentScene();
-		int GetCurrentSceneNum();
+		int GetCurrentSceneNum() const;
 		Scene* GetScene(int scene_num);
 
 	private:

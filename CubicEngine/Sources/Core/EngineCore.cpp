@@ -6,12 +6,15 @@ using namespace CubicEngine::Core;
 
 IMPLEMENT_SINGLETON(EngineCore);
 
+static const std::string source = "EngineCore.cpp";
+
 EngineCore::EngineCore() {
 	application = new Application();
+	Logger::Log(LogLevel::DEBUG, "[Core] Application instance generated.", source);
 }
 
 EngineCore::~EngineCore() {
-
+	Logger::Log(LogLevel::DEBUG, "[Core] EngineCore instance deleting.", source);
 }
 
 CubicEngine::Application* EngineCore::GetApplication() {
@@ -19,20 +22,44 @@ CubicEngine::Application* EngineCore::GetApplication() {
 }
 
 void EngineCore::Init() {
-	glfwSetWindowUserPointer(window, new PointerHolder());
 	Logger::Init();
+	Logger::Log(LogLevel::DEBUG, "[Core] EngineCore initializing.", source);
+	glfwSetWindowUserPointer(window, new PointerHolder());
+	if (glfw_PointerHolder() == nullptr) { // validate pointer holder
+		try {
+			Logger::Log(LogLevel::FATAL, "[Core] set glfw window pointer failed", "EngineCore.cpp");
+		}
+		catch (...) { }
+
+		Panic();
+	}
+#ifdef _DEBUG
+	Logger::LogConsole(true);
+	Logger::Log(LogLevel::DEBUG, "[Logger] LogConsole: true", source);
+#else
+	Logger::LogConsole(false);
+	Logger::Log(LogLevel::DEBUG, "[Logger] LogConsole: false", source);
+#endif
 	CreateManagers();
+	Logger::Log(LogLevel::DEBUG, "[Core] Manager created.", source);
 	CacheManagers();
+	Logger::Log(LogLevel::DEBUG, "[Core] Manager cached.", source);
 	InitManagers();
+	Logger::Log(LogLevel::DEBUG, "[Core] Manager initialized.", source);
 }
 
 void EngineCore::Start() {
+	Logger::Log(LogLevel::INFO, "[Core] Engine start.", source);
 	running = true;
+	for (auto& manager : managers) {
+		manager->Start();
+	}
+	Logger::Log(LogLevel::DEBUG, "[Core] Managers started.", source);
 	EngineMain();
 }
 
 void EngineCore::Quit() {
-
+	Logger::Log(LogLevel::INFO, "[Core] Engine quit.", source);
 }
 
 void EngineCore::PhysicsTick(float elapsedTime) {
@@ -54,8 +81,10 @@ void EngineCore::LateTick(float elapsedTime) {
 }
 
 void EngineCore::EngineMain() {
+	Logger::Log(LogLevel::DEBUG, "[Core] Engine main loop enter.", source);
 	const int frame_delay = 1000 / (application->GetFPS());
 	while (running && (!glfwWindowShouldClose(window))) {
+		Logger::Log(LogLevel::TRACE, "[Core] Engine main loop.", source);
 		Time::updateFrameTime();
 		float delta_frame_time = Time::deltaFrameTime();
 		FrameTick(delta_frame_time);
@@ -66,6 +95,7 @@ void EngineCore::EngineMain() {
 }
 
 void EngineCore::Render() {
+	Logger::Log(LogLevel::TRACE, "[Core] Render event function call.", source);
 	for (auto& render_manager : render_managers) {
 		render_manager->Render();
 	}
@@ -93,4 +123,9 @@ void EngineCore::InitManagers() {
 	for (auto& manager : managers) {
 		manager->Init();
 	}
+}
+
+[[noreturn]] void EngineCore::Panic() {
+	//std::abort();
+	std::exit(1);
 }

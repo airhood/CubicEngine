@@ -4,15 +4,23 @@
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
-#include <typeinfo>
 // Component.h & Transform.h included in GameObject.h
 // Cannot directly include Transform.h because it's incomplete
-#include "../Object/GameObject.h"
+#include "../Component/Component.h"
 
 namespace CubicEngine {
+	class GameObject;
+
 	class Camera : public Component {
 	public:
 		Camera() = default;
+		~Camera() = default;
+
+		void Destroy() override;
+
+		void* Clone_Obj() override;
+		Component* Clone_Comp() override;
+		Camera* Clone();
 
 		glm::mat4 GetViewMatrix();
 		glm::mat4 GetProjectionMatrix();

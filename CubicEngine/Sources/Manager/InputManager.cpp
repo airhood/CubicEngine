@@ -16,6 +16,14 @@ InputManager::~InputManager()
 
 void InputManager::Init()
 {
+	if (glfw_PointerHolder() == nullptr) {
+		try {
+			Logger::Log(LogLevel::FATAL, "null pointer at glfw_PointerHolder()", "InputManager.cpp");
+		}
+		catch (...) { }
+
+		CORE->Panic();
+	}
 	glfw_PointerHolder()->RegisterPointer<std::vector<int>>("frame_pressed_keys", &frame_pressed_keys);
 	glfw_PointerHolder()->RegisterPointer<std::vector<int>>("frame_released_keys", &frame_released_keys);
 

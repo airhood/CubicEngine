@@ -12,32 +12,36 @@ void ComponentInstanceManager::Init() {
 }
 
 void ComponentInstanceManager::Start() {
-	Scene* currentScene = CORE->GET(SceneManager)->GetCurrentScene();
-	for (auto* game_object : currentScene->GetAllGameObjects()) {
+	Scene* current_scene = CORE->GET(SceneManager)->GetCurrentScene();
+	if (current_scene == nullptr) return;
+	for (auto* game_object : current_scene->GetAllGameObjects()) {
 		if (game_object == nullptr) continue;
 		CallStart(game_object);
 	}
 }
 
 void ComponentInstanceManager::PhysicsTick(float elapsed_time) {
-	Scene* currentScene = CORE->GET(SceneManager)->GetCurrentScene();
-	for (auto* game_object : currentScene->GetAllGameObjects()) {
+	Scene* current_scene = CORE->GET(SceneManager)->GetCurrentScene();
+	if (current_scene == nullptr) return;
+	for (auto* game_object : current_scene->GetAllGameObjects()) {
 		if (game_object == nullptr) continue;
 		CallPhysicsTick(elapsed_time, game_object);
 	}
 }
 
 void ComponentInstanceManager::FrameTick(float elapsed_time) {
-	Scene* currentScene = CORE->GET(SceneManager)->GetCurrentScene();
-	for (auto* game_object : currentScene->GetAllGameObjects()) {
+	Scene* current_scene = CORE->GET(SceneManager)->GetCurrentScene();
+	if (current_scene == nullptr) return;
+	for (auto& game_object : current_scene->GetAllGameObjects()) {
 		if (game_object == nullptr) continue;
 		CallFrameTick(elapsed_time, game_object);
 	}
 }
 
 void ComponentInstanceManager::LateTick(float elapsed_time) {
-	Scene* currentScene = CORE->GET(SceneManager)->GetCurrentScene();
-	for (auto* game_object : currentScene->GetAllGameObjects()) {
+	Scene* current_scene = CORE->GET(SceneManager)->GetCurrentScene();
+	if (current_scene == nullptr) return;
+	for (auto* game_object : current_scene->GetAllGameObjects()) {
 		if (game_object == nullptr) continue;
 		CallLateTick(elapsed_time, game_object);
 	}

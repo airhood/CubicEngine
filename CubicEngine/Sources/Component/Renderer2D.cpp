@@ -1,5 +1,6 @@
 #include "Renderer2D.h"
 #include "../Object/Sprite.h"
+#include "../Component/Camera.h"
 
 using namespace CubicEngine;
 
@@ -59,7 +60,8 @@ void Renderer2D::Init() {
 }
 
 void Renderer2D::Render(Camera* camera) {
-    glm::vec3 position = RootGameObject()->transform()->position;
+    std::cout << "render" << std::endl;
+    glm::vec3 position = Component::RootGameObject()->transform()->position;
     glm::vec2 offset = glm::vec2(
         sprite->pivot.x * sprite->texture->width(),
         sprite->pivot.y * sprite->texture->height());

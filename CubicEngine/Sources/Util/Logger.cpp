@@ -8,6 +8,9 @@
 
 using namespace CubicEngine;
 
+bool Logger::log_console = false;
+LogLevel Logger::log_level = LogLevel::INFO;
+
 LogEntry::LogEntry(LogLevel level, const std::string& message, const std::string& source)
     : level(level), message(message), source(source), timestamp(Logger::CurrentTime()) {}
 
@@ -16,33 +19,53 @@ std::mutex Logger::logMutex;
 std::string Logger::logFileName = "runtime";
 
 std::string Logger::CurrentTime() {
-    auto now = std::chrono::system_clock::now();
-    auto time = std::chrono::system_clock::to_time_t(now);
-    std::ostringstream oss;
+    using namespace std::chrono;
+    auto now = system_clock::now();
+    auto time = system_clock::to_time_t(now);
 
+    thread_local char buffer[20]; // "YYYY-MM-DD HH:MM:SS" ¡æ 20ÀÚ
     struct tm local_time;
+
 #if defined(_WIN32) || defined(_WIN64)
-    localtime_s(&local_time, &time);  // Windows
+    localtime_s(&local_time, &time);
 #else
-    localtime_r(&time, &local_time);  // POSIX (Mac, Linux)
+    localtime_r(&time, &local_time);
 #endif
 
-        // Format the time as "YYYY-MM-DD HH:MM:SS"
-    oss << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
-    return oss.str();
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", &local_time);
+    return std::string(buffer);
 }
 
 void Logger::Init() {
+#ifdef _DEBUG
+    std::cout << "Logger initializing." << std::endl;
+#endif
     RotateLogFile();
 }
 
 void Logger::Log(LogLevel level, const std::string& message, const std::string& source) {
-    LogEntry entry(level, message, source);
+    thread_local char buffer[1024];
+
+    auto time = CurrentTime();
+    auto it = fmt::format_to(buffer, "[{}] [{}] {} ({})\n",
+        time,
+        LogLevelToString(level),
+        message,
+        source);
+
+    std::string_view formatted(buffer, it - buffer);
+    LogEntry entry(level, std::string(formatted), source);
+
+    if (log_console && level >= log_level) {
+        std::cout << entry.message;
+    }
+
     {
         std::lock_guard<std::mutex> guard(logMutex);
-        logs.push_back(entry);
+        logs.push_back(std::move(entry));
     }
-    SaveToFile(entry);
+
+    SaveToFile(logs.back());
 }
 
 std::vector<LogEntry> Logger::Search(LogLevel level) {
@@ -68,23 +91,47 @@ void Logger::PrintLogs(LogLevel level) {
     }
 }
 
+void Logger::ClearLogs() {
+    {
+        std::lock_guard<std::mutex> guard(logMutex);
+        logs.clear();
+    }
+}
+
+void Logger::LogConsole(bool state) {
+    log_console = state;
+}
+
+void Logger::SetLogLevel(LogLevel level) {
+    log_level = level;
+}
+
 void Logger::SaveToFile(const LogEntry& entry) {
+    thread_local char buffer[1024];
+    auto end = fmt::format_to(buffer, "[{}] [{}] {} ({})\n",
+        entry.timestamp,
+        LogLevelToString(entry.level),
+        entry.message,
+        entry.source);
+
+    std::string formatted(buffer, end - buffer);
+
     std::ofstream file(logFileName + ".log", std::ios::app);
     if (file) {
-        file << "[" << entry.timestamp << "] [" << LogLevelToString(entry.level)
-            << "] " << entry.message << " (" << entry.source << ")" << std::endl;
+        file << formatted;
     }
+    std::string a = fmt::format("a");
 }
 
 std::string Logger::LogLevelToString(LogLevel level) {
     switch (level) {
-        case LogLevel::TRACE: return "TRACE";
-        case LogLevel::DEBUG:  return "DEBUG";
-        case LogLevel::INFO:   return "INFO";
+        case LogLevel::TRACE:   return "TRACE";
+        case LogLevel::DEBUG:   return "DEBUG";
+        case LogLevel::INFO:    return "INFO";
         case LogLevel::WARNING: return "WARNING";
-        case LogLevel::ERROR:  return "ERROR";
-        case LogLevel::FATAL:  return "FATAL";
-        default:               return "UNKNOWN";
+        case LogLevel::ERROR:   return "ERROR";
+        case LogLevel::FATAL:   return "FATAL";
+        default:                return "UNKNOWN";
     }
 }
 
@@ -96,7 +143,7 @@ void Logger::RotateLogFile() {
 
     bool file_state = file_exists("log.meta");
 
-    std::fstream meta_file("log.meta", std::ios::in, std::ios::out);
+    std::fstream meta_file("log.meta", std::ios::in | std::ios::out | std::ios::app);
 
     if (!file_state) {
         meta_file << "0";
@@ -127,11 +174,4 @@ void Logger::RotateLogFile() {
     //    std::string rotatedLogFile = logFileName + "-old" + ".log";
     //    std::rename((logFileName + ".log").c_str(), rotatedLogFile.c_str());
     //}
-}
-
-void Logger::ClearLogs() {
-    {
-        std::lock_guard<std::mutex> guard(logMutex);
-        logs.clear();
-    }
 }

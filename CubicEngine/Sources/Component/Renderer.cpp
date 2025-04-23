@@ -1,4 +1,7 @@
 #include "Renderer.h"
+#include "../Object/Shader.h"
+#include "../Object/Texture.h"
+#include "../Core/EngineCore.h"
 
 using namespace CubicEngine;
 
