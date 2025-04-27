@@ -86,7 +86,7 @@ void Application::SetResolution(Resolution resolution) {
 void Application::ApplyResolution() {
 	glfwSetWindowSize(window, resolution.width, resolution.height);
 	glViewport(0, 0, resolution.width, resolution.height);
-	Logger::Log(LogLevel::DEBUG, "[App] Applied window resolution.");
+	Logger::Log(LogLevel::DEBUG, "[App] Applied window resolution.", source);
 }
 
 Resolution Application::GetResolution() {

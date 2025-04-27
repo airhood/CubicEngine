@@ -30,7 +30,6 @@ void RenderManager::Render() {
 }
 
 void RenderManager::RenderCamera(Camera* camera) {
-	std::cout << "kkkkkkkkkkkkkkk" << std::endl;
 	for (auto& renderer : renderers) {
 		renderer->Render(camera);
 	}

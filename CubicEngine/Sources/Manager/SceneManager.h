@@ -20,6 +20,7 @@ namespace CubicEngine {
 		void StageScene(Scene* scene);
 		void OpenScene(Scene* scene);
 		void OpenScene(int scene_num);
+		int GetSceneNum(std::string name);
 
 		Scene* GetCurrentScene();
 		int GetCurrentSceneNum() const;

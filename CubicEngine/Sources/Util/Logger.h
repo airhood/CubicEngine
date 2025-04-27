@@ -33,6 +33,7 @@ namespace CubicEngine {
         static void Init();
 
         static std::string CurrentTime();
+        static std::string CurrentTimeForFilename();
 
         static void Log(LogLevel level, const std::string& message, const std::string& source = "Unknown");
         static std::vector<LogEntry> Search(LogLevel level);
@@ -66,7 +67,6 @@ namespace CubicEngine {
 
         static void SaveToFile(const LogEntry& entry);
         static std::string LogLevelToString(LogLevel level);
-        static void RotateLogFile();
 
         static bool log_console;
         static LogLevel log_level;

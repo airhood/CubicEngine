@@ -30,6 +30,13 @@ void SceneManager::OpenScene(int scene_num) {
 	}
 }
 
+int SceneManager::GetSceneNum(std::string name) {
+	for (int i = 0; i < scenes.size(); i++) {
+		if (scenes[i]->name == name) return i;
+	}
+	return -1;
+}
+
 Scene* SceneManager::GetCurrentScene() {
 	if (current_scene_num > -1) {
 		if (scenes.size() > current_scene_num) {

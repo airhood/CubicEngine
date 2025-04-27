@@ -102,8 +102,10 @@ namespace CubicEngine {
 		component->root_game_object = this;
 		components.push_back(component);
 
-		if (dynamic_cast<Renderer*>(component)) {
-			Core::EngineCore::getInstance()->GetRenderManagerFUNC();
+		auto renderer = dynamic_cast<Renderer*>(component);
+		if (renderer) {
+			Core::EngineCore::getInstance()->GetRenderManagerFUNC()->AddRenderer(renderer);
+			std::cout << "renderer: " << renderer << std::endl;
 		}
 
 		return component;

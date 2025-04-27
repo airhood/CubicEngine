@@ -4,6 +4,8 @@
 
 using namespace CubicEngine;
 
+static const std::string source = "Renderer2D.cpp";
+
 Renderer2D::~Renderer2D() {
 
 }
@@ -61,6 +63,8 @@ void Renderer2D::Init() {
 
 void Renderer2D::Render(Camera* camera) {
     std::cout << "render" << std::endl;
+    Logger::Log(LogLevel::TRACE, fmt::format("[Renderer] Renderer2d render at gameobject '{}'", RootGameObject()->GetName()), source);
+    if (sprite == nullptr || material == nullptr) return;
     glm::vec3 position = Component::RootGameObject()->transform()->position;
     glm::vec2 offset = glm::vec2(
         sprite->pivot.x * sprite->texture->width(),

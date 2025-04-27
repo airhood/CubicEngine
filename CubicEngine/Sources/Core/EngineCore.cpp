@@ -9,6 +9,7 @@ IMPLEMENT_SINGLETON(EngineCore);
 static const std::string source = "EngineCore.cpp";
 
 EngineCore::EngineCore() {
+	Logger::Init();
 	application = new Application();
 	Logger::Log(LogLevel::DEBUG, "[Core] Application instance generated.", source);
 }
@@ -22,7 +23,6 @@ CubicEngine::Application* EngineCore::GetApplication() {
 }
 
 void EngineCore::Init() {
-	Logger::Init();
 	Logger::Log(LogLevel::DEBUG, "[Core] EngineCore initializing.", source);
 	glfwSetWindowUserPointer(window, new PointerHolder());
 	if (glfw_PointerHolder() == nullptr) { // validate pointer holder

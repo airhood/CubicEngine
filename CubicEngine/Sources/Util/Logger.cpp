@@ -5,8 +5,13 @@
 #include <chrono>
 #include <ctime>
 #include <iomanip>
+#include <filesystem>
 
 using namespace CubicEngine;
+
+namespace {
+    std::once_flag log_dir_flag;
+}
 
 bool Logger::log_console = false;
 LogLevel Logger::log_level = LogLevel::INFO;
@@ -36,11 +41,34 @@ std::string Logger::CurrentTime() {
     return std::string(buffer);
 }
 
+std::string Logger::CurrentTimeForFilename() {
+    using namespace std::chrono;
+    auto now = system_clock::now();
+    auto time = system_clock::to_time_t(now);
+
+    thread_local char buffer[20]; // "YYYY-MM-DD HH-MM-SS"
+    struct tm local_time;
+
+#if defined(_WIN32) || defined(_WIN64)
+    localtime_s(&local_time, &time);
+#else
+    localtime_r(&time, &local_time);
+#endif
+
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d_%H-%M-%S", &local_time);
+    return std::string(buffer);
+}
+
 void Logger::Init() {
 #ifdef _DEBUG
     std::cout << "Logger initializing." << std::endl;
 #endif
-    RotateLogFile();
+
+    static bool created = []() {
+        return std::filesystem::create_directories("log");
+    }();
+
+    logFileName.append("_").append(CurrentTimeForFilename());
 }
 
 void Logger::Log(LogLevel level, const std::string& message, const std::string& source) {
@@ -54,10 +82,10 @@ void Logger::Log(LogLevel level, const std::string& message, const std::string& 
         source);
 
     std::string_view formatted(buffer, it - buffer);
-    LogEntry entry(level, std::string(formatted), source);
+    LogEntry entry(level, message, source);
 
     if (log_console && level >= log_level) {
-        std::cout << entry.message;
+        std::cout << formatted;
     }
 
     {
@@ -116,7 +144,7 @@ void Logger::SaveToFile(const LogEntry& entry) {
 
     std::string formatted(buffer, end - buffer);
 
-    std::ofstream file(logFileName + ".log", std::ios::app);
+    std::ofstream file("log/" + logFileName + ".log", std::ios::app);
     if (file) {
         file << formatted;
     }
@@ -133,45 +161,4 @@ std::string Logger::LogLevelToString(LogLevel level) {
         case LogLevel::FATAL:   return "FATAL";
         default:                return "UNKNOWN";
     }
-}
-
-void Logger::RotateLogFile() {
-    auto file_exists = [](const std::string& filename) -> bool {
-        struct stat buffer;
-        return (stat(filename.c_str(), &buffer) == 0);
-    };
-
-    bool file_state = file_exists("log.meta");
-
-    std::fstream meta_file("log.meta", std::ios::in | std::ios::out | std::ios::app);
-
-    if (!file_state) {
-        meta_file << "0";
-        meta_file.close();
-        return;
-    }
-
-    std::string file_index_s;
-    std::getline(meta_file, file_index_s);
-
-    int file_index = std::stoi(file_index_s);
-
-    if (!file_exists(logFileName + ".log")) {
-        meta_file.close();
-        return;
-    }
-
-    std::ifstream file(logFileName + ".log", std::ios::ate | std::ios::binary);
-    file.close();
-    std::string rotatedLogFile = logFileName + "-" + std::to_string(file_index + 1) + ".log";
-    std::rename((logFileName + ".log").c_str(), rotatedLogFile.c_str());
-    
-    meta_file << std::to_string(file_index + 1);
-    meta_file.close();
-
-    //if (file.tellg() > 1024 * 1024) {  // 1MB 크기 제한
-    //    file.close();
-    //    std::string rotatedLogFile = logFileName + "-old" + ".log";
-    //    std::rename((logFileName + ".log").c_str(), rotatedLogFile.c_str());
-    //}
 }
