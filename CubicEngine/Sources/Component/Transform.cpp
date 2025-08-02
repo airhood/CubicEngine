@@ -55,17 +55,18 @@ void Transform::SetWorldScale(glm::vec3 world_scale) {
 
 glm::vec3 Transform::front() {
     glm::vec3 front;
-    front.x = cos(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
+    front.x = sin(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
     front.y = sin(glm::radians(rotation.x));
-    front.z = sin(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
+    front.z = cos(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
     return glm::normalize(front);
 }
 
-glm::vec3 Transform::up() {
+glm::vec3 Transform::right() {
+    // world_up: Unity√≥∑≥ (0,1,0)
     return glm::normalize(glm::cross(front(), world_up));
 }
 
-glm::vec3 Transform::right() {
+glm::vec3 Transform::up() {
     return glm::normalize(glm::cross(right(), front()));
 }
 

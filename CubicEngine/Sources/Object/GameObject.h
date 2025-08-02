@@ -105,7 +105,6 @@ namespace CubicEngine {
 		auto renderer = dynamic_cast<Renderer*>(component);
 		if (renderer) {
 			Core::EngineCore::getInstance()->GetRenderManagerFUNC()->AddRenderer(renderer);
-			std::cout << "renderer: " << renderer << std::endl;
 		}
 
 		return component;
@@ -115,8 +114,8 @@ namespace CubicEngine {
 	T* GameObject::GetComponent() {
 		for (auto component : components) {
 			if (component == nullptr) continue;
-			if (typeid(component) == typeid(T*)) {
-				return dynamic_cast<T*>(component);
+			if (auto casted = dynamic_cast<T*>(component)) {
+				return casted;
 			}
 		}
 		return nullptr;

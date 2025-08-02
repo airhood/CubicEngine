@@ -207,7 +207,14 @@ std::vector<GameObject*> GameObject::GetChildrenByTags(std::initializer_list<std
 
 void GameObject::AddComponent(Component* component) {
 	if (component == nullptr) return;
+
+	component->root_game_object = this;
 	components.push_back(component);
+
+	auto renderer = dynamic_cast<Renderer*>(component);
+	if (renderer) {
+		Core::EngineCore::getInstance()->GetRenderManagerFUNC()->AddRenderer(renderer);
+	}
 }
 
 std::vector<Component*> GameObject::GetAllComponents() {

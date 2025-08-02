@@ -6,6 +6,10 @@ using namespace CubicEngine;
 
 static const std::string source = "Renderer2D.cpp";
 
+Renderer2D::Renderer2D() {
+    Init();
+}
+
 Renderer2D::~Renderer2D() {
 
 }
@@ -76,12 +80,18 @@ void Renderer2D::Render(Camera* camera) {
     glm::mat4 view = camera->GetViewMatrix();
     glm::mat4 projection = camera->GetProjectionMatrix();
 
+    glm::mat4 clip = projection * view * model;
+
     for (int i = 0; i < ShaderPassCount(material->shader); i++) {
         UseShader(material->shader, i);
         //material->PassSetMat4(i, "u_MVP", mvp);
         material->PassSetMat4(i, "model", model);
         material->PassSetMat4(i, "view", view);
         material->PassSetMat4(i, "projection", projection);
+
+        material->PassSetInt(i, "texture_diffuse1", 0);
+
+        glActiveTexture(GL_TEXTURE0);
         BindTexture(GL_TEXTURE_2D, sprite->texture);
 
         glBindVertexArray(VAO);

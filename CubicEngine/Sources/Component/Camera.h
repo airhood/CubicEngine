@@ -10,10 +10,11 @@
 
 namespace CubicEngine {
 	class GameObject;
+	class Application;
 
 	class Camera : public Component {
 	public:
-		Camera() = default;
+		Camera();
 		~Camera() = default;
 
 		void Destroy() override;
@@ -26,7 +27,9 @@ namespace CubicEngine {
 		glm::mat4 GetProjectionMatrix();
 		glm::mat4 GetViewProjectionMatrix();
 
-		float fov, aspectRatio, nearPlane, farPlane;
+		float fov = 45.0f, aspectRatio, nearPlane = 0.1f, farPlane = 100.0f;
 
+	private:
+		Application* application;
 	};
 }

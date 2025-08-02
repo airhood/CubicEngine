@@ -24,10 +24,16 @@ int main(void)
 	scene_manager->OpenScene(scene_manager->GetSceneNum("test scene"));
 
 	GameObject* game_object = new GameObject();
+	game_object->SetName("GameManager");
 	game_object->AddComponent<GameManager>();
 	scene->AddGameObject(game_object);
 
+	GameObject* cam_game_object = new GameObject();
+	cam_game_object->SetName("Camera");
+	cam_game_object->transform()->position = glm::vec3(0.0f, 0.0f, -30.0f);
+	cam_game_object->transform()->rotation.y = 15.0f;
 	Camera* camera = new Camera();
+	cam_game_object->AddComponent(camera);
 	CORE->GET(RenderManager)->SetCamera(camera);
 
 	app->Start();

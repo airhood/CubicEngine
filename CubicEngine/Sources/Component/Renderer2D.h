@@ -11,7 +11,7 @@ namespace CubicEngine {
 
 	class Renderer2D : public Renderer {
 	public:
-		Renderer2D() = default;
+		Renderer2D();
 		~Renderer2D();
 
 		void* Clone_Obj() override;

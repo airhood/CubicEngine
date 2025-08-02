@@ -14,6 +14,7 @@ int Renderer::ShaderPassCount(Shader* shader) {
 }
 
 void Renderer::BindTexture(GLenum target, Texture* texture) {
+	if (texture == nullptr) return;
 	glBindTexture(target, texture->gl_textureID);
 }
 

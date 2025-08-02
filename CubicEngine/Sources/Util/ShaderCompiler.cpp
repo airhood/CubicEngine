@@ -3,11 +3,25 @@
 
 using namespace CubicEngine;
 
+std::string removeNulls(const std::string& input) {
+	std::string result;
+	result.reserve(input.size());
+
+	for (char c : input) {
+		if (c != '\0') {
+			result.push_back(c);
+		}
+	}
+
+	return result;
+}
+
 ShaderCompileResult ShaderCompiler::Compile_csl(std::string code) {
 	ShaderCompileResult compileResult;
 
 	// (\$[a-zA-Z_][a-zA-Z0-9_]*)(?=\s)|(\S+)(?=\s|\n)|(\$[a-zA-Z_][a-zA-Z0-9_]*)(?=\n|\Z)
-	std::regex shaderRegex(R"((\$[a-zA-Z_][a-zA-Z0-9_]*)(?=\s)|(\S+)(?=\s|\n)|(\$[a-zA-Z_][a-zA-Z0-9_]*)(?=\n|\Z))");
+	std::regex shaderRegex(R"((\$[a-zA-Z_][a-zA-Z0-9_]*)(?=\s|$)|(\S+)(?=\s|$))");
+
 
 	std::smatch match;
 
@@ -21,15 +35,31 @@ ShaderCompileResult ShaderCompiler::Compile_csl(std::string code) {
 	std::string temp;
 
 	while (std::regex_search(code, match, shaderRegex)) {
-		if (match.str() == "$pass") {
+		if (removeNulls(match.str()) == "$pass") {
 			receivingState = RECEIVING_PASS;
+			temp = match.suffix().str();
+			code = match.suffix().str();
 			continue;
 		}
 
-		if (match.str() == "$end") {
-			if (receivingState == RECEIVED_PASS) {
-				receivingState = 0;
-				continue;
+		if (removeNulls(match.str()) == "$end") {
+			if (receivingState == RECEIVING_PASS) {
+				std::regex re(R"(([\s\S]*?)(?=\$end))");
+				std::smatch re_match;
+
+				if (std::regex_search(temp, re_match, re)) {
+					ShaderPassResult passResult = CompilePass(re_match[1].str());
+					passResult.passIndex = passIndex;
+					passIndex++;
+					compileResult.passResults.push_back(passResult);
+					temp = "";
+					receivingState = 0;
+					code = match.suffix().str();
+					continue;
+				}
+				else {
+					// TODO: Log error
+				}
 			}
 
 			compileResult.error = true;
@@ -42,11 +72,7 @@ ShaderCompileResult ShaderCompiler::Compile_csl(std::string code) {
 			receivingState = 0;
 		}
 		else if (receivingState == RECEIVING_PASS) {
-			ShaderPassResult passResult = CompilePass(match.str());
-			passResult.passIndex = passIndex;
-			passIndex++;
-			compileResult.passResults.push_back(passResult);
-			receivingState = RECEIVED_PASS;
+			
 		}
 		else {
 			temp = match.str();
@@ -62,19 +88,25 @@ ShaderCompileResult ShaderCompiler::Compile_csl(std::string code) {
 ShaderPassResult ShaderCompiler::CompilePass(std::string passCode) {
 	ShaderPassResult passResult;
 
-	std::regex shaderPassRegex(R"(@(?:fragment|vertex|geometry|compute)\n((?:.|\n)*?)(?=\n@|$))");
+	while (!passCode.empty() && (passCode.front() == '\n' || passCode.front() == '\r')) {
+		passCode.erase(passCode.begin());
+	}
 
-	std::smatch match;
+	std::regex shaderPassRegex(
+		R"(@(vertex|fragment|geometry|compute)\r?\n([^@]*))",
+		std::regex_constants::icase
+	);
 
-	if (std::regex_match(passCode, match, shaderPassRegex)) {
+	auto begin = std::sregex_iterator(passCode.begin(), passCode.end(), shaderPassRegex);
+	auto end = std::sregex_iterator();
+
+	for (auto it = begin; it != end; ++it) {
+		std::smatch match = *it;
+
 		ShaderPassGLShader SPGLS;
 		SPGLS.type = match[1].str();
 		SPGLS.code = match[2].str();
 		passResult.shaderPassGLShaders.push_back(SPGLS);
-	}
-	else {
-		// TODO: throw error
-		// "Error: Input does not match the expected shader pass format.\n";
 	}
 
 	return passResult;
