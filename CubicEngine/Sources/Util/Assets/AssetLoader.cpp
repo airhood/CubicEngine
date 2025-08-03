@@ -3,6 +3,8 @@
 
 using namespace CubicEngine;
 
+static const std::string source = "AssetLoader.cpp";
+
 const Texture2D* AssetLoader::LoadTexture(const std::string& path) {
 	auto it = textureCache.find(path);
 	if (it != textureCache.end()) {

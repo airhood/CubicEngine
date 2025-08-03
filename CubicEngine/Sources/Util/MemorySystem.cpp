@@ -37,3 +37,25 @@ void operator delete[](void* ptr) noexcept {
 #endif
 #endif
 }
+
+void* CubicEngine::MemorySystem::Alloc(size_t size) {
+#ifdef _DEBUG
+#if MEM_DEBUG == 1
+    std::cout << "[Memory] Alloc: Requesting " << size << " bytes.\n";
+#endif
+#endif
+    void* ptr = std::malloc(size);
+    if (!ptr) {
+        throw std::bad_alloc();
+    }
+    return ptr;
+}
+
+void CubicEngine::MemorySystem::Free(void* ptr) {
+#ifdef _DEBUG
+#if MEM_DEBUG == 1
+    std::cout << "[Memory] Free: Releasing memory.\n";
+#endif
+#endif
+    std::free(ptr);
+}

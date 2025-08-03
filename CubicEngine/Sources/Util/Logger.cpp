@@ -83,17 +83,18 @@ void Logger::Log(LogLevel level, const std::string& message, const std::string& 
 
     std::string_view formatted(buffer, it - buffer);
     LogEntry entry(level, message, source);
+    if (level >= log_level) {
+        if (log_console) {
+            std::cout << formatted;
+        }
 
-    if (log_console && level >= log_level) {
-        std::cout << formatted;
+        {
+            std::lock_guard<std::mutex> guard(logMutex);
+            logs.push_back(std::move(entry));
+        }
+
+        SaveToFile(logs.back());
     }
-
-    {
-        std::lock_guard<std::mutex> guard(logMutex);
-        logs.push_back(std::move(entry));
-    }
-
-    SaveToFile(logs.back());
 }
 
 std::vector<LogEntry> Logger::Search(LogLevel level) {

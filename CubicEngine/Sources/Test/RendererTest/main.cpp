@@ -11,7 +11,7 @@ int main(void)
 {
 	CubicApp();
 
-	Logger::SetLogLevel(LogLevel::DEBUG);
+	//Logger::SetLogLevel(LogLevel::DEBUG);
 
 	Application* app = App();
 	app->SetTitle("Awesome Game");

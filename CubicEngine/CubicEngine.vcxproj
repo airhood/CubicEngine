@@ -195,6 +195,8 @@
     <ClCompile Include="Sources\Test\RendererTest\GameManager.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\main.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\Player.cpp" />
+    <ClCompile Include="Sources\Util\Assets\AssetLoader.cpp" />
+    <ClCompile Include="Sources\Util\CubicEngine_stb_image.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.h" />
     <ClCompile Include="Sources\Util\Input.cpp" />
@@ -215,7 +217,7 @@
     <ClCompile Include="Sources\Util\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sources\Shader\Cubic2D.csl" />
+    <None Include="Sources\Shader\Default.csl" />
     <None Include="Sources\Shader\Cubic2D_LC.csl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
     <None Include="Sources\Shader\TestShader.csl" />
@@ -253,6 +255,7 @@
     <ClInclude Include="Sources\Setting.h" />
     <ClInclude Include="Sources\Test\RendererTest\GameManager.h" />
     <ClInclude Include="Sources\Test\RendererTest\Player.h" />
+    <ClInclude Include="Sources\Util\Assets\AssetLoader.h" />
     <ClInclude Include="Sources\Util\Input.h" />
     <ClInclude Include="Sources\Util\ShaderCompiler.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest\MemorySystemTest.cpp" />

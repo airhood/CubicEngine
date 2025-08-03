@@ -9,6 +9,10 @@ namespace CubicEngine {
 		static bool GetKeyPress(KeyCode key);
 		static bool GetKeyRelease(KeyCode key);
 
+		glm::vec2 GetDirectional(bool normalize = true);
+		static glm::vec2 GetWASD(bool normalize = true);
+        glm::vec2 GetArrows(bool normalize = true);
+
 	private:
 		friend class CubicEngine::Core::EngineCore;
 		static InputManager* inputManager;

@@ -53,7 +53,7 @@ void EngineCore::Init() {
 }
 
 void EngineCore::Start() {
-	Logger::Log(LogLevel::INFO, "[Core] Engine start.", source);
+	Logger::Log(LogLevel::DEBUG, "[Core] Engine start.", source);
 	running = true;
 	for (auto& manager : managers) {
 		manager->Start();

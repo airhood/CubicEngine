@@ -129,13 +129,19 @@
     <ClCompile Include="Sources\Util\Input.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Util\Assets\AssetLoader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Util\CubicEngine_stb_image.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\vertexShader.glsl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
     <None Include="Sources\Shader\TestShader.csl" />
     <None Include="Sources\Shader\Cubic2D_LC.csl" />
-    <None Include="Sources\Shader\Cubic2D.csl" />
+    <None Include="Sources\Shader\Default.csl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Object\Shader.h">
@@ -277,6 +283,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\Input.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Util\Assets\AssetLoader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

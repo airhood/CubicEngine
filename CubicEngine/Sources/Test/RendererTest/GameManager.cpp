@@ -8,7 +8,7 @@ void GameManager::Start() {
 
 	Renderer2D* renderer2D = gameObject->AddComponent<Renderer2D>();
 
-	Shader* shader = Shader::Load(R"(C:\Users\airhood\source\repos\CubicEngine\CubicEngine\Sources\Shader\TestShader.csl)");
+	Shader* shader = Shader::Load(R"(C:\Users\airhood\source\repos\CubicEngine\CubicEngine\Sources\Shader\Default.csl)");
 	Material* mat = new Material();
 	mat->shader = shader;
 	Sprite* sprite = new Sprite();
