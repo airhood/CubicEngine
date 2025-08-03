@@ -6,8 +6,10 @@
 //  | |__| |_| | |_) | | (__  | |___| | | | (_| | | | | |  __/
 //   \____\__,_|_.__/|_|\___| |_____|_| |_|\__, |_|_| |_|\___|
 //                                         |___/                  
-// created by Airhood
 
+// Cubic Engine
+// Copyright (c) 2025 Airhood
+// Licensed under the MIT License. See LICENSE.txt for details.
 
 
 // Essential includes

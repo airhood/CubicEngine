@@ -86,6 +86,7 @@ namespace CubicEngine {
 			void CreateManagers();
 			void CacheManagers();
 			void InitManagers();
+			void InitUtils();
 
 		public:
 			[[noreturn]] void Panic();

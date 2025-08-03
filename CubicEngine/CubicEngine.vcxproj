@@ -194,8 +194,10 @@
     </ClCompile>
     <ClCompile Include="Sources\Test\RendererTest\GameManager.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\main.cpp" />
+    <ClCompile Include="Sources\Test\RendererTest\Player.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.h" />
+    <ClCompile Include="Sources\Util\Input.cpp" />
     <ClCompile Include="Sources\Util\MemorySystem.cpp" />
     <ClCompile Include="Sources\Util\ShaderCompiler.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\ModelLoader.cpp">
@@ -250,6 +252,8 @@
     <ClInclude Include="Sources\Object\Texture2D.h" />
     <ClInclude Include="Sources\Setting.h" />
     <ClInclude Include="Sources\Test\RendererTest\GameManager.h" />
+    <ClInclude Include="Sources\Test\RendererTest\Player.h" />
+    <ClInclude Include="Sources\Util\Input.h" />
     <ClInclude Include="Sources\Util\ShaderCompiler.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest\MemorySystemTest.cpp" />
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h">

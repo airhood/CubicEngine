@@ -62,12 +62,11 @@ glm::vec3 Transform::front() {
 }
 
 glm::vec3 Transform::right() {
-    // world_up: Unity√≥∑≥ (0,1,0)
-    return glm::normalize(glm::cross(front(), world_up));
+    return glm::normalize(glm::cross(world_up, front()));
 }
 
 glm::vec3 Transform::up() {
-    return glm::normalize(glm::cross(right(), front()));
+    return glm::normalize(glm::cross(front(), right()));
 }
 
 std::string Transform::ToString() {

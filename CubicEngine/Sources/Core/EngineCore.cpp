@@ -1,6 +1,8 @@
 #include "EngineCore.h"
 #include "../Manager/RenderBase.h"
+#include "../Util/Input.h"
 #include <Windows.h>
+#include <chrono>
 
 using namespace CubicEngine::Core;
 
@@ -46,6 +48,8 @@ void EngineCore::Init() {
 	Logger::Log(LogLevel::DEBUG, "[Core] Manager cached.", source);
 	InitManagers();
 	Logger::Log(LogLevel::DEBUG, "[Core] Manager initialized.", source);
+	InitUtils();
+	Logger::Log(LogLevel::DEBUG, "[Core] Utils initialized.", source);
 }
 
 void EngineCore::Start() {
@@ -82,17 +86,31 @@ void EngineCore::LateTick(float elapsedTime) {
 
 void EngineCore::EngineMain() {
 	Logger::Log(LogLevel::DEBUG, "[Core] Engine main loop enter.", source);
+
 	const int frame_delay = 1000 / (application->GetFPS());
+
 	while (running && (!glfwWindowShouldClose(window))) {
 		Logger::Log(LogLevel::TRACE, "[Core] Engine main loop.", source);
+
+		auto frame_start = std::chrono::high_resolution_clock::now();
+
 		Time::updateFrameTime();
 		float delta_frame_time = Time::deltaFrameTime();
+		
 		FrameTick(delta_frame_time);
 		LateTick(delta_frame_time);
 		Render();
-		Sleep(frame_delay);
+
+		auto frame_end = std::chrono::high_resolution_clock::now();
+
+		int frame_time = std::chrono::duration_cast<std::chrono::milliseconds>(frame_end - frame_start).count();
+
+		if (frame_time < frame_delay) {
+			Sleep(frame_delay - frame_time);
+		}
 	}
 }
+
 
 void EngineCore::Render() {
 	Logger::Log(LogLevel::TRACE, "[Core] Render event function call.", source);
@@ -125,7 +143,10 @@ void EngineCore::InitManagers() {
 	}
 }
 
+void EngineCore::InitUtils() {
+	CubicEngine::Input::inputManager = obj_InputManager;
+}
+
 [[noreturn]] void EngineCore::Panic() {
-	//std::abort();
-	std::exit(1);
+	std::abort();
 }

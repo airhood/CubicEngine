@@ -66,7 +66,6 @@ void Renderer2D::Init() {
 }
 
 void Renderer2D::Render(Camera* camera) {
-    std::cout << "render" << std::endl;
     Logger::Log(LogLevel::TRACE, fmt::format("[Renderer] Renderer2d render at gameobject '{}'", RootGameObject()->GetName()), source);
     if (sprite == nullptr || material == nullptr) return;
     glm::vec3 position = Component::RootGameObject()->transform()->position;
@@ -79,6 +78,7 @@ void Renderer2D::Render(Camera* camera) {
 
     glm::mat4 view = camera->GetViewMatrix();
     glm::mat4 projection = camera->GetProjectionMatrix();
+    projection[0][0] *= -1;
 
     glm::mat4 clip = projection * view * model;
 

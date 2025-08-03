@@ -17,8 +17,6 @@ namespace CubicEngine {
     public:
         virtual ~Texture() = default;
 
-        void Destroy() override;
-
         virtual void* Clone_Obj() = 0;
 
         TextureFormat format() const;

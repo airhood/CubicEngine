@@ -3,7 +3,7 @@
 using namespace CubicEngine;
 
 Scene::Scene() {
-	game_objects.push_back(new GameObject());
+
 }
 
 Scene::~Scene() {

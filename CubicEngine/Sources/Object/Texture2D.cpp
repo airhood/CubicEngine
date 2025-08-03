@@ -1,7 +1,10 @@
 #include "Texture2D.h"
 #include <algorithm>
+#include "../Util/Logger.h"
 
 using namespace CubicEngine;
+
+static const std::string source = "Texture2D.cpp";
 
 Texture2D::Texture2D(int width, int height) {
 	_width = width;
@@ -35,7 +38,7 @@ int Texture2D::height() const {
 
 void Texture2D::SetPixel(int x, int y, Color color) const {
 	if (!cpuMemorySyncState) {
-		// TODO: throw error
+		Logger::Log(LogLevel::ERROR, "Texture modify is only available when cpuMemorySyncState is activated", source);
 		return;
 	}
 	data[y * _width + x] = color;
@@ -43,14 +46,16 @@ void Texture2D::SetPixel(int x, int y, Color color) const {
 
 Color Texture2D::GetPixel(int x, int y) const {
 	if (!cpuMemorySyncState) {
-		// TODO: throw error
+		Logger::Log(LogLevel::ERROR, "Texture modify is only available when cpuMemorySyncState is activated", source);
 		return Color();
 	}
 	return data[y * _width + x];
 }
 
 void Texture2D::Apply() {
-	Load(ConvertData());
+	unsigned char* textureData = ConvertData();
+	Load(textureData);
+	delete[] textureData;
 }
 
 void Texture2D::Load(unsigned char* data) {
