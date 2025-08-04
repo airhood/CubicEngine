@@ -17,7 +17,7 @@ namespace CubicEngine {
     public:
         virtual ~Texture() = default;
 
-        virtual void* Clone_Obj() = 0;
+        virtual void* Clone_Obj() const = 0;
 
         TextureFormat format() const;
         void setCPUMemorySyncState(bool state);
@@ -27,6 +27,7 @@ namespace CubicEngine {
 
     protected:
         Color* data;
+        unsigned char* data_raw;
         TextureFormat _format = TextureFormat::RGBA;
         bool cpuMemorySyncState = true;
 
@@ -34,5 +35,7 @@ namespace CubicEngine {
         friend class MeshRenderer;
         friend class Renderer;
         GLuint gl_textureID = 0;
+
+        virtual void SyncMemory() = 0;
     };
 }

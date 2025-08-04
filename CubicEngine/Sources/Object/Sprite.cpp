@@ -10,11 +10,11 @@ void Sprite::Destroy() {
 
 }
 
-void* Sprite::Clone_Obj() {
+void* Sprite::Clone_Obj() const {
 	return Clone();
 }
 
-Sprite* Sprite::Clone() {
+Sprite* Sprite::Clone() const {
 	Sprite* sprite = new Sprite();
 	sprite->texture = texture;
 	return sprite;

@@ -188,10 +188,6 @@
     <ClCompile Include="Sources\Object\Sprite.cpp" />
     <ClCompile Include="Sources\Object\Texture.cpp" />
     <ClCompile Include="Sources\Object\Texture2D.cpp" />
-    <ClCompile Include="Sources\TestApplication\main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Sources\Test\RendererTest\GameManager.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\main.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\Player.cpp" />

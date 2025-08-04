@@ -3,7 +3,7 @@
 
 using namespace CubicEngine;
 
-void* Component::Clone_Obj() {
+void* Component::Clone_Obj() const {
 	return Clone_Comp();
 }
 

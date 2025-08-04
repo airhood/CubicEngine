@@ -32,7 +32,7 @@ int main(void)
 
 	GameObject* player = new GameObject();
 	player->SetName("Player");
-	player->transform()->position = glm::vec3(0.0f, 0.0f, -30.0f);
+	player->transform()->position = glm::vec3(0.0f, 0.0f, -10.0f);
 	Camera* camera = new Camera();
 	player->AddComponent(camera);
 	CORE->GET(RenderManager)->SetCamera(camera);

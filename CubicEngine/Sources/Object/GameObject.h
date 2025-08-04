@@ -27,8 +27,8 @@ namespace CubicEngine {
 
 		void Destroy() override;
 
-		void* Clone_Obj() override;
-		GameObject* Clone();
+		void* Clone_Obj() const override;
+		GameObject* Clone() const;
 
 		int GetRootSceneNum();
 

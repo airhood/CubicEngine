@@ -10,6 +10,19 @@ void MeshRenderer::Destroy() {
 
 }
 
+void* MeshRenderer::Clone_Obj() const {
+	return Clone();
+}
+
+Component* MeshRenderer::Clone_Comp() const {
+	return Clone();
+}
+
+MeshRenderer* MeshRenderer::Clone() const {
+	// TODO: implement MeshRenderer clone
+	return nullptr;
+}
+
 void MeshRenderer::SetMesh(Mesh* mesh) {
 	this->mesh = mesh;
 	setupMesh();

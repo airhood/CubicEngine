@@ -10,11 +10,11 @@ void Material::Destroy() {
 
 }
 
-void* Material::Clone_Obj() {
+void* Material::Clone_Obj() const {
 	return Clone();
 }
 
-Material* Material::Clone() {
+Material* Material::Clone() const {
 	Material* material = new Material();
 	material->shader = shader;
 	return material;

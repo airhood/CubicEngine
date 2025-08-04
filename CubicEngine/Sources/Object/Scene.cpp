@@ -14,11 +14,11 @@ void Scene::Destroy() {
 
 }
 
-void* Scene::Clone_Obj() {
+void* Scene::Clone_Obj() const {
 	return Clone();
 }
 
-Scene* Scene::Clone() {
+Scene* Scene::Clone() const {
 	Scene* scene = new Scene();
 	scene->name = name;
 	for (auto* game_object : game_objects) {

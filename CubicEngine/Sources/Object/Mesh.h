@@ -27,9 +27,9 @@ namespace CubicEngine {
 
 		void Destroy() override;
 
-		void* Clone_Obj() override;
+		void* Clone_Obj() const override;
 
-		Mesh* Clone();
+		Mesh* Clone() const;
 
 		std::vector<Vertex> vertices;
 		std::vector<unsigned int> indices;

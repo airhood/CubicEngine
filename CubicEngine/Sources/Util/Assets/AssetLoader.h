@@ -7,9 +7,9 @@
 namespace CubicEngine {
 	class AssetLoader {
 	public:
-		const Texture2D* LoadTexture(const std::string& path);
+		static const Texture2D* LoadTexture(const std::string& path);
 		
 	private:
-		std::unordered_map<std::string, Texture2D*> textureCache;
+		static std::unordered_map<std::string, Texture2D*> textureCache;
 	};
 }

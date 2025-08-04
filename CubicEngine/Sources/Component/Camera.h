@@ -12,6 +12,11 @@ namespace CubicEngine {
 	class GameObject;
 	class Application;
 
+	enum class ProjectionType {
+		Perspective,
+		Orthographic
+	};
+
 	class Camera : public Component {
 	public:
 		Camera();
@@ -19,17 +24,20 @@ namespace CubicEngine {
 
 		void Destroy() override;
 
-		void* Clone_Obj() override;
-		Component* Clone_Comp() override;
-		Camera* Clone();
+		void* Clone_Obj() const override;
+		Component* Clone_Comp() const override;
+		Camera* Clone() const;
 
 		glm::mat4 GetViewMatrix();
 		glm::mat4 GetProjectionMatrix();
 		glm::mat4 GetViewProjectionMatrix();
 
-		float fov = 45.0f, aspectRatio, nearPlane = 0.1f, farPlane = 100.0f;
+		ProjectionType projectionType = ProjectionType::Perspective;
+		float fov = 45.0f, nearPlane = 0.1f, farPlane = 100.0f;
 
 	private:
 		Application* application;
+
+		float aspectRatio;
 	};
 }

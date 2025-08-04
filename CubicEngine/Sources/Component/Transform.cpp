@@ -10,15 +10,15 @@ void Transform::Destroy() {
 
 }
 
-Component* Transform::Clone_Comp() {
+Component* Transform::Clone_Comp() const {
     return Clone();
 }
 
-void* Transform::Clone_Obj() {
+void* Transform::Clone_Obj() const {
     return Clone();
 }
 
-Transform* Transform::Clone() {
+Transform* Transform::Clone() const {
     Transform* clone = new Transform();
     clone->position = this->position;
     clone->rotation = this->rotation;

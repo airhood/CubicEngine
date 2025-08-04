@@ -29,7 +29,7 @@ namespace CubicEngine {
 
     private:
         Shader() = default;
-        void* Clone_Obj() override;
+        void* Clone_Obj() const override;
 
     public:
         static Shader* Load(const std::string& path);

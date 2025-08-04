@@ -7,12 +7,16 @@
 #include <GLFW/glfw3.h>
 
 namespace CubicEngine {
-	class MeshRenderer : public Component, public Renderer {
+	class MeshRenderer : public Renderer {
 	public:
 		MeshRenderer() = default;
 		~MeshRenderer();
 
 		void Destroy() override;
+
+		void* Clone_Obj() const override;
+		Component* Clone_Comp() const override;
+		MeshRenderer* Clone() const;
 
 		void SetMesh(Mesh* mesh);
 		Mesh* GetMesh() const;

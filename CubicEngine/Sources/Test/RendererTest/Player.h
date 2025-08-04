@@ -12,7 +12,7 @@ public:
 
 	void FrameTick(float elapsedTime) override;
 
-	Component* Clone_Comp() override { return nullptr; }
+	Component* Clone_Comp() const override { return nullptr; }
 
 private:
 	const float moveSpeed = 0.1f;

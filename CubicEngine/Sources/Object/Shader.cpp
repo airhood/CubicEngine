@@ -22,7 +22,7 @@ void Shader::Destroy() {
 
 }
 
-void* Shader::Clone_Obj() {
+void* Shader::Clone_Obj() const {
     return nullptr;
 }
 

@@ -12,9 +12,9 @@ namespace CubicEngine {
 
 		void Destroy() override;
 		
-		void* Clone_Obj() override;
+		void* Clone_Obj() const override;
 
-		Sprite* Clone();
+		Sprite* Clone() const;
 
 	public:
 		Texture2D* texture;

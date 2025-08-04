@@ -4,19 +4,18 @@
 #include "Renderer.h"
 #include "../Object/GameObject.h"
 #include "../Object/Material.h"
+#include "../Object/Sprite.h"
 
 namespace CubicEngine {
-
-	class Sprite;
 
 	class Renderer2D : public Renderer {
 	public:
 		Renderer2D();
 		~Renderer2D();
 
-		void* Clone_Obj() override;
-
-		Component* Clone_Comp() override;
+		void* Clone_Obj() const override;
+		Component* Clone_Comp() const override;
+		Renderer2D* Clone() const;
 
 		void Destroy() override;
 
@@ -27,12 +26,16 @@ namespace CubicEngine {
 		void SetMaterial(Material* material);
 		Material* GetMaterial() const;
 
-	public:
-		Sprite* sprite;
+		void SetSprite(Sprite sprite);
+		Sprite GetSprite() const;
 
 	private:
+		Sprite sprite;
+
 		Material* material;
 
 		GLuint VAO, VBO, EBO;
+
+		void UpdateBuffers();
 	};
 }

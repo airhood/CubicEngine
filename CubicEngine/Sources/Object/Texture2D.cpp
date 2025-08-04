@@ -12,11 +12,11 @@ Texture2D::Texture2D(int width, int height) {
 	data = new Color[width * height];
 }
 
-void* Texture2D::Clone_Obj() {
+void* Texture2D::Clone_Obj() const {
 	return Clone();
 }
 
-Texture2D* Texture2D::Clone() {
+Texture2D* Texture2D::Clone() const {
 	Texture2D* texture2d = new Texture2D(_width, _height);
 	texture2d->data = new Color[_width * _height];
 	for (int i = 0; i < (_width * _height); i++) {
@@ -24,6 +24,26 @@ Texture2D* Texture2D::Clone() {
 	}
 	texture2d->_format = _format;
 	texture2d->cpuMemorySyncState = cpuMemorySyncState;
+
+	int channelCount;
+	switch (_format) {
+		case TextureFormat::RGBA:
+			channelCount = 4;
+			break;
+		case TextureFormat::RGB:
+			channelCount = 3;
+			break;
+		case TextureFormat::GRAYSCALE:
+			channelCount = 1;
+			break;
+		default:
+			return nullptr;
+	}
+
+	size_t dataSize = static_cast<size_t>(_width * _height * channelCount);
+
+	texture2d->data_raw = new unsigned char[dataSize];
+	std::memcpy(texture2d->data_raw, data_raw, dataSize);
 
 	return texture2d;
 }
@@ -53,17 +73,68 @@ Color Texture2D::GetPixel(int x, int y) const {
 }
 
 void Texture2D::Apply() {
-	unsigned char* textureData = ConvertData();
-	Load(textureData);
-	delete[] textureData;
+	if (cpuMemorySyncState) {
+		unsigned char* textureData = ConvertData();
+		delete[] data_raw;
+		data_raw = textureData;
+	}
+	Load();
 }
 
-void Texture2D::Load(unsigned char* data) {
-	if (gl_textureID != 0) Release();
-	
-	glGenTextures(1, &gl_textureID);
-	glBindTexture(GL_TEXTURE_2D, gl_textureID);
+void Texture2D::Load(unsigned char* load_data) {
+	int channelCount;
+	int gl_format;
+	switch (_format) {
+		case TextureFormat::RGBA:
+			channelCount = 4;
+			gl_format = GL_RGBA;
+			break;
+		case TextureFormat::RGB:
+			channelCount = 3;
+			gl_format = GL_RGB;
+			break;
+		case TextureFormat::GRAYSCALE:
+			channelCount = 1;
+			gl_format = GL_R8;
+			break;
+		default:
+			return;
+	}
 
+	size_t dataSize = static_cast<size_t>(_width * _height * channelCount);
+
+	if (data_raw) {
+		delete[] data_raw;
+	}
+
+	data_raw = new unsigned char[dataSize];
+	std::memcpy(data_raw, load_data, dataSize);
+
+	if (cpuMemorySyncState) {
+		SyncMemory();
+	}
+
+	if (gl_textureID == 0) {
+		glGenTextures(1, &gl_textureID);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, gl_textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, gl_format, _width, _height, 0, gl_format, GL_UNSIGNED_BYTE, data_raw);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+void Texture2D::Release() {
+	glDeleteTextures(1, &gl_textureID);
+	gl_textureID = 0;
+	_width = 0;
+	_height = 0;
+}
+
+void Texture2D::Load() {
 	int gl_format;
 	switch (_format) {
 		case TextureFormat::RGBA:
@@ -79,19 +150,17 @@ void Texture2D::Load(unsigned char* data) {
 			return;
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, gl_format, _width, _height, 0, gl_format, GL_UNSIGNED_BYTE, data);
+	if (gl_textureID == 0) {
+		glGenTextures(1, &gl_textureID);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, gl_textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, gl_format, _width, _height, 0, gl_format, GL_UNSIGNED_BYTE, data_raw);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
-
-void Texture2D::Release() {
-	glDeleteTextures(1, &gl_textureID);
-	gl_textureID = 0;
-	_width = 0;
-	_height = 0;
 }
 
 unsigned char* Texture2D::ConvertData() const {
@@ -120,4 +189,14 @@ unsigned char* Texture2D::ConvertData() const {
 	}
 
 	return textureData;
+}
+
+void Texture2D::SyncMemory() {
+	if (data_raw == nullptr) return;
+	for (int i = 0; i < _width * _height; i++) {
+		data[i].r = data_raw[i * 4] / 255.0f;
+		data[i].g = data_raw[i * 4 + 1] / 255.0f;
+		data[i].b = data_raw[i * 4 + 2] / 255.0f;
+		data[i].a = data_raw[i * 4 + 3] / 255.0f;
+	}
 }

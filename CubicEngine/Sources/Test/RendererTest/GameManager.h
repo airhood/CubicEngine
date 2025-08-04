@@ -12,5 +12,5 @@ public:
 
 	void Start() override;
 
-	Component* Clone_Comp() override { return nullptr; }
+	Component* Clone_Comp() const override { return nullptr; }
 };

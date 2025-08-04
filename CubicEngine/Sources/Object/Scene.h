@@ -18,8 +18,8 @@ namespace CubicEngine {
 	public:
 		void Destroy() override;
 
-		void* Clone_Obj() override;
-		Scene* Clone();
+		void* Clone_Obj() const override;
+		Scene* Clone() const;
 
 		void SetName(std::string name);
 		std::string GetName();

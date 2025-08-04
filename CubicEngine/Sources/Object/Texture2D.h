@@ -7,9 +7,9 @@ namespace CubicEngine {
 	public:
 		Texture2D(int width, int height);
 
-		void* Clone_Obj() override;
+		void* Clone_Obj() const override;
 
-		Texture2D* Clone();
+		Texture2D* Clone() const;
 
 		int width() const;
 		int height() const;
@@ -27,6 +27,10 @@ namespace CubicEngine {
 		int _width;
 		int _height;
 
+		void Load();
+
 		unsigned char* ConvertData() const;
+
+		void SyncMemory() override;
 	};
 }

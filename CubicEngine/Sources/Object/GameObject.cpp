@@ -50,11 +50,11 @@ void GameObject::Destroy() {
 	}
 }
 
-void* GameObject::Clone_Obj() {
+void* GameObject::Clone_Obj() const {
 	return Clone();
 }
 
-GameObject* GameObject::Clone() {
+GameObject* GameObject::Clone() const {
 	GameObject* clone = new GameObject();
 	clone->name = this->name;
 	clone->isEnabled = this->isEnabled;

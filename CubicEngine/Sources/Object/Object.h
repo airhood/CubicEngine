@@ -11,7 +11,7 @@ namespace CubicEngine {
 
 		virtual void Destroy() {}
 
-		virtual void* Clone_Obj() = 0;
+		virtual void* Clone_Obj() const = 0;
 
 		virtual std::string ToString() { return ""; };
 

@@ -10,9 +10,9 @@ namespace CubicEngine {
 
 		void Destroy() override;
 
-		void* Clone_Obj() override;
+		void* Clone_Obj() const override;
 
-		Material* Clone();
+		Material* Clone() const;
 
 		Shader* shader;
 

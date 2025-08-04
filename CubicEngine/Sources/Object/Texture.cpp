@@ -8,6 +8,9 @@ TextureFormat Texture::format() const {
 
 void Texture::setCPUMemorySyncState(bool state) {
 	cpuMemorySyncState = state;
+	if (state) {
+		SyncMemory();
+	}
 }
 
 bool Texture::getCPUMemorySyncState() const {
