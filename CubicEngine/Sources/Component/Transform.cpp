@@ -53,20 +53,56 @@ void Transform::SetWorldScale(glm::vec3 world_scale) {
     scale = GetWorldScale() - world_scale;
 }
 
-glm::vec3 Transform::front() {
-    glm::vec3 front;
-    front.x = sin(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
-    front.y = sin(glm::radians(rotation.x));
-    front.z = cos(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
-    return glm::normalize(front);
+glm::mat4 Transform::RotationMatrix() const {
+    float pitch = glm::radians(rotation.x); // pitch
+    float yaw = glm::radians(rotation.y); // yaw
+    float roll = glm::radians(rotation.z); // roll
+
+    float cy = cos(yaw);
+    float sy = sin(yaw);
+    float cp = cos(pitch);
+    float sp = sin(pitch);
+    float cr = cos(roll);
+    float sr = sin(roll);
+
+    glm::mat4 rot;
+
+    rot[0][0] = cy * cr + sy * sp * sr;
+    rot[0][1] = sr * cp;
+    rot[0][2] = -sy * cr + cy * sp * sr;
+    rot[0][3] = 0.0f;
+
+    rot[1][0] = -cy * sr + sy * sp * cr;
+    rot[1][1] = cr * cp;
+    rot[1][2] = sr * sy + cy * sp * cr;
+    rot[1][3] = 0.0f;
+
+    rot[2][0] = sy * cp;
+    rot[2][1] = -sp;
+    rot[2][2] = cy * cp;
+    rot[2][3] = 0.0f;
+
+    rot[3][0] = 0.0f;
+    rot[3][1] = 0.0f;
+    rot[3][2] = 0.0f;
+    rot[3][3] = 1.0f;
+
+    return rot;
 }
 
-glm::vec3 Transform::right() {
-    return glm::normalize(glm::cross(world_up, front()));
+glm::vec3 Transform::Forward() const {
+    glm::mat4 rot = RotationMatrix();
+    return glm::normalize(glm::vec3(rot * glm::vec4(0, 0, 1, 0)));
 }
 
-glm::vec3 Transform::up() {
-    return glm::normalize(glm::cross(front(), right()));
+glm::vec3 Transform::Right() const {
+    glm::mat4 rot = RotationMatrix();
+    return glm::normalize(glm::vec3(rot * glm::vec4(1, 0, 0, 0)));
+}
+
+glm::vec3 Transform::Up() const {
+    glm::mat4 rot = RotationMatrix();
+    return glm::normalize(glm::vec3(rot * glm::vec4(0, 1, 0, 0)));
 }
 
 std::string Transform::ToString() {

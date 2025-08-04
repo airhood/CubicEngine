@@ -16,7 +16,7 @@ int main(void)
 	Application* app = App();
 	app->SetTitle("Awesome Game");
 	app->SetResolution(1920, 1080);
-	app->SetFPS(120);
+	app->SetFPS(60);
 	app->Init();
 
 	Scene* scene = new Scene();
@@ -33,6 +33,7 @@ int main(void)
 	GameObject* player = new GameObject();
 	player->SetName("Player");
 	player->transform()->position = glm::vec3(0.0f, 0.0f, -10.0f);
+	//player->transform()->rotation = glm::vec3(15.0f, 0.0f, 90.0f);
 	Camera* camera = new Camera();
 	player->AddComponent(camera);
 	CORE->GET(RenderManager)->SetCamera(camera);

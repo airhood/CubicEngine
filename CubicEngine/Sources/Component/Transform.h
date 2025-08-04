@@ -26,9 +26,11 @@ namespace CubicEngine {
 		void SetWorldRotation(glm::vec3);
 		void SetWorldScale(glm::vec3);
 
-		glm::vec3 front();
-		glm::vec3 up();
-		glm::vec3 right();
+		glm::mat4 RotationMatrix() const;
+
+		glm::vec3 Forward() const;
+		glm::vec3 Up() const;
+		glm::vec3 Right() const;
 
 		std::string ToString();
 

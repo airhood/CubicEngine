@@ -35,8 +35,8 @@ glm::mat4 Camera::GetViewMatrix() {
 	auto root = RootGameObject();
 	Transform* transform = root->GetComponent<Transform>();
 	glm::vec3 pos = transform->position;
-	glm::vec3 front = glm::normalize(transform->front());
-	glm::vec3 up = glm::normalize(transform->up());
+	glm::vec3 front = glm::normalize(transform->Forward());
+	glm::vec3 up = glm::normalize(transform->Up());
 
 	return glm::lookAt(pos, pos + front, up);
 }
