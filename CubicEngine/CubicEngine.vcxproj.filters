@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Object\Shader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -63,7 +60,7 @@
     <ClCompile Include="Sources\Object\Mesh.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Component\MeshRenderer.cpp">
+    <ClCompile Include="Sources\Component\Rendering\MeshRenderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Util\Logger.cpp">
@@ -96,10 +93,10 @@
     <ClCompile Include="Sources\Util\ShaderCompiler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Component\Renderer2D.cpp">
+    <ClCompile Include="Sources\Component\Rendering\Renderer2D.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Component\Renderer.cpp">
+    <ClCompile Include="Sources\Component\Rendering\Renderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Object\Sprite.cpp">
@@ -129,7 +126,16 @@
     <ClCompile Include="Sources\Util\Assets\AssetLoader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Util\CubicEngine_stb_image.cpp">
+    <ClCompile Include="Sources\Util\stb_image_impl.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Manager\PhysicsManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Component\Physics\BoxCollider2D.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Component\Physics\CircleCollider.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -225,7 +231,7 @@
     <ClInclude Include="Sources\Object\Material.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Component\MeshRenderer.h">
+    <ClInclude Include="Sources\Component\Rendering\MeshRenderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\Logger.h">
@@ -255,10 +261,10 @@
     <ClInclude Include="Sources\Util\ShaderCompiler.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Component\Renderer2D.h">
+    <ClInclude Include="Sources\Component\Rendering\Renderer2D.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Component\Renderer.h">
+    <ClInclude Include="Sources\Component\Rendering\Renderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Object\Sprite.h">
@@ -283,6 +289,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\Assets\AssetLoader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Manager\PhysicsManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Component\Physics\BoxCollider2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Component\Physics\CircleCollider.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

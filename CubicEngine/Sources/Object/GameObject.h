@@ -10,7 +10,7 @@
 #include "../Component/Transform.h"
 #include "LayerMask.h"
 #include "../Util/Logger.h"
-#include "../Component/Renderer.h"
+#include "../Component/Rendering/Renderer.h"
 
 namespace CubicEngine {
 

@@ -9,7 +9,7 @@
 
 // Cubic Engine
 // Copyright (c) 2025 Airhood
-// Licensed under the MIT License. See LICENSE.txt for details.
+// Licensed under the MIT License. See LICENSE.md for details.
 
 
 // Essential includes

@@ -1,6 +1,6 @@
 #pragma once
 
-#define CORE_CLASS
+#define CUBICENGINE_CORE_CLASS
 
 #include <iostream>
 #include <vector>
@@ -22,6 +22,7 @@
 #include "../Manager/SceneManager.h"
 #include "../Manager/ComponentInstanceManager.h"
 #include "../Manager/LayerManager.h"
+#include "../Manager/AudioManager.h"
 
 #define Manager(NAME)                                               \
 public:                                                             \
@@ -45,6 +46,7 @@ namespace CubicEngine {
 	class SceneManager;
 	class ComponentInstanceManager;
 	class LayerManager;
+	class AudioManager;
 
 	namespace Core {
 		class EngineCore {
@@ -71,6 +73,7 @@ namespace CubicEngine {
 			Manager(SceneManager);
 			Manager(ComponentInstanceManager);
 			Manager(LayerManager);
+			Manager(AudioManager);
 
 		private:
 			bool running = false;
@@ -83,6 +86,7 @@ namespace CubicEngine {
 
 			std::vector<ManagerBase*> managers;
 			std::vector<RenderBase*> render_managers;
+
 			void CreateManagers();
 			void CacheManagers();
 			void InitManagers();
@@ -94,4 +98,4 @@ namespace CubicEngine {
 	}
 }
 
-#undef CORE_CLASS
+#undef CUBICENGINE_CORE_CLASS

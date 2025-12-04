@@ -150,9 +150,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\fmt\include\fmt;$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\fmt\include;$(ProjectDir)Dependencies\stb;$(ProjectDir)Dependencies\assimp\include;$(ProjectDir)Dependencies\glm;$(ProjectDir)Dependencies\glew-2.1.0\include;$(ProjectDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -168,14 +169,17 @@
   <ItemGroup>
     <ClCompile Include="Sources\Component\Camera.cpp" />
     <ClCompile Include="Sources\Component\Component.cpp" />
-    <ClCompile Include="Sources\Component\MeshRenderer.cpp" />
-    <ClCompile Include="Sources\Component\Renderer.cpp" />
-    <ClCompile Include="Sources\Component\Renderer2D.cpp" />
+    <ClCompile Include="Sources\Component\Physics\BoxCollider2D.cpp" />
+    <ClCompile Include="Sources\Component\Physics\CircleCollider.cpp" />
+    <ClCompile Include="Sources\Component\Rendering\MeshRenderer.cpp" />
+    <ClCompile Include="Sources\Component\Rendering\Renderer.cpp" />
+    <ClCompile Include="Sources\Component\Rendering\Renderer2D.cpp" />
     <ClCompile Include="Sources\Component\Transform.cpp" />
     <ClCompile Include="Sources\Core\Application.cpp" />
     <ClCompile Include="Sources\Core\EngineCore.cpp" />
     <ClCompile Include="Sources\Manager\ComponentInstanceManager.cpp" />
     <ClCompile Include="Sources\Manager\LayerManager.cpp" />
+    <ClCompile Include="Sources\Manager\PhysicsManager.cpp" />
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Manager\SceneManager.cpp" />
     <ClCompile Include="Sources\Object\Color.cpp" />
@@ -192,7 +196,7 @@
     <ClCompile Include="Sources\Test\RendererTest\main.cpp" />
     <ClCompile Include="Sources\Test\RendererTest\Player.cpp" />
     <ClCompile Include="Sources\Util\Assets\AssetLoader.cpp" />
-    <ClCompile Include="Sources\Util\CubicEngine_stb_image.cpp" />
+    <ClCompile Include="Sources\Util\stb_image_impl.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.cpp" />
     <ClCompile Include="Sources\Util\FileSystem\MetaFileSystem.h" />
     <ClCompile Include="Sources\Util\Input.cpp" />
@@ -206,10 +210,6 @@
     <ClCompile Include="Sources\Object\Mesh.cpp" />
     <ClCompile Include="Sources\Util\pugixml\pugixml.cpp" />
     <ClCompile Include="Sources\Object\Shader.cpp" />
-    <ClCompile Include="Sources\main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Sources\Util\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,9 +225,11 @@
     </ClInclude>
     <ClInclude Include="Dependencies\fmt\include\fmt\format.h" />
     <ClInclude Include="Sources\Component\Camera.h" />
-    <ClInclude Include="Sources\Component\MeshRenderer.h" />
-    <ClInclude Include="Sources\Component\Renderer.h" />
-    <ClInclude Include="Sources\Component\Renderer2D.h" />
+    <ClInclude Include="Sources\Component\Physics\BoxCollider2D.h" />
+    <ClInclude Include="Sources\Component\Physics\CircleCollider.h" />
+    <ClInclude Include="Sources\Component\Rendering\MeshRenderer.h" />
+    <ClInclude Include="Sources\Component\Rendering\Renderer.h" />
+    <ClInclude Include="Sources\Component\Rendering\Renderer2D.h" />
     <ClInclude Include="Sources\Component\Transform.h" />
     <ClInclude Include="Sources\Core\Application.h" />
     <ClInclude Include="Sources\Component\Component.h" />
@@ -236,6 +238,7 @@
     <ClInclude Include="Sources\Manager\ComponentInstanceManager.h" />
     <ClInclude Include="Sources\Manager\LayerManager.h" />
     <ClInclude Include="Sources\Manager\ManagerBase.h" />
+    <ClInclude Include="Sources\Manager\PhysicsManager.h" />
     <ClInclude Include="Sources\Manager\RenderBase.h" />
     <ClInclude Include="Sources\Manager\RenderManager.h" />
     <ClInclude Include="Sources\Component\ComponentInstanceBase.h" />

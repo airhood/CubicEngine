@@ -1,5 +1,5 @@
 #include "RenderManager.h"
-#include "../Component/Renderer.h"
+#include "../Component/Rendering/Renderer.h"
 #include <algorithm>
 
 using namespace CubicEngine;
@@ -20,7 +20,7 @@ void RenderManager::SetViewport() {
 }
 
 void RenderManager::Render() {
-	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClearColor(171/255.0f, 220/255.0f, 255/255.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	RenderCamera(camera);

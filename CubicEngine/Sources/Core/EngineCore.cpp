@@ -125,6 +125,7 @@ void EngineCore::CreateManagers() {
 	obj_SceneManager = new SceneManager();
 	obj_ComponentInstanceManager = new ComponentInstanceManager();
 	obj_LayerManager = new LayerManager();
+	obj_AudioManager = new AudioManager();
 }
 
 void EngineCore::CacheManagers() {

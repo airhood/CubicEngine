@@ -3,7 +3,7 @@
 using namespace CubicEngine;
 
 SceneManager::~SceneManager() {
-
+	Exterminate();
 }
 
 void SceneManager::Init() {

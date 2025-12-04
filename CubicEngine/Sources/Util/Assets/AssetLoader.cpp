@@ -32,3 +32,7 @@ const Texture2D* AssetLoader::LoadTexture(const std::string& path) {
     textureCache[path] = tex;
     return tex;
 }
+
+const AudioClip* AssetLoader::LoadAudioClip(const std::string& path) {
+
+}

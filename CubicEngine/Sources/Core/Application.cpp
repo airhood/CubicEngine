@@ -8,7 +8,7 @@ using namespace CubicEngine::Core;
 static const std::string source = "Application.cpp";
 
 Application::Application() {
-
+	initialized = false;
 }
 
 Application::~Application() {
@@ -56,6 +56,8 @@ void Application::Init() {
 
 	CORE->window = window;
 	CORE->Init();
+
+	initialized = true;
 }
 
 void Application::Start() {

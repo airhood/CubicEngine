@@ -3,7 +3,7 @@
 #include <iostream>
 #include "EngineCore.h"
 
-#if defined(CORE_CLASS) || defined(APPLICATION_CPP)
+#if defined(CUBICENGINE_CORE_CLASS) || defined(APPLICATION_CPP)
 
 namespace CubicEngine {
 

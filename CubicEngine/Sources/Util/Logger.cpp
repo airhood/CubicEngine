@@ -72,18 +72,19 @@ void Logger::Init() {
 }
 
 void Logger::Log(LogLevel level, const std::string& message, const std::string& source) {
-    thread_local char buffer[1024];
-
-    auto time = CurrentTime();
-    auto it = fmt::format_to(buffer, "[{}] [{}] {} ({})\n",
-        time,
-        LogLevelToString(level),
-        message,
-        source);
-
-    std::string_view formatted(buffer, it - buffer);
-    LogEntry entry(level, message, source);
     if (level >= log_level) {
+        thread_local char buffer[1024];
+
+        auto time = CurrentTime();
+        auto it = fmt::format_to(buffer, "[{}] [{}] {} ({})\n",
+            time,
+            LogLevelToString(level),
+            message,
+            source);
+
+        std::string_view formatted(buffer, it - buffer);
+        LogEntry entry(level, message, source);
+
         if (log_console) {
             std::cout << formatted;
         }
