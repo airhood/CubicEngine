@@ -1,14 +1,17 @@
 #include "AssetLoader.h"
 #include <stb_image.h>
 #include "../Logger.h"
+#include "../../Core/EngineCore.h"
+#include <fmod.hpp>
 
 using namespace CubicEngine;
 
 static const std::string source = "AssetLoader.cpp";
 
 std::unordered_map<std::string, Texture2D*> AssetLoader::textureCache = std::unordered_map<std::string, Texture2D*>();
+std::unordered_map<std::string, AudioClip*> AssetLoader::audioClipCache = std::unordered_map<std::string, AudioClip*>();
 
-const Texture2D* AssetLoader::LoadTexture(const std::string& path) {
+Texture2D* AssetLoader::LoadTexture(const std::string& path) {
 	auto it = textureCache.find(path);
 	if (it != textureCache.end()) {
 		return it->second;
@@ -33,6 +36,24 @@ const Texture2D* AssetLoader::LoadTexture(const std::string& path) {
     return tex;
 }
 
-const AudioClip* AssetLoader::LoadAudioClip(const std::string& path) {
+AudioClip* AssetLoader::LoadAudioClip(const std::string& path) {
+    auto it = audioClipCache.find(path);
+    if (it != audioClipCache.end()) {
+        return it->second;
+    }
 
+    FMOD::System* system = CORE->GET(AudioManager)->GetFMODSystem();
+    FMOD::Sound* sound(nullptr);
+    FMOD_RESULT result = system->createSound(path.c_str(), FMOD_LOOP_OFF, 0, &sound);
+    if (result != FMOD_OK) {
+        Logger::Log(LogLevel::ERROR, "[AssetLoader] FMOD create sound failed.", source);
+        return nullptr;
+    }
+
+    AudioClip* audioClip = new AudioClip();
+    audioClip->sound = sound;
+
+    audioClipCache[path] = audioClip;
+
+    return audioClip;
 }

@@ -14,7 +14,7 @@ void GameManager::Start() {
 	mat->shader = shader;
 	Sprite sprite = Sprite();
 
-	const Texture2D* tex2D = AssetLoader::LoadTexture(R"(C:\Users\airhood\Desktop\Dimo\DIMO.png)");
+	Texture2D* tex2D = AssetLoader::LoadTexture(R"(C:\Users\airhood\Desktop\Dimo\DIMO.png)");
 	Texture2D* tex2D_clone = tex2D->Clone();
 	tex2D_clone->Apply();
 	sprite.texture = tex2D_clone;

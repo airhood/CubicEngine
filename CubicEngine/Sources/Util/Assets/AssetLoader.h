@@ -8,10 +8,11 @@
 namespace CubicEngine {
 	class AssetLoader {
 	public:
-		static const Texture2D* LoadTexture(const std::string& path);
-		static const AudioClip* LoadAudioClip(const std::string& path);
+		static Texture2D* LoadTexture(const std::string& path);
+		static AudioClip* LoadAudioClip(const std::string& path);
 		
 	private:
 		static std::unordered_map<std::string, Texture2D*> textureCache;
+		static std::unordered_map<std::string, AudioClip*> audioClipCache;
 	};
 }

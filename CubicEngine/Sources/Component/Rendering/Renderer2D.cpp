@@ -138,9 +138,9 @@ void Renderer2D::UpdateBuffers() {
     float vertices[] = {
         // x, y, z, u, v
         -unitPerPixel / 2.0f - offsetX,   -unitPerPixel / 2.0f - offsetY,   0.0f,   0.0f,   0.0f,
-        unitPerPixel / 2.0f - offsetX,    -unitPerPixel / 2.0f - offsetY,   0.0f,   1.0f,   0.0f,
-        unitPerPixel / 2.0f - offsetX,    unitPerPixel / 2.0f - offsetY,    0.0f,   1.0f,   1.0f,
-        -unitPerPixel / 2.0f - offsetX,   unitPerPixel / 2.0f - offsetY,    0.0f,   0.0f,   1.0f
+         unitPerPixel / 2.0f - offsetX,   -unitPerPixel / 2.0f - offsetY,   0.0f,   1.0f,   0.0f,
+         unitPerPixel / 2.0f - offsetX,    unitPerPixel / 2.0f - offsetY,   0.0f,   1.0f,   1.0f,
+        -unitPerPixel / 2.0f - offsetX,    unitPerPixel / 2.0f - offsetY,   0.0f,   0.0f,   1.0f
     };
 
     unsigned int indices[] = {

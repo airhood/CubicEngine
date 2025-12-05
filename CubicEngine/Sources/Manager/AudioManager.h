@@ -17,10 +17,12 @@ namespace CubicEngine {
 
 		void FrameTick(float elapsedTime) override;
 
-		FMOD::System* GetFMODSystem();
 
 	private:
 		FMOD::System* system = nullptr;
+
+		friend class AssetLoader;
+		FMOD::System* GetFMODSystem();
 
 		bool InitFMOD();
 		bool RestartFMOD();

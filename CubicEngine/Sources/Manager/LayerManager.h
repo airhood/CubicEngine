@@ -14,7 +14,6 @@ namespace CubicEngine {
 
 		int GetLayerByName(std::string layer_name);
 
-		// called before starting core)
 		void SetLayerName(int layer, std::string name);
 
 	private:
