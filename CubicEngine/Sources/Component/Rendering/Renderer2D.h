@@ -2,7 +2,6 @@
 
 #include "../Component.h"
 #include "Renderer.h"
-#include "../../Object/GameObject.h"
 #include "../../Object/Material.h"
 #include "../../Object/Sprite.h"
 

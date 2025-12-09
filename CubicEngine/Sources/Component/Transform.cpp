@@ -1,4 +1,6 @@
 #include "Transform.h"
+#include <gtc/matrix_transform.hpp>
+#include <gtc/quaternion.hpp>
 
 using namespace CubicEngine;
 
@@ -109,4 +111,14 @@ std::string Transform::ToString() {
     return "position: (" + std::to_string(position.x) + ", " + std::to_string(position.y) + ", " + std::to_string(position.z) + "), "
         + "rotation: (" + std::to_string(rotation.x) + ", " + std::to_string(rotation.y) + ", " + std::to_string(position.z) + "), "
         + "scale: (" + std::to_string(scale.x) + ", " + std::to_string(scale.y) + ", " + std::to_string(scale.z) + ")";
+}
+
+glm::mat4 Transform::GetModelMatrix() const {
+    // Translate -> Rotate -> Scale
+    glm::mat4 model(1.0f);
+    model = glm::translate(model, position);
+    glm::quat rot_quat = glm::quat(rotation);
+    model = model * glm::mat4_cast(rot_quat);
+    model = glm::scale(model, scale);
+    return model;
 }

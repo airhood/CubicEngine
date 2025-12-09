@@ -1,12 +1,16 @@
 #include "MeshRenderer.h"
+#include "../Camera.h"
+#include "../../Util/RenderUnit.h"
+#include "../../Util/Logger.h"
+#include "../../Object/GameObject.h"
+#include <gtc/matrix_transform.hpp>
+#include <gtc/quaternion.hpp>
 
 using namespace CubicEngine;
 
+static const std::string source = "MeshRenderer.cpp";
+
 MeshRenderer::~MeshRenderer() {
-
-}
-
-void MeshRenderer::Destroy() {
 
 }
 
@@ -19,13 +23,23 @@ Component* MeshRenderer::Clone_Comp() const {
 }
 
 MeshRenderer* MeshRenderer::Clone() const {
-	// TODO: implement MeshRenderer clone
-	return nullptr;
+	MeshRenderer* meshRenderer = new MeshRenderer();
+	meshRenderer->SetMaterial(material);
+	meshRenderer->SetMesh(mesh);
+	return meshRenderer;
+}
+
+void MeshRenderer::Destroy() {
+
+}
+
+void MeshRenderer::Init() {
+
 }
 
 void MeshRenderer::SetMesh(Mesh* mesh) {
 	this->mesh = mesh;
-	setupMesh();
+	SetupMesh();
 }
 
 Mesh* MeshRenderer::GetMesh() const {
@@ -41,9 +55,79 @@ Material* MeshRenderer::GetMaterial() const {
 }
 
 void MeshRenderer::Render(Camera* camera) {
+	Logger::Log(LogLevel::TRACE, fmt::format("[Renderer] MeshRenderer render at gameobject '{}'", RootGameObject()->GetName()), source);
 
+	if (material == nullptr) return;
+	if (mesh == nullptr) return;
+
+	glm::mat4 model = RootGameObject()->transform()->GetModelMatrix();
+	glm::mat4 view = camera->GetViewMatrix();
+	glm::mat4 projection = camera->GetProjectionMatrix();
+
+	glm::mat4 mvp = projection * view * model;
+
+	for (int pass = 0; pass < ShaderPassCount(material->shader); pass++) {
+		UseShader(material->shader, pass);
+		//material->PassSetMat4(pass, "u_MVP", mvp);
+		material->PassSetMat4(pass, "model", model);
+		material->PassSetMat4(pass, "view", view);
+		material->PassSetMat4(pass, "projection", projection);
+
+		material->PassSetInt(pass, "texture_diffuse1", 0);
+
+		material->Apply(pass, CubicEngine::RenderUnit::NORMAL);
+
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mesh->indices.size()), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		glUseProgram(0);
+	}
 }
 
-void MeshRenderer::setupMesh() {
+void MeshRenderer::UpdateMesh() const {
+	mesh->CalculateNormal();
+	mesh->CalculateTangent();
 
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, mesh->vertices.size() * sizeof(Vertex), mesh->vertices.data(), GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->vertices.size() * sizeof(uint32_t), mesh->vertices.data(), GL_DYNAMIC_DRAW);
+
+	glBindVertexArray(0);
+}
+
+void MeshRenderer::SetupMesh() {
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, mesh->vertices.size() * sizeof(Vertex), mesh->vertices.data(), GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->vertices.size() * sizeof(uint32_t), mesh->indices.data(), GL_DYNAMIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
+	glEnableVertexAttribArray(2);
+
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
+	glEnableVertexAttribArray(3);
+
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, bitangent));
+	glEnableVertexAttribArray(4);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glm.hpp"
+#include <glm.hpp>
 #include "Component.h"
 
 namespace CubicEngine {
@@ -41,5 +41,10 @@ namespace CubicEngine {
 	private:
 		friend class GameObject;
 		Transform* _parent;
+
+		friend class Renderer;
+		friend class Renderer2D;
+		friend class MeshRenderer;
+		glm::mat4 GetModelMatrix() const;
 	};
 }

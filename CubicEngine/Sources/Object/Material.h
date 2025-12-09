@@ -96,6 +96,7 @@ namespace CubicEngine {
 		friend class RenderManager;
 		friend class Renderer;
 		friend class Renderer2D;
+		friend class MeshRenderer;
 		void Apply(int pass, int unit);
 	};
 }

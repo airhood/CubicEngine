@@ -32,6 +32,9 @@ namespace CubicEngine {
 		Mesh* Clone() const;
 
 		std::vector<Vertex> vertices;
-		std::vector<unsigned int> indices;
+		std::vector<uint32_t> indices;
+
+		void CalculateNormal();
+		void CalculateTangent();
 	};
 }

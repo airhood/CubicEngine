@@ -12,11 +12,13 @@ namespace CubicEngine {
 		MeshRenderer() = default;
 		~MeshRenderer();
 
-		void Destroy() override;
-
 		void* Clone_Obj() const override;
 		Component* Clone_Comp() const override;
 		MeshRenderer* Clone() const;
+
+		void Destroy() override;
+
+		void Init() override;
 
 		void SetMesh(Mesh* mesh);
 		Mesh* GetMesh() const;
@@ -26,6 +28,8 @@ namespace CubicEngine {
 
 		void Render(Camera* camera) override;
 
+		void UpdateMesh() const;
+
 	private:
 		Mesh* mesh;
 
@@ -33,6 +37,6 @@ namespace CubicEngine {
 
 		GLuint VAO, VBO, EBO;
 
-		void setupMesh();
+		void SetupMesh();
 	};
 }

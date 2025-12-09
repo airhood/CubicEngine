@@ -2,6 +2,10 @@
 #include "../../Object/Sprite.h"
 #include "../Camera.h"
 #include "../../Util/RenderUnit.h"
+#include "../../Util/Logger.h"
+#include "../../Object/GameObject.h"
+#include <gtc/matrix_transform.hpp>
+#include <gtc/quaternion.hpp>
 
 using namespace CubicEngine;
 
@@ -88,23 +92,26 @@ void Renderer2D::Render(Camera* camera) {
     glm::mat4 projection = camera->GetProjectionMatrix();
     projection[0][0] *= -1;
 
-    glm::mat4 clip = projection * view * model;
+    glm::mat4 mvp = projection * view * model;
 
     for (int pass = 0; pass < ShaderPassCount(material->shader); pass++) {
         UseShader(material->shader, pass);
-        material->Apply(pass, CubicEngine::RenderUnit::NORMAL);
-        //material->PassSetMat4(i, "u_MVP", mvp);
+        //material->PassSetMat4(pass, "u_MVP", mvp);
         material->PassSetMat4(pass, "model", model);
         material->PassSetMat4(pass, "view", view);
         material->PassSetMat4(pass, "projection", projection);
 
         material->PassSetInt(pass, "texture_diffuse1", 0);
 
+        material->Apply(pass, CubicEngine::RenderUnit::NORMAL);
+
         sprite.texture->Bind(CubicEngine::RenderUnit::SPRITE);
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
+
+        glUseProgram(0);
     }
 }
 

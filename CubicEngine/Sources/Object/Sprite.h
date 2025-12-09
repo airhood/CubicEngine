@@ -2,7 +2,7 @@
 
 #include "Object.h"
 #include "Texture2D.h"
-#include "glm.hpp"
+#include <glm.hpp>
 
 namespace CubicEngine {
 	class Sprite : public Object {
