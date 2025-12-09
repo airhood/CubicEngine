@@ -14,6 +14,5 @@ Mesh* Mesh::Clone() const {
 	Mesh* mesh = new Mesh();
 	mesh->vertices = vertices;
 	mesh->indices = indices;
-	mesh->textures = textures;
 	return mesh;
 }

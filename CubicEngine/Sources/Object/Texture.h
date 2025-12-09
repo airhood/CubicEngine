@@ -37,5 +37,10 @@ namespace CubicEngine {
         GLuint gl_textureID = 0;
 
         virtual void SyncMemory() = 0;
+
+        friend class Renderer;
+        friend class Renderer2D;
+        friend class Material;
+        void Bind(int unit) const;
     };
 }

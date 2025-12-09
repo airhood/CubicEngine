@@ -262,6 +262,7 @@
     <ClInclude Include="Sources\Test\RendererTest\Player.h" />
     <ClInclude Include="Sources\Util\Assets\AssetLoader.h" />
     <ClInclude Include="Sources\Util\Input.h" />
+    <ClInclude Include="Sources\Util\RenderUnit.h" />
     <ClInclude Include="Sources\Util\ShaderCompiler.h" />
     <ClInclude Include="Sources\Test\MemorySystemTest\MemorySystemTest.cpp" />
     <ClInclude Include="Sources\Util\FileSystem\ModelLoader.h">

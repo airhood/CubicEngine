@@ -1,6 +1,7 @@
 #include "Renderer2D.h"
 #include "../../Object/Sprite.h"
 #include "../Camera.h"
+#include "../../Util/RenderUnit.h"
 
 using namespace CubicEngine;
 
@@ -89,17 +90,17 @@ void Renderer2D::Render(Camera* camera) {
 
     glm::mat4 clip = projection * view * model;
 
-    for (int i = 0; i < ShaderPassCount(material->shader); i++) {
-        UseShader(material->shader, i);
+    for (int pass = 0; pass < ShaderPassCount(material->shader); pass++) {
+        UseShader(material->shader, pass);
+        material->Apply(pass, CubicEngine::RenderUnit::NORMAL);
         //material->PassSetMat4(i, "u_MVP", mvp);
-        material->PassSetMat4(i, "model", model);
-        material->PassSetMat4(i, "view", view);
-        material->PassSetMat4(i, "projection", projection);
+        material->PassSetMat4(pass, "model", model);
+        material->PassSetMat4(pass, "view", view);
+        material->PassSetMat4(pass, "projection", projection);
 
-        material->PassSetInt(i, "texture_diffuse1", 0);
+        material->PassSetInt(pass, "texture_diffuse1", 0);
 
-        glActiveTexture(GL_TEXTURE0);
-        BindTexture(GL_TEXTURE_2D, sprite.texture);
+        sprite.texture->Bind(CubicEngine::RenderUnit::SPRITE);
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

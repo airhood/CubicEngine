@@ -20,9 +20,9 @@ Material* Material::Clone() const {
 	return material;
 }
 
-void Material::SetBool(const std::string& name, bool value) {
+void Material::SetBool(const std::string& name, bool val) {
 	for (int pass = 0; pass < shader->passes.size(); pass++) {
-		PassSetBool(pass, name, value);
+		PassSetBool(pass, name, val);
 	}
 }
 
@@ -50,9 +50,9 @@ void Material::SetVec2(const std::string& name, float x, float y) {
 	}
 }
 
-void Material::SetVec3(const std::string& name, const glm::vec3& value) {
+void Material::SetVec3(const std::string& name, const glm::vec3& val) {
 	for (int pass = 0; pass < shader->passes.size(); pass++) {
-		PassSetVec2(pass, name, value);
+		PassSetVec2(pass, name, val);
 	}
 }
 
@@ -62,9 +62,9 @@ void Material::SetVec3(const std::string& name, float x, float y, float z) {
 	}
 }
 
-void Material::SetVec4(const std::string& name, const glm::vec4& value) {
+void Material::SetVec4(const std::string& name, const glm::vec4& val) {
 	for (int pass = 0; pass < shader->passes.size(); pass++) {
-		PassSetVec4(pass, name, value);
+		PassSetVec4(pass, name, val);
 	}
 }
 
@@ -92,36 +92,42 @@ void Material::SetMat4(const std::string& name, const glm::mat4& mat) {
 	}
 }
 
-void Material::PassSetBool(int pass, const std::string& name, bool value) {
-	uniform_buffer[pass].bools[name] = value;
+void Material::SetTexture(const std::string& name, const Texture* tex) {
+	for (int pass = 0; pass < shader->passes.size(); pass++) {
+		PassSetTexture(pass, name, tex);
+	}
 }
 
-void Material::PassSetInt(int pass, const std::string& name, int value) {
-	uniform_buffer[pass].ints[name] = value;
+void Material::PassSetBool(int pass, const std::string& name, bool val) {
+	uniform_buffer[pass].bools[name] = val;
 }
 
-void Material::PassSetFloat(int pass, const std::string& name, float value) {
-	uniform_buffer[pass].floats[name] = value;
+void Material::PassSetInt(int pass, const std::string& name, int val) {
+	uniform_buffer[pass].ints[name] = val;
 }
 
-void Material::PassSetVec2(int pass, const std::string& name, const glm::vec2& value) {
-	uniform_buffer[pass].vec2s[name] = value;
+void Material::PassSetFloat(int pass, const std::string& name, float val) {
+	uniform_buffer[pass].floats[name] = val;
+}
+
+void Material::PassSetVec2(int pass, const std::string& name, const glm::vec2& val) {
+	uniform_buffer[pass].vec2s[name] = val;
 }
 
 void Material::PassSetVec2(int pass, const std::string& name, float x, float y) {
 	uniform_buffer[pass].vec2s[name] = glm::vec2(x, y);
 }
 
-void Material::PassSetVec3(int pass, const std::string& name, const glm::vec3& value) {
-	uniform_buffer[pass].vec3s[name] = value;
+void Material::PassSetVec3(int pass, const std::string& name, const glm::vec3& val) {
+	uniform_buffer[pass].vec3s[name] = val;
 }
 
 void Material::PassSetVec3(int pass, const std::string& name, float x, float y, float z) {
 	uniform_buffer[pass].vec3s[name] = glm::vec3(x, y, z);
 }
 
-void Material::PassSetVec4(int pass, const std::string& name, const glm::vec4& value) {
-	uniform_buffer[pass].vec4s[name] = value;
+void Material::PassSetVec4(int pass, const std::string& name, const glm::vec4& val) {
+	uniform_buffer[pass].vec4s[name] = val;
 }
 
 void Material::PassSetVec4(int pass, const std::string& name, float x, float y, float z, float w) {
@@ -140,61 +146,79 @@ void Material::PassSetMat4(int pass, const std::string& name, const glm::mat4& m
 	uniform_buffer[pass].mat4s[name] = mat;
 }
 
-void Material::Apply() {
-	for (auto& pass_uniform : uniform_buffer) {
-		int pass = pass_uniform.first;
-		for (auto& bool_ : pass_uniform.second.bools) {
-			std::string name = bool_.first;
-			auto value = bool_.second;
-			glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), (int)value);
-		}
+void Material::PassSetTexture(int pass, const std::string& name, const Texture* tex) {
+	uniform_buffer[pass].textures[name] = tex;
+}
 
-		for (auto& int_ : pass_uniform.second.ints) {
-			std::string name = int_.first;
-			auto value = int_.second;
-			glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), value);
-		}
+void Material::Apply(int pass, int unit) {
+	auto pass_uniform = uniform_buffer[pass];
 
-		for (auto& float_ : pass_uniform.second.floats) {
-			std::string name = float_.first;
-			auto value = float_.second;
-			glUniform1f(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), value);
-		}
+	for (auto& entry : pass_uniform.bools) {
+		std::string name = entry.first;
+		auto val = entry.second;
+		glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), (int)val);
+	}
 
-		for (auto& vec2 : pass_uniform.second.vec2s) {
-			std::string name = vec2.first;
-			auto value = vec2.second;
-			glUniform2fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, &value[0]);
-		}
+	for (auto& entry : pass_uniform.ints) {
+		std::string name = entry.first;
+		auto val = entry.second;
+		glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), val);
+	}
 
-		for (auto& vec3 : pass_uniform.second.vec3s) {
-			std::string name = vec3.first;
-			auto value = vec3.second;
-			glUniform3fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, &value[0]);
-		}
+	for (auto& entry : pass_uniform.floats) {
+		std::string name = entry.first;
+		auto val = entry.second;
+		glUniform1f(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), val);
+	}
 
-		for (auto& vec4 : pass_uniform.second.vec4s) {
-			std::string name = vec4.first;
-			auto value = vec4.second;
-			glUniform4fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, &value[0]);
-		}
+	for (auto& entry : pass_uniform.vec2s) {
+		std::string name = entry.first;
+		auto val = entry.second;
+		glUniform2fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, &val[0]);
+	}
 
-		for (auto& mat2 : pass_uniform.second.mat2s) {
-			std::string name = mat2.first;
-			auto mat = mat2.second;
-			glUniformMatrix2fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
-		}
+	for (auto& entry : pass_uniform.vec3s) {
+		std::string name = entry.first;
+		auto val = entry.second;
+		glUniform3fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, &val[0]);
+	}
 
-		for (auto& mat3 : pass_uniform.second.mat3s) {
-			std::string name = mat3.first;
-			auto mat = mat3.second;
-			glUniformMatrix3fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
-		}
+	for (auto& entry : pass_uniform.vec4s) {
+		std::string name = entry.first;
+		auto val = entry.second;
+		glUniform4fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, &val[0]);
+	}
 
-		for (auto& mat4 : pass_uniform.second.mat4s) {
-			std::string name = mat4.first;
-			auto mat = mat4.second;
-			glUniformMatrix4fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
-		}
+	for (auto& entry : pass_uniform.mat2s) {
+		std::string name = entry.first;
+		auto mat = entry.second;
+		glUniformMatrix2fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+	}
+
+	for (auto& entry : pass_uniform.mat3s) {
+		std::string name = entry.first;
+		auto mat = entry.second;
+		glUniformMatrix3fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+	}
+
+	for (auto& entry : pass_uniform.mat4s) {
+		std::string name = entry.first;
+		auto mat = entry.second;
+		glUniformMatrix4fv(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+	}
+
+	int unitIndex = 0;
+
+	for (auto& entry : pass_uniform.textures) {
+		const std::string& name = entry.first;
+		const Texture* tex = entry.second;
+
+		glActiveTexture(GL_TEXTURE0 + unitIndex);
+
+		tex->Bind(unit);
+
+		glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), unitIndex);
+
+		unitIndex++;
 	}
 }

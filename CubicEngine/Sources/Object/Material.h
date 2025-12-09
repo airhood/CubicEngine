@@ -16,6 +16,7 @@ namespace CubicEngine {
 		std::unordered_map<std::string, glm::mat2> mat2s;
 		std::unordered_map<std::string, glm::mat3> mat3s;
 		std::unordered_map<std::string, glm::mat4> mat4s;
+		std::unordered_map<std::string, const Texture*> textures;
 	};
 
 	class Material : public Object {
@@ -30,21 +31,25 @@ namespace CubicEngine {
 
 		Shader* shader;
 
-		void SetBool(const std::string& name, bool value);
+		Texture* mainTexture;
+		glm::vec2 mainTextureOffset;
+		glm::vec2 mainTextureScale;
 
-		void SetInt(const std::string& name, int value);
+		void SetBool(const std::string& name, bool val);
 
-		void SetFloat(const std::string& name, float value);
+		void SetInt(const std::string& name, int val);
 
-		void SetVec2(const std::string& name, const glm::vec2& value);
+		void SetFloat(const std::string& name, float val);
+
+		void SetVec2(const std::string& name, const glm::vec2& val);
 
 		void SetVec2(const std::string& name, float x, float y);
 
-		void SetVec3(const std::string& name, const glm::vec3& value);
+		void SetVec3(const std::string& name, const glm::vec3& val);
 
 		void SetVec3(const std::string& name, float x, float y, float z);
 
-		void SetVec4(const std::string& name, const glm::vec4& value);
+		void SetVec4(const std::string& name, const glm::vec4& val);
 
 		void SetVec4(const std::string& name, float x, float y, float z, float w);
 
@@ -54,22 +59,24 @@ namespace CubicEngine {
 
 		void SetMat4(const std::string& name, const glm::mat4& mat);
 
+		void SetTexture(const std::string& name, const Texture* tex);
 
-		void PassSetBool(int pass, const std::string& name, bool value);
 
-		void PassSetInt(int pass, const std::string& name, int value);
+		void PassSetBool(int pass, const std::string& name, bool val);
 
-		void PassSetFloat(int pass, const std::string& name, float value);
+		void PassSetInt(int pass, const std::string& name, int val);
 
-		void PassSetVec2(int pass, const std::string& name, const glm::vec2& value);
+		void PassSetFloat(int pass, const std::string& name, float val);
+
+		void PassSetVec2(int pass, const std::string& name, const glm::vec2& val);
 
 		void PassSetVec2(int pass, const std::string& name, float x, float y);
 
-		void PassSetVec3(int pass, const std::string& name, const glm::vec3& value);
+		void PassSetVec3(int pass, const std::string& name, const glm::vec3& val);
 
 		void PassSetVec3(int pass, const std::string& name, float x, float y, float z);
 
-		void PassSetVec4(int pass, const std::string& name, const glm::vec4& value);
+		void PassSetVec4(int pass, const std::string& name, const glm::vec4& val);
 
 		void PassSetVec4(int pass, const std::string& name, float x, float y, float z, float w);
 
@@ -79,12 +86,16 @@ namespace CubicEngine {
 
 		void PassSetMat4(int pass, const std::string& name, const glm::mat4& mat);
 
+		void PassSetTexture(int pass, const std::string& name, const Texture* tex);
+
 	private:
 		GLuint shaderProgram = 0;
 
 		std::unordered_map<int, PassUniforms> uniform_buffer;
 
 		friend class RenderManager;
-		void Apply();
+		friend class Renderer;
+		friend class Renderer2D;
+		void Apply(int pass, int unit);
 	};
 }

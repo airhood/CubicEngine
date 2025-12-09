@@ -16,3 +16,8 @@ void Texture::setCPUMemorySyncState(bool state) {
 bool Texture::getCPUMemorySyncState() const {
 	return cpuMemorySyncState;
 }
+
+void Texture::Bind(int unit) const {
+	glActiveTexture(GL_TEXTURE0 + unit);
+	glBindTexture(GL_TEXTURE_2D, gl_textureID);
+}
