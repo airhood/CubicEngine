@@ -71,7 +71,6 @@ void MeshRenderer::Render(Camera* camera) {
 	glm::mat4 model = RootGameObject()->transform()->GetModelMatrix();
 	glm::mat4 view = camera->GetViewMatrix();
 	glm::mat4 projection = camera->GetProjectionMatrix();
-	projection[0][0] *= -1;
 
 	glm::mat4 mvp = projection * view * model;
 

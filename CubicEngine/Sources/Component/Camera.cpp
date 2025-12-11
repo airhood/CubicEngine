@@ -38,14 +38,17 @@ glm::mat4 Camera::GetViewMatrix() {
 	glm::vec3 front = glm::normalize(transform->Forward());
 	glm::vec3 up = glm::normalize(transform->Up());
 
-	return glm::lookAt(pos, pos + front, up);
+	glm::mat4 view_mat = glm::lookAt(pos, pos + front, up);
+	return view_mat;
 }
 
 glm::mat4 Camera::GetProjectionMatrix() {
+	glm::mat4 projection_mat;
 	switch (projectionType) {
 		case ProjectionType::Perspective:
 			aspectRatio = (float)(application->GetResolutionWidth()) / (float)(application->GetResolutionHeight());
-			return glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
+			projection_mat = glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
+			break;
 		case ProjectionType::Orthographic:
 			{
 				// TODO: temp orthographic projection
@@ -55,12 +58,17 @@ glm::mat4 Camera::GetProjectionMatrix() {
 				float top = (float)application->GetResolutionHeight();
 				float near = -10.0f;
 				float far = 10.0f;
-				return glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, near, far);
+				projection_mat = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, near, far);
 			}
+			break;
 		default:
 			Logger::Log(LogLevel::ERROR, "Not pre-defined projection type", source);
-			return glm::mat4();
+			projection_mat = glm::mat4();
+			break;
 	}
+
+	projection_mat[0][0] *= -1;
+	return projection_mat;
 }
 
 glm::mat4 Camera::GetViewProjectionMatrix() {

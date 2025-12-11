@@ -5,11 +5,32 @@
 void Player::FrameTick(float elapsedTime) {
 	Transform* transform = RootGameObject()->transform();
 
-	glm::vec3 forward = transform->Forward();
-	glm::vec3 right = transform->Right();
+	//glm::vec3 forward = transform->Forward();
+	//glm::vec3 right = transform->Right();
+
+	//glm::vec2 wasd_input = Input::GetWASD();
+	////glm::vec3 moveDir = right * wasd_input.x + forward * wasd_input.y;
+	//glm::vec3 moveDir = glm::vec3(wasd_input.x, 0.0f, wasd_input.y);
+	//transform->position += moveDir * moveSpeed * elapsedTime;
+
+	float yaw = transform->rotation.y;
+	float rad = glm::radians(yaw);
+
+	glm::vec3 forward = glm::normalize(glm::vec3(
+		sin(rad),
+		0.0f,
+		cos(rad)
+	));
+
+	glm::vec3 right = glm::normalize(glm::vec3(
+		cos(rad),
+		0.0f,
+		-sin(rad)
+	));
 
 	glm::vec2 wasd_input = Input::GetWASD();
-	glm::vec3 moveDir = right * wasd_input.x + forward * wasd_input.y;
+
+	glm::vec3 moveDir = forward * wasd_input.y + right * wasd_input.x;
 	transform->position += moveDir * moveSpeed * elapsedTime;
 
 	float rot_x = 0.0f;
