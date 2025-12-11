@@ -157,6 +157,7 @@
     <None Include="Sources\Shader\TestShader.csl" />
     <None Include="Sources\Shader\Cubic2D_LC.csl" />
     <None Include="Sources\Shader\Default.csl" />
+    <None Include="Sources\Shader\MeshRender.csl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Object\Shader.h">

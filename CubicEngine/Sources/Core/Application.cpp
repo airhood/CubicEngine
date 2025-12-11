@@ -25,6 +25,9 @@ void Application::Init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Mac OS only
+
+	glfwWindowHint(GLFW_DEPTH_BITS, 24);
+
 	Logger::Log(LogLevel::DEBUG, "[Core] GLFW initialized.", source);
 
 	window = glfwCreateWindow(resolution.width, resolution.height, title.c_str(), NULL, NULL);
@@ -51,6 +54,9 @@ void Application::Init() {
 		Logger::Log(LogLevel::DEBUG, "[Core] Terminated GLFW.", source);
 		return;
 	}
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 	
 	glfwSwapInterval(1);
 

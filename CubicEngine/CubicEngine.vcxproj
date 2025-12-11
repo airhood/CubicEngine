@@ -220,6 +220,7 @@
     <None Include="Sources\Shader\Default.csl" />
     <None Include="Sources\Shader\Cubic2D_LC.csl" />
     <None Include="Sources\Shader\fragmentShader.glsl" />
+    <None Include="Sources\Shader\MeshRender.csl" />
     <None Include="Sources\Shader\TestShader.csl" />
     <None Include="Sources\Shader\vertexShader.glsl" />
   </ItemGroup>

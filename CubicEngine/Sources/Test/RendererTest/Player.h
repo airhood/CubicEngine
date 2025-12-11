@@ -15,6 +15,6 @@ public:
 	Component* Clone_Comp() const override { return nullptr; }
 
 private:
-	const float moveSpeed = 0.1f;
+	const float moveSpeed = 2.0f;
 	const float div_sqrt2 = 0.707106f;
 };

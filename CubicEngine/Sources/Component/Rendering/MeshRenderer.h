@@ -9,7 +9,7 @@
 namespace CubicEngine {
 	class MeshRenderer : public Renderer {
 	public:
-		MeshRenderer() = default;
+		MeshRenderer();
 		~MeshRenderer();
 
 		void* Clone_Obj() const override;

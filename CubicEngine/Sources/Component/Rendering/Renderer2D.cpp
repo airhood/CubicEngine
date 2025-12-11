@@ -95,15 +95,17 @@ void Renderer2D::Render(Camera* camera) {
     glm::mat4 mvp = projection * view * model;
 
     for (int pass = 0; pass < ShaderPassCount(material->shader); pass++) {
+        continue;
+
         UseShader(material->shader, pass);
         //material->PassSetMat4(pass, "u_MVP", mvp);
         material->PassSetMat4(pass, "model", model);
         material->PassSetMat4(pass, "view", view);
         material->PassSetMat4(pass, "projection", projection);
 
-        material->PassSetInt(pass, "texture_diffuse1", 0);
+        material->PassSetInt(pass, "texture_diffuse1", CubicEngine::RenderUnit::SPRITE);
 
-        material->Apply(pass, CubicEngine::RenderUnit::NORMAL);
+        material->Apply(pass, CubicEngine::RenderUnit::SPRITE);
 
         sprite.texture->Bind(CubicEngine::RenderUnit::SPRITE);
 
@@ -169,6 +171,6 @@ void Renderer2D::UpdateBuffers() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float))); // tex coords
     glEnableVertexAttribArray(1);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
