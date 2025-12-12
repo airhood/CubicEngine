@@ -7,6 +7,8 @@
 
 namespace CubicEngine {
 
+    class TextureArray;
+
     enum class TextureFormat {
         RGBA,       // 4 color channels (Red, Green, Blue, Alpha)
         RGB,        // 3 color channels (Red, Green, Blue)
@@ -30,6 +32,11 @@ namespace CubicEngine {
         BRDF_LUT,
         POSTFX_0,
         POSTFX_1
+    };
+
+    enum class TextureBindType {
+        INDIVIDUAL,
+        ATLAS
     };
 
     class Texture abstract : public Object {
@@ -69,6 +76,11 @@ namespace CubicEngine {
         friend class Renderer2D;
         friend class Material;
 
+        GLuint gl_textureID;
+
         int layerIndex = -1;
+        TextureArray* textureArray = nullptr;
+
+        TextureBindType bindType = TextureBindType::INDIVIDUAL;
     };
 }

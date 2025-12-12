@@ -6,6 +6,8 @@
 #include "../../Object/GameObject.h"
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
+#include <iostream>
+#include <format>
 
 using namespace CubicEngine;
 
@@ -101,12 +103,45 @@ void Renderer2D::Render(Camera* camera) {
         material->PassSetMat4(pass, "projection", projection);
 
         TextureType spriteTextureType = sprite.texture->GetTextureType();
-        GLuint texture2DArrayID = CORE->GET(TextureManager)->GetTexture2DArrayID(spriteTextureType);
-        glActiveTexture(GL_TEXTURE0 + static_cast<int>(spriteTextureType));
-        glBindTexture(GL_TEXTURE_2D_ARRAY, texture2DArrayID);
-        material->PassSetInt(pass, "textureArray", static_cast<int>(spriteTextureType));
-        material->PassSetFloat(pass, "layerIndex", sprite.texture->layerIndex);
-        material->PassSetVec4(pass, "subUV", glm::vec4(0, 0, 1, 1));
+        switch (sprite.texture->bindType) {
+            case TextureBindType::INDIVIDUAL: {
+                material->PassSetBool(pass, "useArray", false);
+
+                GLuint textureID = sprite.texture->gl_textureID;
+                glActiveTexture(GL_TEXTURE0 + static_cast<int>(spriteTextureType));
+                glBindTexture(GL_TEXTURE_2D, textureID);
+                glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+
+                material->PassSetInt(pass, "texture_diffuse", static_cast<int>(spriteTextureType));
+
+                // trash value
+                material->PassSetInt(pass, "textureArray", static_cast<int>(spriteTextureType));
+                material->PassSetFloat(pass, "layerIndex", 0);
+                material->PassSetVec4(pass, "subUV", glm::vec4(0, 0, 1, 1));
+
+                break;
+            }
+            case TextureBindType::ATLAS: {
+                material->PassSetBool(pass, "useArray", true);
+
+                GLuint texture2DArrayID = sprite.texture->textureArray->textureArrayID;
+                glActiveTexture(GL_TEXTURE0 + static_cast<int>(spriteTextureType));
+                glBindTexture(GL_TEXTURE_2D, 0);
+                glBindTexture(GL_TEXTURE_2D_ARRAY, texture2DArrayID);
+
+                // trash value
+                material->PassSetInt(pass, "texture_diffuse", static_cast<int>(spriteTextureType));
+
+                material->PassSetInt(pass, "textureArray", static_cast<int>(spriteTextureType));
+                material->PassSetFloat(pass, "layerIndex", sprite.texture->layerIndex);
+                material->PassSetVec4(pass, "subUV", glm::vec4(0, 0, 1, 1));
+
+                break;
+            }
+            default:
+                Logger::Log(LogLevel::ERROR, std::format("[TextureManager] Invalid TextureBindType {}", static_cast<int>(sprite.texture->bindType)), source);
+                return;
+        }
 
         material->Apply(pass, CubicEngine::RenderUnit::SPRITE);
 

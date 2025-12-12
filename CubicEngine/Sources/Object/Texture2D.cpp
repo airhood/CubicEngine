@@ -2,6 +2,8 @@
 #include <algorithm>
 #include "../Util/Logger.h"
 #include "../Core/EngineCore.h"
+#include <iostream>
+#include <format>
 
 using namespace CubicEngine;
 
@@ -12,7 +14,7 @@ Texture2D::Texture2D(int width, int height) {
 	_height = height;
 	data = new Color[width * height];
 
-	CORE->GET(TextureManager)->RegisterTexture2D(this);
+	CORE->GET(TextureManager)->AllocTexture2D(this);
 }
 
 void* Texture2D::Clone_Obj() const {
@@ -117,11 +119,11 @@ void Texture2D::Load(unsigned char* load_data) {
 		SyncMemory();
 	}
 
-	CORE->GET(TextureManager)->UpdateTexture2D(textureType, layerIndex);
+	CORE->GET(TextureManager)->UpdateTexture2D(textureSystemID);
 }
 
 void Texture2D::Release() {
-	CORE->GET(TextureManager)->ReleaseTexture2D(textureType, layerIndex);
+	CORE->GET(TextureManager)->ReleaseTexture2D(textureSystemID);
 	_width = 0;
 	_height = 0;
 }
@@ -142,7 +144,7 @@ void Texture2D::Load() {
 			return;
 	}
 
-	CORE->GET(TextureManager)->UpdateTexture2D(textureType, layerIndex);
+	CORE->GET(TextureManager)->UpdateTexture2D(textureSystemID);
 }
 
 unsigned char* Texture2D::ConvertData() const {

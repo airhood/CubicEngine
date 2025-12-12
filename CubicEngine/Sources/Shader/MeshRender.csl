@@ -29,15 +29,22 @@ in vec2 TexCoords;
 
 out vec4 FragColor;
 
+uniform bool useArray;
+
+uniform sampler2D texture_diffuse;
+
 uniform sampler2DArray textureArray;
 uniform float layerIndex;
 uniform vec4 subUV;
 
 void main()
 {
-    vec2 finalUV = mix(subUV.xy, subUV.zw, TexCoords);
-    vec4 color = texture(textureArray, vec3(finalUV, layerIndex));
-    FragColor = color;
+    if (useArray) {
+        vec2 finalUV = mix(subUV.xy, subUV.zw, TexCoords);
+        FragColor = texture(textureArray, vec3(finalUV, layerIndex));
+    } else {
+        FragColor = texture(texture_diffuse, TexCoords);
+    }
 }
 
 $end

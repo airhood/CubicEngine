@@ -32,6 +32,8 @@ namespace CubicEngine {
 		int _width;
 		int _height;
 
+		int textureSystemID;
+
 		void Load();
 
 		unsigned char* ConvertData() const;

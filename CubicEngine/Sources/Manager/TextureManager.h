@@ -2,11 +2,31 @@
 
 #include <unordered_map>
 #include <vector>
-#include "../Object/Texture2D.h"
 #include "../Core/EngineCore.h"
 #include <GL/glew.h>
+#include "../Object/Texture.h"
 
 namespace CubicEngine {
+
+	class Texture;
+	class Texture2D;
+
+	class TextureArray {
+		friend class TextureManager;
+		friend class Renderer;
+		friend class Renderer2D;
+		friend class MeshRenderer;
+	private:
+		TextureArray(int numLayers, GLsizei atlasSize);
+
+		TextureType textureType;
+		GLuint textureArrayID;
+		std::vector<Texture2D*> textures;
+		std::vector<int> availableIndices;
+		int numLayers;
+		GLsizei atlasSize;
+	};
+
 	class TextureManager : public ManagerBase {
 	public:
 		explicit TextureManager() = default;
@@ -16,30 +36,28 @@ namespace CubicEngine {
 
 		void Exterminate() override;
 
-		void RegisterTexture2D(Texture2D* texture);
+		void AllocTexture2D(Texture2D* texture);
+		void UpdateTexture2D(int id);
+		void ReleaseTexture2D(int id);
 
-		void UpdateTexture2D(TextureType textureType, int layerIndex);
-
-		void ReleaseTexture2D(TextureType textureType, int layerIndex);
-
-		GLuint GetTexture2DArrayID(TextureType textureType);
+		TextureArray* AllocTextureArray(TextureType textureType, GLsizei initAtlasSize = 128, int numLayers = 2);
+		void TextureArrayRegisterTexture2D(TextureArray* textureArray, Texture2D* texture);
+		void TextureArrayUpdateTexture2D(TextureArray* textureArray, int layerIndex);
+		void TextureArrayUnregisterTexture2D(TextureArray* textureArray, int layerIndex);
 
 	private:
-		std::unordered_map<TextureType, std::vector<Texture2D*>> texture2DPools;
-		std::unordered_map<TextureType, GLuint> texture2DArrayIDs;
-		std::unordered_map<TextureType, GLsizei> texture2DAtlasSize;
-		std::unordered_map<TextureType, std::vector<int>> availableIndices;
-		std::unordered_map<TextureType, int> texture2DArrayNumLayers;
+		std::vector<Texture2D*> texture2Ds;
+		std::vector<int> availableIndices;
 
-		static std::unordered_map<TextureType, int> init_layer_num;
+		int init_size = 16;
 
-		void AllocTexture2DArray(TextureType textureType, GLsizei atlasSize, GLsizei numLayers);
+		void ResizeTexture2DStorage();
 
-		void ResizeTexture2DArrayLayer(TextureType textureType);
-		void ResizeTexture2DArrayAtlas(TextureType textureType, GLsizei newAtlasSize);
+		void ResizeTexture2DArrayLayer(TextureArray* textureArray);
+		void ResizeTexture2DArrayAtlas(TextureArray* textureArray, GLsizei newAtlasSize);
 
-		GLsizei CalculateMipmapLevels(GLsizei atlasSize);
+		static GLsizei CalculateMipmapLevels(GLsizei atlasSize);
 
-		void GenerateMipmapForLayer(GLuint texture2DArrayID, GLsizei atlasSize, int layerIndex);
+		void GenerateMipmapForLayer(TextureArray* textureArray, GLsizei atlasSize, int layerIndex);
 	};
 }
