@@ -28,7 +28,18 @@ namespace CubicEngine {
 		std::unordered_map<TextureType, std::vector<Texture2D*>> texture2DPools;
 		std::unordered_map<TextureType, GLuint> texture2DArrayIDs;
 		std::unordered_map<TextureType, GLsizei> texture2DAtlasSize;
+		std::unordered_map<TextureType, std::vector<int>> availableIndices;
+		std::unordered_map<TextureType, int> texture2DArrayNumLayers;
 
-		void AllocTexture2DArray(TextureType textureType, GLsizei atlas_size, GLsizei num_layers);
+		static std::unordered_map<TextureType, int> init_layer_num;
+
+		void AllocTexture2DArray(TextureType textureType, GLsizei atlasSize, GLsizei numLayers);
+
+		void ResizeTexture2DArrayLayer(TextureType textureType);
+		void ResizeTexture2DArrayAtlas(TextureType textureType, GLsizei newAtlasSize);
+
+		GLsizei CalculateMipmapLevels(GLsizei atlasSize);
+
+		void GenerateMipmapForLayer(GLuint texture2DArrayID, GLsizei atlasSize, int layerIndex);
 	};
 }
