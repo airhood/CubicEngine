@@ -13,6 +13,25 @@ namespace CubicEngine {
         GRAYSCALE,  // 1 color channel (Gray)
     };
 
+    enum class TextureType {
+        ALBEDO,
+        NORMAL,
+        METALLIC,
+        ROUGHNESS,
+        AO,
+        EMISSION,
+        SPRITE,
+        SHADOW_MAP,
+        SHADOW_CUBE,
+        GBUFFER_DEPTH,
+        GBUFFER_NORMAL,
+        IRRADIANCE_MAP,
+        PREFILTER_MAP,
+        BRDF_LUT,
+        POSTFX_0,
+        POSTFX_1
+    };
+
     class Texture abstract : public Object {
     public:
         virtual ~Texture() = default;
@@ -20,6 +39,10 @@ namespace CubicEngine {
         virtual void* Clone_Obj() const = 0;
 
         TextureFormat format() const;
+
+        void SetTextureType(TextureType textureType);
+        TextureType GetTextureType() const;
+
         void setCPUMemorySyncState(bool state);
         bool getCPUMemorySyncState() const;
 
@@ -27,20 +50,25 @@ namespace CubicEngine {
 
     protected:
         Color* data;
+
+        friend class TextureManager;
         unsigned char* data_raw;
+
         TextureFormat _format = TextureFormat::RGBA;
         bool cpuMemorySyncState = true;
+
+        TextureType textureType = TextureType::ALBEDO;
 
         // GL
         friend class MeshRenderer;
         friend class Renderer;
-        GLuint gl_textureID = 0;
 
         virtual void SyncMemory() = 0;
 
         friend class Renderer;
         friend class Renderer2D;
         friend class Material;
-        void Bind(int unit) const;
+
+        int layerIndex = -1;
     };
 }

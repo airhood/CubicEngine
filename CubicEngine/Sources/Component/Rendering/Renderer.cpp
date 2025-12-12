@@ -13,11 +13,6 @@ int Renderer::ShaderPassCount(Shader* shader) {
 	return shader->passes.size();
 }
 
-void Renderer::BindTexture(GLenum target, Texture* texture) {
-	if (texture == nullptr) return;
-	glBindTexture(target, texture->gl_textureID);
-}
-
 void Renderer::SetRenderOrder(int value) {
 	renderOrder = value;
 	CORE->GET(RenderManager)->OnRenderOrderChanged();

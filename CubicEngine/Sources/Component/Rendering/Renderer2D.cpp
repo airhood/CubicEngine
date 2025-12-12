@@ -100,11 +100,15 @@ void Renderer2D::Render(Camera* camera) {
         material->PassSetMat4(pass, "view", view);
         material->PassSetMat4(pass, "projection", projection);
 
-        material->PassSetInt(pass, "texture_diffuse1", CubicEngine::RenderUnit::SPRITE);
+        TextureType spriteTextureType = sprite.texture->GetTextureType();
+        GLuint texture2DArrayID = CORE->GET(TextureManager)->GetTexture2DArrayID(spriteTextureType);
+        glActiveTexture(GL_TEXTURE0 + static_cast<int>(spriteTextureType));
+        glBindTexture(GL_TEXTURE_2D_ARRAY, texture2DArrayID);
+        material->PassSetInt(pass, "textureArray", static_cast<int>(spriteTextureType));
+        material->PassSetFloat(pass, "layerIndex", sprite.texture->layerIndex);
+        material->PassSetVec4(pass, "subUV", glm::vec4(0, 0, 1, 1));
 
         material->Apply(pass, CubicEngine::RenderUnit::SPRITE);
-
-        sprite.texture->Bind(CubicEngine::RenderUnit::SPRITE);
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

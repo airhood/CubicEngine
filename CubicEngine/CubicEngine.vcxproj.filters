@@ -150,6 +150,9 @@
     <ClCompile Include="Sources\Manager\AudioManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Manager\TextureManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sources\Shader\vertexShader.glsl" />
@@ -320,6 +323,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Util\RenderUnit.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Manager\TextureManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

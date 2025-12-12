@@ -185,6 +185,7 @@
     <ClCompile Include="Sources\Manager\PhysicsManager.cpp" />
     <ClCompile Include="Sources\Manager\RenderManager.cpp" />
     <ClCompile Include="Sources\Manager\SceneManager.cpp" />
+    <ClCompile Include="Sources\Manager\TextureManager.cpp" />
     <ClCompile Include="Sources\Object\AudioClip.cpp" />
     <ClCompile Include="Sources\Object\Color.cpp" />
     <ClCompile Include="Sources\Object\Color32.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="Sources\Manager\RenderBase.h" />
     <ClInclude Include="Sources\Manager\RenderManager.h" />
     <ClInclude Include="Sources\Component\ComponentInstanceBase.h" />
+    <ClInclude Include="Sources\Manager\TextureManager.h" />
     <ClInclude Include="Sources\Object\AudioClip.h" />
     <ClInclude Include="Sources\Object\Color.h" />
     <ClInclude Include="Sources\Object\Color32.h" />

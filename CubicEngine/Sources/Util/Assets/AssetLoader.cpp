@@ -8,12 +8,12 @@ using namespace CubicEngine;
 
 static const std::string source = "AssetLoader.cpp";
 
-std::unordered_map<std::string, Texture2D*> AssetLoader::textureCache = std::unordered_map<std::string, Texture2D*>();
+std::unordered_map<std::string, Texture2D*> AssetLoader::texture2DCache = std::unordered_map<std::string, Texture2D*>();
 std::unordered_map<std::string, AudioClip*> AssetLoader::audioClipCache = std::unordered_map<std::string, AudioClip*>();
 
-Texture2D* AssetLoader::LoadTexture(const std::string& path) {
-	auto it = textureCache.find(path);
-	if (it != textureCache.end()) {
+Texture2D* AssetLoader::LoadTexture2D(const std::string& path, TextureType textureType) {
+	auto it = texture2DCache.find(path);
+	if (it != texture2DCache.end()) {
 		return it->second;
 	}
 
@@ -27,12 +27,13 @@ Texture2D* AssetLoader::LoadTexture(const std::string& path) {
     }
 
     Texture2D* tex = new Texture2D(w, h);
+    tex->SetTextureType(textureType);
     tex->Load(data);
     tex->Apply();
 
     stbi_image_free(data);
 
-    textureCache[path] = tex;
+    texture2DCache[path] = tex;
     return tex;
 }
 

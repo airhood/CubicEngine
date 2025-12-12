@@ -81,11 +81,15 @@ void MeshRenderer::Render(Camera* camera) {
 		material->PassSetMat4(pass, "view", view);
 		material->PassSetMat4(pass, "projection", projection);
 
-		material->PassSetInt(pass, "texture_diffuse1", CubicEngine::RenderUnit::NORMAL);
+		TextureType mainTextureType = material->mainTexture->GetTextureType();
+		GLuint texture2DArrayID = CORE->GET(TextureManager)->GetTexture2DArrayID(mainTextureType);
+		glActiveTexture(GL_TEXTURE0 + static_cast<int>(mainTextureType));
+		glBindTexture(GL_TEXTURE_2D_ARRAY, texture2DArrayID);
+		material->PassSetInt(pass, "textureArray", static_cast<int>(mainTextureType));
+		material->PassSetFloat(pass, "layerIndex", material->mainTexture->layerIndex);
+		material->PassSetVec4(pass, "subUV", glm::vec4(0, 0, 1, 1));
 
-		material->Apply(pass, CubicEngine::RenderUnit::NORMAL);
-
-		material->mainTexture->Bind(CubicEngine::RenderUnit::NORMAL);
+		material->Apply(pass, CubicEngine::RenderUnit::ALBEDO);
 
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mesh->indices.size()), GL_UNSIGNED_INT, 0);

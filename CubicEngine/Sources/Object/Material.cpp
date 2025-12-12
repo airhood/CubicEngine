@@ -210,15 +210,17 @@ void Material::Apply(int pass, int unit) {
 	int unitIndex = 0;
 
 	for (auto& entry : pass_uniform.textures) {
-		const std::string& name = entry.first;
-		const Texture* tex = entry.second;
+		// TODO: Fix Set Texture
+		
+		//const std::string& name = entry.first;
+		//const Texture* tex = entry.second;
 
-		glActiveTexture(GL_TEXTURE0 + unitIndex);
+		//glActiveTexture(GL_TEXTURE0 + unitIndex);
 
-		tex->Bind(unit);
+		//tex->Bind(unit);
 
-		glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), unitIndex);
+		//glUniform1i(glGetUniformLocation(shader->passes[pass]->shaderProgram, name.c_str()), unitIndex);
 
-		unitIndex++;
+		//unitIndex++;
 	}
 }

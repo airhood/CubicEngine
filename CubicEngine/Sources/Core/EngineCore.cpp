@@ -126,6 +126,7 @@ void EngineCore::CreateManagers() {
 	obj_ComponentInstanceManager = new ComponentInstanceManager();
 	obj_LayerManager = new LayerManager();
 	obj_AudioManager = new AudioManager();
+	obj_TextureManager = new TextureManager();
 }
 
 void EngineCore::CacheManagers() {
@@ -134,6 +135,8 @@ void EngineCore::CacheManagers() {
 	managers.push_back(obj_SceneManager);
 	managers.push_back(obj_ComponentInstanceManager);
 	managers.push_back(obj_LayerManager);
+	managers.push_back(obj_AudioManager);
+	managers.push_back(obj_TextureManager);
 	
 	render_managers.push_back(obj_RenderManager);
 }

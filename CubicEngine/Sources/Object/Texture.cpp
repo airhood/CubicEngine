@@ -6,6 +6,15 @@ TextureFormat Texture::format() const {
 	return _format;
 }
 
+void Texture::SetTextureType(TextureType textureType) {
+	// TODO: OnTypeChange()
+	this->textureType = textureType;
+}
+
+TextureType Texture::GetTextureType() const {
+	return textureType;
+}
+
 void Texture::setCPUMemorySyncState(bool state) {
 	cpuMemorySyncState = state;
 	if (state) {
@@ -15,9 +24,4 @@ void Texture::setCPUMemorySyncState(bool state) {
 
 bool Texture::getCPUMemorySyncState() const {
 	return cpuMemorySyncState;
-}
-
-void Texture::Bind(int unit) const {
-	glActiveTexture(GL_TEXTURE0 + unit);
-	glBindTexture(GL_TEXTURE_2D, gl_textureID);
 }

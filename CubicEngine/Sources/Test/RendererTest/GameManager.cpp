@@ -9,9 +9,6 @@ void GameManager::Start() {
 	glm::vec3 f = t->Forward();
 	glm::vec3 r = t->Right();
 	glm::vec3 u = t->Up();
-	std::cout << "Forward: " << f.x << "," << f.y << "," << f.z
-		<< "  Right: " << r.x << "," << r.y << "," << r.z
-		<< "  Up: " << u.x << "," << u.y << "," << u.z << "\n";
 
 	GameObject* gameObject = new GameObject();
 	gameObject->SetName("TestGameObject");
@@ -24,7 +21,7 @@ void GameManager::Start() {
 
 	Sprite sprite = Sprite();
 
-	Texture2D* tex2D = AssetLoader::LoadTexture(R"(C:\Users\airhood\Desktop\Dimo\DIMO.png)");
+	Texture2D* tex2D = AssetLoader::LoadTexture2D(R"(C:\Users\airhood\Desktop\Dimo\DIMO.png)");
 	Texture2D* tex2D_clone = tex2D->Clone();
 	tex2D_clone->Apply();
 

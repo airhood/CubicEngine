@@ -1,6 +1,7 @@
 #include "Texture2D.h"
 #include <algorithm>
 #include "../Util/Logger.h"
+#include "../Core/EngineCore.h"
 
 using namespace CubicEngine;
 
@@ -10,6 +11,8 @@ Texture2D::Texture2D(int width, int height) {
 	_width = width;
 	_height = height;
 	data = new Color[width * height];
+
+	CORE->GET(TextureManager)->RegisterTexture2D(this);
 }
 
 void* Texture2D::Clone_Obj() const {
@@ -114,24 +117,11 @@ void Texture2D::Load(unsigned char* load_data) {
 		SyncMemory();
 	}
 
-	if (gl_textureID == 0) {
-		glGenTextures(1, &gl_textureID);
-	}
-
-	glBindTexture(GL_TEXTURE_2D, gl_textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, gl_format, _width, _height, 0, gl_format, GL_UNSIGNED_BYTE, data_raw);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
+	CORE->GET(TextureManager)->UpdateTexture2D(textureType, layerIndex);
 }
 
 void Texture2D::Release() {
-	glDeleteTextures(1, &gl_textureID);
-	gl_textureID = 0;
+	CORE->GET(TextureManager)->ReleaseTexture2D(textureType, layerIndex);
 	_width = 0;
 	_height = 0;
 }
@@ -152,17 +142,7 @@ void Texture2D::Load() {
 			return;
 	}
 
-	if (gl_textureID == 0) {
-		glGenTextures(1, &gl_textureID);
-	}
-
-	glBindTexture(GL_TEXTURE_2D, gl_textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, gl_format, _width, _height, 0, gl_format, GL_UNSIGNED_BYTE, data_raw);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	CORE->GET(TextureManager)->UpdateTexture2D(textureType, layerIndex);
 }
 
 unsigned char* Texture2D::ConvertData() const {

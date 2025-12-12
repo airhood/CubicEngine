@@ -17,7 +17,6 @@ namespace CubicEngine {
 
 		static void UseShader(Shader* shader, int pass);
 		static int ShaderPassCount(Shader* shader);
-		static void BindTexture(GLenum target, Texture* texture);
 
 	public:
 		virtual void Render(Camera* camera) = 0;

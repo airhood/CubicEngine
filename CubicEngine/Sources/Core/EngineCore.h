@@ -23,6 +23,7 @@
 #include "../Manager/ComponentInstanceManager.h"
 #include "../Manager/LayerManager.h"
 #include "../Manager/AudioManager.h"
+#include "../Manager/TextureManager.h"
 
 #define Manager(NAME)                                               \
 public:                                                             \
@@ -47,6 +48,7 @@ namespace CubicEngine {
 	class ComponentInstanceManager;
 	class LayerManager;
 	class AudioManager;
+	class TextureManager;
 
 	namespace Core {
 		class EngineCore {
@@ -74,6 +76,7 @@ namespace CubicEngine {
 			Manager(ComponentInstanceManager);
 			Manager(LayerManager);
 			Manager(AudioManager);
+			Manager(TextureManager);
 
 		private:
 			bool running = false;

@@ -4,6 +4,11 @@
 
 namespace CubicEngine {
 	class Texture2D : public Texture {
+		friend class TextureManager;
+		friend class Renderer;
+		friend class Renderer2D;
+		friend class MeshRenderer;
+
 	public:
 		Texture2D(int width, int height);
 
